@@ -1,0 +1,150 @@
+body {
+    width: 1280px;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+
+}
+header {
+    position: relative;
+    display: flex;
+    background-color: #0D0942;
+    width: 100%;
+    height: 12%;
+    border-bottom: 0.1px solid #045050;
+}
+header .logo
+{
+    position: absolute;
+    width: 8%;
+    display: flex;
+    transform: translate(80%, 30%);
+}
+header .logo img
+{
+    width: 100%;
+}
+header .toolbar
+{
+    width: 70%;
+    display: flex;
+    margin-left: 200px;
+    background-color: #0D0942;
+}
+header .toolbar .navbar  {
+    background-color: #0D0942;
+}
+.toolbar
+{
+    padding-left: 10px;
+}
+.toolbar ul li
+{
+    margin-left: 40px;
+}
+.toolbar  a
+{
+    color: white;
+}
+.toolbar  a:hover
+{
+    color: aquamarine;
+}
+
+.navbar-nav .nav-item:last-child .nav-link {
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 150%;
+    height: 100%;
+    text-align: center;
+    text-align-all: center;
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+}
+.navbar-nav .dropdown-item {
+    color: #0D0942;
+    font-weight: bold;
+}
+
+/*phần main*/
+
+main
+{
+    width: 100%;
+    height: 88%;
+    background-color: #0D0942;
+}
+.controller_main
+{
+    position: relative;
+    display: flex;
+    width: 86%;
+    padding-left: 80px;
+    padding-top: 50px;
+    /*transform: translate(8%, 10%);*/
+}
+main .main_left
+{
+    padding-left: 30px;
+    padding-top: 20px;
+    width: 18%;
+    height: 170px;
+    background-color: #171E63;
+    border: 1px solid #0D0942;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.main_left ul li
+{
+    list-style: none;
+    /*align-items: center;*/
+    margin-bottom: 3px;
+    border-bottom:1px solid #045050;
+}
+.main_left ul li a
+{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+.main_left ul li a:hover
+{
+    color: chocolate;
+}
+.main_left_item.active {
+    color: chocolate;
+}
+.main_right
+{
+    width: 75%;
+    padding-left: 30px;
+    margin-left: 50px;
+}
+.main_right .info_Order
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px 50px 20px 0;
+    border: 1px solid #0D0942;
+    border-radius: 5px;
+    color: white;
+    background-color: #171E63;
+}
+.info_Order ul li
+{
+    list-style: none;
+    font-size: 10pt;
+}
+
+
+
+
+
+
+
+
+

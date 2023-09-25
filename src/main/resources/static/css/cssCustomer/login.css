@@ -1,0 +1,67 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    background-image: url('/static/image/login.png');
+    width: 1280px;
+    height: 720px;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
+}
+.login
+{
+    width: 33%;
+    height: 60%;
+    background-color: rgba(52, 152, 219, 0.25);
+    padding: 20px;
+    position: absolute;
+    top: 36%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.login h3
+{
+    font-size: 28pt;
+    text-align: center;
+    padding-top: 10px;
+}
+.login .submit
+{
+    padding-left: 23%;
+    padding-top: 10px;
+    width: 70%;
+    height: 13%;
+    position: absolute;
+}
+.login .submit .btnSubmit
+{
+    justify-content: center;
+    font-size: 15pt;
+    font-weight: 600;
+    color: white;
+    border:10pt rgba(52, 152, 219, 10);
+    border-radius: 50% ;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(52, 152, 219, 0.3);
+}
+.login .submit :hover {
+    background-color: rgba(52, 152, 219, 0.5);
+}
+.login .signIn
+{
+    padding-top: 20%;
+    text-align: center;
+}
+.login .signIn a
+{
+    font-size: 14pt;
+    margin: 0 15px;
+}

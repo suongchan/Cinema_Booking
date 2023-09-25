@@ -1,0 +1,118 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Đăng ký tài khoản</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form th:action="@{}" method="post" th:object="${user}">-->
+<!--    <label>Name:</label>-->
+<!--    <input type="text" th:field="*{name}" /><br/>-->
+
+<!--    <label>Age:</label>-->
+<!--    <input type="text" th:field="*{age}" /><br/>-->
+
+<!--    <label>Sdt </label>-->
+<!--    <input type="text" th:field="*{phone}" /><br/>-->
+
+<!--    <label>Email </label>-->
+<!--    <input type="text" th:field="*{mail}" /><br/>-->
+
+<!--    <label>Địa chỉ </label>-->
+<!--    <input type="text" th:field="*{adress}" /><br/>-->
+
+<!--    <button type="submit">Đăng ký</button>-->
+
+
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng ký tài khoản</title>
+</head>
+<body>
+
+    <h2>Register</h2>
+    <form method="POST" th:action="@{/signup}" th:object="${user}" > <!-- Đặt action theo URL xử lý đăng ký -->
+        <!-- Trường ID (id) - Sẽ tự động tạo khi đăng ký -->
+        <input type="hidden" name="id" value="0">
+
+        <label for="username">Họ và Tên:</label>
+        <input type="text" id="name" th:field="*{name}" required><br><br>
+
+
+        <!-- Trường Tên người dùng (username) -->
+        <label for="username">Tên đăng nhập:</label>
+        <input type="text" id="username" th:field="*{username}" required><br><br>
+
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" required><br><br>
+
+
+        <label for="checkpassword">Password:</label>
+        <input type="password" id="checkpassword" th:field="*{rePassword}" required><br><br>
+
+        <!-- Trường Tuổi (age) -->
+        <label for="join_datepicker">Ngày sinh:</label>
+        <input type="date" class="form-control" placeholder="yyyy-MM-dd" id="join_datepicker" th:field="*{dateOfBirth}">
+
+        <!-- Trường Số điện thoại (phone) -->
+        <label for="phone">Số điện thoại:</label>
+        <input type="text" id="phone" th:field="*{phone}" required><br><br>
+
+        <!-- Trường Email (email) -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required><br><br>
+
+        <!-- Trường Địa chỉ (address) -->
+        <label for="address">Address:</label>
+        <textarea id="address" th:field="*{address}" rows="4" required></textarea><br><br>
+
+        <input type="submit" value="Register">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
+    <!--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <!--    <script>-->
+    <!--        $(function() {-->
+    <!--            $("#join_datepicker").datepicker({dateFormat:"yy-mm-dd"});-->
+    <!--            $("#retire_datepicker").datepicker({dateFormat:"yy-mm-dd"});-->
+    <!--        });-->
+    <!--    </script>-->
+    </form>
+
+<h2>Register</h2>
+<form method="POST" th:action="@{/user/signup}" th:object="${user}" > <!-- Đặt action theo URL xử lý đăng ký -->
+    <!-- Trường ID (id) - Sẽ tự động tạo khi đăng ký -->
+    <input type="hidden" name="id" value="0">
+
+    <!-- Trường Tên người dùng (username) -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" th:field="*{username}" required><br><br>
+
+    <label for="age">Password:</label>
+    <input type="text" id="password" th:field="*{password}" required><br><br>
+
+    <!-- Trường Tuổi (age) -->
+    <label for="age">Age:</label>
+    <input type="number" id="age" th:field="*{age}" required><br><br>
+
+    <!-- Trường Số điện thoại (phone) -->
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" th:field="*{phone}" required><br><br>
+
+    <!-- Trường Email (email) -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" required><br><br>
+
+    <!-- Trường Địa chỉ (address) -->
+    <label for="address">Address:</label>
+    <textarea id="address" th:field="*{address}" rows="4" required></textarea><br><br>
+
+    <input type="submit" value="Register">
+</form>
+
+</body>
+</html>

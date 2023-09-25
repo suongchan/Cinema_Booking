@@ -1,0 +1,260 @@
+body {
+    width: 1280px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0D0942;
+}
+.background
+{
+    background-image: url('/static/image/pg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 450px;
+}
+header {
+    position: relative;
+    display: flex;
+    /*background-color: #0D0942;*/
+    width: 100%;
+    height: 16%;
+    border-bottom: 0.1px solid #045050;
+}
+header .logo
+{
+    position: absolute;
+    width: 8%;
+    display: flex;
+    transform: translate(80%, 30%);
+}
+header .logo img
+{
+    width: 100%;
+}
+header .toolbar
+{
+    width: 70%;
+    display: flex;
+    margin-left: 200px;
+    /*background-color: #0D0942;*/
+}
+header .toolbar .navbar  {
+    /*background-color: #0D0942;*/
+}
+.toolbar
+{
+    padding-left: 10px;
+}
+.toolbar ul li
+{
+    margin-left: 40px;
+}
+.toolbar  a
+{
+    color: white;
+}
+.toolbar  a:hover
+{
+    color: aquamarine;
+}
+
+.navbar-nav .nav-item:last-child .nav-link {
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 150%;
+    height: 100%;
+    text-align: center;
+    text-align-all: center;
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+}
+.navbar-nav .dropdown-item {
+    color: #0D0942;
+    font-weight: bold;
+}
+
+/*phần main*/
+main
+{
+    display: flex;
+    width: 100%;
+    height: 84%;
+    /*background-color: #0D0942;*/
+}
+.controller_main
+{
+    display: flex;
+    width: 86%;
+    margin-left: 100px;
+    padding-top: 50px;
+}.controller_film
+ {
+     width: 100%;
+
+ }
+.film
+{
+    color: white;
+    width: 100%;
+    transform: translate(30%, 35%);
+}
+.film h3
+{
+    font-size: 34pt;
+}
+.date_Time img
+{
+    width: 30px;
+}
+.date_Time
+{
+    display: flex;
+    color: white;
+    padding-top: 10px;
+}
+.date
+{
+    padding-right: 150px;
+}
+.decsFilm
+{
+    padding-left: 20px;
+    color: #e8d8d8;
+    font-weight: 400;
+}
+nav
+{
+    background-color: #0D0942;
+    padding-bottom: 80px;
+}
+.container_showtime
+{
+    display: flex;
+    background-color: #171E63;
+}
+.showtime
+{
+    display: flex;
+    background-color: #171E63;
+    color: olivedrab;
+    padding: 10px 0 10px 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.showtime .back
+{
+    border-radius: 40%;
+    color: white;
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+    margin-right: 380px;
+}
+.showtime span
+{
+    margin-left: 40px;
+    color: white;
+}
+.showtime .time
+{
+    width: 80px;
+    border: 1px solid #560648;
+    border-radius: 35%;
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+    text-align: center;
+}
+
+.container_chair
+{
+    width: 86%;
+    margin-left: 100px;
+    padding-top: 50px;
+}
+.container_chair h3
+{
+    width: 50%;
+    color: white;
+    text-align: center;
+    border-top: 1px solid #171E63;
+    border-bottom: 1px solid #171E63;
+    padding: 10px;
+    margin-left: 250px;
+}
+.chair
+{
+    padding-top: 30px;
+    padding-left: 200px;
+}
+.row_chair
+{
+    padding-top: 15px;
+    display: flex;
+}
+.column_chair
+{
+    margin-left: 10px;
+}
+.row_chair_special .chair_ticket
+{
+background-color: #527EC1;
+}
+.row_chair_vip .chair_ticket
+{
+    background-color: chocolate;
+}
+.chair_ticket
+{
+    font-weight: 600;
+    border: #0D0942;
+    border-radius: 5px;
+    width: 50px;
+}
+.chair_ticket:hover
+{
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+}
+.container_checkout
+{
+    display: flex;
+    width: 80%;
+    margin-left: 80px;
+    margin-top: 50px;
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+    border-radius: 5px;
+}
+.check_out
+{
+    display: flex;
+    color: white;
+    font-weight: 600;
+    align-content: center;
+    padding-left: 150px;
+}
+.check_out span
+{
+    margin-right: 100px;
+    padding-top: 30px;
+}
+.check_out span p
+{
+    color: #527EC1;
+    font-size: 14pt;
+    font-weight: 800;
+}
+.check_out input
+{
+    width: 150px;
+    height: 50px;
+    margin-top: 30px;
+    color: white;
+    border: 1px solid #560648;
+    background: linear-gradient(to bottom, #ea70d6, transparent);
+    border-radius: 40%;
+}
+.check_out input:hover
+{
+    background-color: #ea70d6;
+}
+
+
+
+
+

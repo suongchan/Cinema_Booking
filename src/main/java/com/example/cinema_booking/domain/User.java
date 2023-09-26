@@ -9,8 +9,8 @@ import java.util.Date;
 @Getter
 @Setter
 
-public class Customer {
-    private Long idCustomer;
+public class User {
+    private Long idUser;
     private String name;
     private String username;
     private String password;

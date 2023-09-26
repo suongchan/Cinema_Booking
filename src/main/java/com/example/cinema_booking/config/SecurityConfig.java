@@ -2,8 +2,10 @@ package com.example.cinema_booking.config;
 
 import com.example.cinema_booking.handler.CustomAuthenticationFailureHandler;
 import com.example.cinema_booking.handler.CustomAuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,6 +21,9 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Autowired
+//    private CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -69,6 +74,10 @@ public class SecurityConfig {
 //        return new IPFilter();
 //    }
 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(customUserDetailsService);
+//    }
     @Bean
     public CustomAuthenticationFailureHandler authenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();

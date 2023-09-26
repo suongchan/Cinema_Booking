@@ -1,15 +1,19 @@
 package com.example.cinema_booking.security;
 
+import com.example.cinema_booking.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
     private Long id;
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -61,4 +65,11 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+//    public UserPrincipal(UserEntity userEntity) {
+//        this.id = userEntity.getIdUser();
+//        this.username = userEntity.getUsername();
+//        this.password = userEntity.getPassword();
+//        this.authorities = Collections.singleton(new SimpleGrantedAuthority(userEntity.getRole()));
+//    }
 }

@@ -6,14 +6,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "users")
 
-public class CustomerEntity {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCustomer", nullable = false)
+    @Column(name = "idUser", nullable = false)
 
-    private Long idCustomer;
+    private Long idUser;
     private String name;
     private String username;
     private String password;
@@ -40,12 +40,12 @@ public class CustomerEntity {
         this.role = role;
     }
 
-    public Long getIdCustomer() {
-        return idCustomer;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setIdCustomer(Long idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public String getUsername() {

@@ -6,17 +6,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "users")
 
-public class CustomerEntity {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCustomer", nullable = false)
+    @Column(name = "idUser", nullable = false)
 
-    private Long idCustomer;
-    private String nameCustomer;
-    private String usernameCustomer;
-    private String passwordCustomer;
+    private Long idUser;
+    private String nameUser;
+    private String usernameUser;
+    private String passwordUser;
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date dateOfBirth;
     private String phone;
@@ -24,12 +24,12 @@ public class CustomerEntity {
     private String address;
     private String role;
 
-    public String getNameCustomer() {
-        return nameCustomer;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setNameCustomer(String nameCustomer) {
-        this.nameCustomer = nameCustomer;
+    public void setNameUser(String name) {
+        this.nameUser = nameUser;
     }
 
     public String getRole() {
@@ -40,28 +40,28 @@ public class CustomerEntity {
         this.role = role;
     }
 
-    public Long getIdCustomer() {
-        return idCustomer;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setIdCustomer(Long idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
-    public String getUsernameCustomer() {
-        return usernameCustomer;
+    public String getUsernameUser() {
+        return usernameUser;
     }
 
-    public void setUsernameCustomer(String usernameCustomer) {
-        this.usernameCustomer = usernameCustomer;
+    public void setUsernameUser(String username) {
+        this.usernameUser = usernameUser;
     }
 
-    public String getPasswordCustomer() {
-        return passwordCustomer;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-    public void setPasswordCustomer(String passwordCustomer) {
-        this.passwordCustomer = passwordCustomer;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 
     public Date getDateOfBirth() {

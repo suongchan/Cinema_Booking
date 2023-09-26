@@ -8,12 +8,11 @@ import java.util.Date;
 
 @Getter
 @Setter
-
-public class Customer {
-    private Long idCustomer;
-    private String nameCustomer;
-    private String usernameCustomer;
-    private String passwordCustomer;
+public class User {
+    private Long idUsr;
+    private String nameUser;
+    private String usernameUser;
+    private String passwordUser;
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date dateOfBirth;
     private String phone;
@@ -22,11 +21,11 @@ public class Customer {
     private String rePassword;
 
     public String getPassword() {
-        return passwordCustomer;
+        return passwordUser;
     }
 
     public void setPassword(String password) {
-        this.passwordCustomer = passwordCustomer;
+        this.passwordUser = passwordUser;
     }
 
     public String getRePassword() {

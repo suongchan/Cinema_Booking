@@ -2,8 +2,10 @@ package com.example.cinema_booking.service;
 
 import com.example.cinema_booking.entity.CustomerEntity;
 import com.example.cinema_booking.repository.CustomerRepository;
+import com.example.cinema_booking.repository.UserRepository;
 import com.example.cinema_booking.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,21 +18,22 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@Primary
 
-public class CustomUserDetailService implements UserDetailsService {
+public class CustomUserDetailServiceForCustomer implements UserDetailsService {
     @Autowired
     private CustomerRepository customerRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CustomerEntity entity = customerRepository.findByUsername(username)
-                .orElseThrow(() -> new BadCredentialsException("Không tìm thấy user"));
+    public UserDetails loadUserByUsername(String usernameCustomer) throws UsernameNotFoundException {
+        CustomerEntity customerEntity = customerRepository.findByUsernameCustomer(usernameCustomer)
+                .orElseThrow(() -> new BadCredentialsException("Không tìm thấy customer"));
 
         UserPrincipal principal = new UserPrincipal();
-        principal.setId(entity.getId());
-        principal.setUsername(username);
-        principal.setPassword(entity.getPassword());
-        principal.setAuthorities(List.of(new SimpleGrantedAuthority(entity.getRole())));
+        principal.setId(customerEntity.getIdCustomer());
+        principal.setUsername(usernameCustomer);
+        principal.setPassword(customerEntity.getPasswordCustomer());
+        principal.setAuthorities(List.of(new SimpleGrantedAuthority(customerEntity.getRole())));
         return principal;
     }
 

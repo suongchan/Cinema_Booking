@@ -13,9 +13,9 @@ public class CustomerConverter {
     public static CustomerEntity toEntity(Customer customer){
         CustomerEntity customerEntity = new CustomerEntity();
         PasswordEncoder passwordEncoder = new  BCryptPasswordEncoder();
-        customerEntity.setName(customer.getName());
-        customerEntity.setUsername(customer.getUsername());
-        customerEntity.setPassword(passwordEncoder.encode(customer.getPassword()));
+        customerEntity.setNameCustomer(customer.getNameCustomer());
+        customerEntity.setUsernameCustomer(customer.getUsernameCustomer());
+        customerEntity.setPasswordCustomer(passwordEncoder.encode(customer.getPassword()));
         customerEntity.setDateOfBirth(customer.getDateOfBirth());
         customerEntity.setPhone(customer.getPhone());
         customerEntity.setEmail(customer.getEmail());

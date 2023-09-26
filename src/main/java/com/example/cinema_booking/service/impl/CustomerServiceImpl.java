@@ -7,6 +7,7 @@ import com.example.cinema_booking.repository.CustomerRepository;
 import com.example.cinema_booking.security.UserPrincipal;
 import com.example.cinema_booking.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Qualifier
 
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
@@ -28,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Long createCustomer(Customer customer) {
-        return customerRepository.save(CustomerConverter.toEntity(customer)).getId();
+        return customerRepository.save(CustomerConverter.toEntity(customer)).getIdCustomer();
     }
 
     @Override
@@ -41,16 +43,21 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByRole("ROLE_CUSTOMER");
     }
 
-    public boolean updatePassword(String username, String oldPassword, String newPassword) {
-        UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
-        CustomerEntity entity = customerRepository.findByUsername(username).orElseThrow();
+    public boolean updatePassword(String usernameCustomer, String oldPassword, String newPassword) {
+        UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(usernameCustomer);
+        CustomerEntity customerEntity = customerRepository.findByUsernameCustomer(usernameCustomer).orElseThrow();
         if (passwordEncoder.matches(oldPassword, userPrincipal.getPassword())){
             String encodedNewPassword = passwordEncoder.encode(newPassword);
-            entity.setPassword(encodedNewPassword);
-            customerRepository.save(entity);
+            customerEntity.setPasswordCustomer(encodedNewPassword);
+            customerRepository.save(customerEntity);
             return true;
         } else {
             return false;
         }
     }
+
+//    @Autowired
+//    public CustomerServiceImpl(@Qualifier("customUserDetailServiceForCustomer") UserDetailsService userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
 }

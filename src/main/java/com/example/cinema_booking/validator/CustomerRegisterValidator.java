@@ -17,7 +17,7 @@ public class CustomerRegisterValidator {
 
     public boolean validateRegisterUser(Customer customer) {
 
-        CustomerEntity entity = customerRepository.findByUsername(customer.getUsername()).orElse(null);
+        CustomerEntity entity = customerRepository.findByUsernameCustomer(customer.getUsernameCustomer()).orElse(null);
         CustomerEntity email = customerRepository.findByEmail(customer.getEmail()).orElse(null);
         CustomerEntity phone = customerRepository.findByPhone(customer.getPhone()).orElse(null);
 

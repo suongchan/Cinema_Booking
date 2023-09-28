@@ -66,10 +66,4 @@ public class UserPrincipal implements UserDetails {
         return true;
     }
 
-//    public UserPrincipal(UserEntity userEntity) {
-//        this.id = userEntity.getIdUser();
-//        this.username = userEntity.getUsername();
-//        this.password = userEntity.getPassword();
-//        this.authorities = Collections.singleton(new SimpleGrantedAuthority(userEntity.getRole()));
-//    }
 }

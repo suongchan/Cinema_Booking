@@ -110,6 +110,10 @@
         </label>
 
         <input type="submit" value="Đăng ký">
+
+        <label th:if="${messageError}" class="error-message">
+            <p th:text="${messageError}" style="color: red"></p>
+        </label>
     </form>
 </div>
 </body>

@@ -1,4 +1,3 @@
-@charset "ISO-8859-1";
 :root {
     --body-bg: #fafafb;
     --box-bg: #ffffff;
@@ -40,7 +39,7 @@ body {
 
 a {
     text-decoration: none;
-    color: white ;
+    color: white;
     display: inline-block;
 }
 
@@ -65,7 +64,6 @@ a {
     padding: 5px 5px;
     padding-top: 10px;
     display: flex;
-    /*align-items: center;*/
     justify-content: center;
     font-weight: bold;
     font-size: 30px;
@@ -138,7 +136,7 @@ a {
     background-color: RGB(34,45,51);
 }
 
-.sidebar-menu span{
+.sidebar-menu span {
     width: 100%;
     padding: 15px;
     height: 45px;
@@ -150,7 +148,7 @@ a {
     transition: color 0.2s ease-in-out;
 }
 
-.permanent{
+.permanent {
     background-color: RGB(29,33,39);
     color: #236377;
 }
@@ -283,18 +281,8 @@ a {
 }
 
 .main {
-    /* width: 200px; */
     padding-left: var(--sidebar-size);
 }
-
-/*.main-header {*/
-/*    height: var(--main-header-height);*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    padding: 20px;*/
-/*    background-color: var(--box-bg);*/
-/*    box-shadow: var(--shadow);*/
-/*}*/
 
 .dark .main-header {
     border-bottom: 2px solid var(--border-color);
@@ -327,159 +315,101 @@ a {
     margin-right: 15px;
 }
 
-.header-right{
+.header-right {
     width: 100%;
     background-color: RGB(69,137,192);
     color: #fff;
     text-align: right;
     padding-right: 30px;
-    /*box-sizing: border-box;*/
     padding-bottom: 9px;
     padding-top: 3px;
 }
 
-.header-text{
-    font-size: 20px; /* Kích th??c ch? */
+.header-text {
+    font-size: 20px;
     font-weight: bold;
 }
 
 .header-right img {
-    width: 35px; /* ??t chi?u r?ng c?a hình ?nh */
-    height: auto; /* ?? t? l? khung hình ?nh t? ?i?u ch?nh */
-    margin-right: 3px; /* ?? t?o kho?ng cách gi?a hình ?nh và v?n b?n "Admin" */
+    width: 35px;
+    height: auto;
+    margin-right: 3px;
     margin-top: 8px;
 }
 
-.admin-taikhoan{
+.admin-taikhoan {
+    /*position: fixed;*/
+    align-items: center;
+    padding-left: 17%;
+    width: 100%;
     background-color: RGB(236,240,246);
-    height: 808px;
 }
+
 .taikhoan-header {
-    padding-left: 330px;
+    padding-left: 30px;
 }
-.taikhoan-body{
+
+.taikhoan-body {
+    align-items: center;
     padding-left: 50px;
-    margin-left: 315px;
+    margin-left: 30px;
+    padding-top: 30px;
     background-color: white;
-    width: 80%;
+    width: 95%;
     height: auto;
 }
-.text1{
+.form-containers
+{
+    padding-left: 20%;
+
+}
+
+.text1 {
     font-size: 35px;
 }
-.text2{
+
+.text2 {
     font-size: 20px;
     margin-left: 15px;
-}.search{
-     padding-top: 20px;
- }
-.search input{
+}
+
+.search {
+    padding-top: 20px;
+}
+
+.search input {
     width: 40%;
     height: 35px;
 }
-#searchButton{
+
+#searchButton {
     margin-left: 20px;
     width: 80px;
     height: 27px;
     background-color: #19a4a0;
-    border-color:#19a4a0;
-    border-radius:3px;
+    border-color: #19a4a0;
+    border-radius: 3px;
     color: white;
 }
-#addTaikhoan{
+
+#addTaikhoan {
     width: 70px;
     height: 27px;
     background-color: #028836;
-    border-color:#028836;
-    border-radius:3px;
+    border-color: #028836;
+    border-radius: 3px;
     color: white;
 }
 
-
-
-table {
-    width: 100%;
-    min-width: 1000px;
+.account_container {
+    width: 90%;
     margin-left: 5px;
-    border-collapse: collapse; /* Xóa kho?ng tr?ng gi?a các c?t */
+    border-collapse: collapse;
 }
 
-.delete{
-    background-color: #f90404;
-    color: white;
-    padding: 3px 7px;
-    border-radius: 5px;
-    display: inline-block;
-}
-table td a:hover{
-    background-color: #fb7b7b;
-}
-/*table thead {*/
-/*    background-color: RGB(69,137,192) ;*/
-/*}*/
 
-/*table thead tr {*/
-/*    text-align: right;*/
-/*}*/
 
-table th,td {
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-.headline{
-    margin-left: 5px;
-    font-weight: bold;
-}
 
-.order-status {
-    padding: 5px 15px;
-    border-radius: 5px;
-    font-weight: 500;
-}
-
-.order-ready {
-    color: #2a59d1;
-    background-color: rgba(62, 121, 247, 0.1);
-}
-
-.order-shipped {
-    color: #00ab6f;
-    background-color: rgba(4, 209, 130, 0.1);
-}
-
-.payment-status {
-    display: inline-block;
-    /*align-items: center;*/
-
-}
-
-.payment-status a{
-    background-color: #04d182;
-    color: white;
-    padding: 3px 5px;
-    border-radius: 5px;
-}
-.payment-status a:hover{
-    background-color: #42f4b0;
-}
-
-.overflow-scroll {
-    overflow-y: auto;
-}
-
-.overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
-}
-
-.overlay.active {
-    display: block;
-}
 .form-containers {
     display: flex;
     flex-direction: column;
@@ -488,28 +418,30 @@ table th,td {
 }
 
 .form-row {
+    font-size: 14pt;
     display: flex;
-    flex-direction: column; /* ??m b?o các input n?m th?ng m?t c?t */
+    flex-direction: column;
     margin-bottom: 10px;
+    width: 50%;
+}
+
+.form-row input
+{
+    height: 30px;
 }
 
 label {
     display: flex;
-    text-align: right; /* C?n ch?nh label sang ph?i */
+    text-align: right;
 }
-.form-row input
-{
+
+.form-row input {
     display: flex;
 }
 
-
-
 @media only screen and (max-width: 1280px) {
     .sidebar {
-        transition: transform 0.3s ease-in-out;
-        max-width: 100%;
-        z-index: 99;
-        transform: translateX(-100%);
+        width: 17%;
     }
 
     .sidebar.active {
@@ -518,7 +450,6 @@ label {
 
     .main {
         clear: both;
-        /* padding-left: 0; */
     }
 
     .mobile-toggle,
@@ -535,3 +466,37 @@ label {
         right: -15px;
     }
 }
+
+/* Lo?i b? thanh cu?n trong trình duy?t webkit */
+.sidebar::-webkit-scrollbar {
+    width: 0.2rem;
+}
+
+/* ?n thanh cu?n trong trình duy?t webkit */
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.submit
+{
+
+    width: 12%;
+    height: 30px;
+    border: none;
+    background-color: #1ce0ae;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 12pt;
+    transition: background-color 0.3s;
+}
+
+.submit :hover {
+    background-color: #efcf83; /* ??i màu n?n thành ?? khi hover */
+}
+

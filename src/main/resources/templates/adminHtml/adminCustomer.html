@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách nhân viên| Admin Web</title>
+  <title>Danh sách khách hàng| Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -40,8 +40,8 @@
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
     <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
-    <li><a th:href="@{/admin/staffList}" class="active"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#" th:href="@{/admin/customerList}" > <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
+    <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
+    <li><a href="#" th:href="@{/admin/customerList}" class="active" > <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
@@ -159,10 +159,10 @@
           <div class="search">
             <!-- Ô tìm kiếm -->
             <input type="text" id="search" placeholder="Tìm kiếm...">
-            <a href="/admin/searchStaff" class="searchStaff">Tìm Kiếm
+            <a href="/admin/searchCustomer" class="searchStaff">Tìm Kiếm
             </a>
-            <a href="/admin/addStaff" class="addStaff">
-             Thêm
+            <a href="/admin/addCustomer" class="addStaff">
+              Thêm
             </a>
           </div>
 
@@ -174,22 +174,24 @@
               <td>Tên đăng nhập</td>
               <td>Ngày sinh</td>
               <td>Số điện thoại</td>
+              <td>Email</td>
               <td>Địa chỉ</td>
               <td></td>
               <td></td>
             </tr>
-            <tr th:each="staff : ${users}">
-              <td th:text="${staff.name}"></td>
-              <td th:text="${staff.username}"></td>
-              <td th:text="${staff.dateOfBirth}"></td>
-              <td th:text="${staff.phone}"></td>
-              <td th:text="${staff.address}"></td>
-                <td class="payment-status payment-pending">
-                  <a th:href="@{/admin/editStaff/{id}(id=${staff.idUser})}">Cập nhập</a>
-                </td>
-                <td class="delete">
-                  <a th:href="@{/admin/deleteStaff/{id}(id=${staff.idUser})}">Xóa</a>
-                </td>
+            <tr th:each="customer : ${customers}">
+              <td th:text="${customer.name}"></td>
+              <td th:text="${customer.username}"></td>
+              <td th:text="${customer.dateOfBirth}"></td>
+              <td th:text="${customer.phone}"></td>
+              <td th:text="${customer.email}"></td>
+              <td th:text="${customer.address}"></td>
+              <td class="payment-status payment-pending">
+                <a th:href="@{/admin/editCustomer/{id}(id=${customer.idCustomer})}">Cập nhập</a>
+              </td>
+              <td class="delete">
+                <a th:href="@{/admin/deleteCustomer/{id}(id=${customer.idCustomer})}">Xóa</a>
+              </td>
             </tr>
             </tbody>
           </table>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cập nhật Khách hàng | Admin Web</title>
+  <title>Cập nhật nhân viên | Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -157,7 +157,7 @@
         </div>
         <div class="taikhoan-body">
         <form class="form-containers" th:action="@{/admin/saveEditedStaff}" method="POST" th:object="${user}">
-          <input name="id" th:value="*{id}">
+          <input type="hidden" th:field="*{idUser}" />
           <div class="form-row" >
             <label for="name">Họ và Tên</label>
             <input type="text" id="name" name="name" required th:value="*{name}">
@@ -169,6 +169,15 @@
           </div>
 
           <div class="form-row" >
+            <label for="password">Mật Khẩu</label>
+            <input type="password" id="password" name="password" required th:text="${password}">
+          </div>
+          <div class="form-row" >
+            <label for="repassword">Xác nhận mật khẩu</label>
+            <input type="password" id="repassword" name="repassword" required th:text="${rePassword}">
+          </div>
+
+          <div class="form-row" >
             <label for="join_datepicker">Ngày sinh:</label>
             <input type="date" class="form-control" placeholder="yyyy-MM-dd" id="join_datepicker" th:field="*{dateOfBirth}">
           </div>
@@ -176,16 +185,13 @@
             <label for="name">Số điện thoại</label>
             <input type="text" id="phone" name="phone" required th:value="*{phone}">
           </div>
-          <div class="form-row" >
-            <label for="Email">Email</label>
-            <input type="Email" id="Email" name="Email" required th:value="*{email}">
-          </div>
+
           <div class="form-row" >
             <label for="address">Địa chỉ</label>
             <input type="text" id="address" name="address" required th:value="*{address}">
           </div>
 
-          <input type="submit" value="Cập nhập">
+          <input type="submit" value="Cập nhập" class="submit">
         </form>
       </div>
     </div>

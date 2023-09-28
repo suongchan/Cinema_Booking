@@ -1,5 +1,6 @@
 package com.example.cinema_booking.domain;
 
+import com.example.cinema_booking.entity.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,4 +37,6 @@ public class Customer {
     public void setRePassword(String rePassword) {
         this.rePassword = rePassword;
     }
+
+
 }

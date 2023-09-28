@@ -28,12 +28,16 @@ public class RegisterController {
     }
     @PostMapping("")
     public String creatUser(@ModelAttribute Customer customer, Model model) {
-        if (customerRegisterValidator.validateRegisterUser(customer)) {
+        String errorMessage = customerRegisterValidator.validateRegisterUser(customer);
+        if (errorMessage == null) {
+            // Không có lỗi, tiến hành đăng ký
             customerService.register(customer);
             return "customerHtml/loginCustomer";
+        } else {
+            // Có lỗi, hiển thị thông điệp lỗi
+            model.addAttribute("messageError", errorMessage);
+            return "register/registration";
         }
-        model.addAttribute("messageError", "trùng gì đó rồi");
-        System.out.println("trùng rồi");
-        return "register/registration";
     }
+
 }

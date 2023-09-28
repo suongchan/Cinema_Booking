@@ -1,5 +1,9 @@
 package com.example.cinema_booking.controller;
 
+import com.example.cinema_booking.domain.Customer;
+import com.example.cinema_booking.entity.CustomerEntity;
+import com.example.cinema_booking.exception.CustomerNotFoundException;
+import com.example.cinema_booking.repository.CustomerRepository;
 import com.example.cinema_booking.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +27,12 @@ public class CustomerController {
     }
 
     @GetMapping("info")
-    public String infoAccount(){
+    public String infoAccount(Principal principal, Model model) throws CustomerNotFoundException {
+        String username = principal.getName(); // Lấy tên người dùng hiện tại
+        CustomerEntity customer = customerService.getCustomerByUsername(username);
+
+        Long customerId = customer.getIdCustomer();
+        model.addAttribute("customer", customer);
         return "customerHtml/info";
     }
 
@@ -36,7 +45,7 @@ public class CustomerController {
     public String changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Principal principal, Model model){
 
         if (customerService.updatePassword(principal.getName(), oldPassword, newPassword)){
-            return "customerHtml/info";
+            return "customerHtml/SuccessChangePassword";
         } else {
             model.addAttribute("message", "Sai rồi mày");
             return "customerHtml/changePassword";

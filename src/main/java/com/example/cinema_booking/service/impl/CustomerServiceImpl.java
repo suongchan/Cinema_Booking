@@ -3,7 +3,7 @@ package com.example.cinema_booking.service.impl;
 import com.example.cinema_booking.converter.CustomerConverter;
 import com.example.cinema_booking.domain.Customer;
 import com.example.cinema_booking.entity.CustomerEntity;
-import com.example.cinema_booking.entity.UserEntity;
+import com.example.cinema_booking.exception.CustomerNotFoundException;
 import com.example.cinema_booking.repository.CustomerRepository;
 import com.example.cinema_booking.security.UserPrincipal;
 import com.example.cinema_booking.service.CustomerService;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
@@ -60,6 +59,19 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerEntity getCustomerById(Long id) {
         return customerRepository.getById(id);
+    }
+
+    @Override
+    public CustomerEntity getCustomerByUsername(String username) throws CustomerNotFoundException {
+        // Thực hiện truy vấn để lấy khách hàng dựa trên username
+        Optional<CustomerEntity> customerOptional = customerRepository.findByUsername(username);
+
+        if (customerOptional.isPresent()) {
+            return customerOptional.get(); // Trả về khách hàng nếu tìm thấy
+        } else {
+            throw new CustomerNotFoundException("Không tìm thấy khách hàng với username: " + username);
+            // Ném ngoại lệ hoặc xử lý nếu không tìm thấy khách hàng
+        }
     }
 
     @Override

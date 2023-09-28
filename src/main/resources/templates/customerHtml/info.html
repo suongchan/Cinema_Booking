@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Thông Tin Tài Khoản</title>
@@ -38,16 +38,12 @@
                                     XIN CHÀO : SUONGCHAN
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">TÀI KHOẢN</a></li>
+                                    <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
 
                                     <li><a class="dropdown-item" href="perform_logout">ĐĂNG XUẤT</a></li>
-
-
                                 </ul>
                             </li>
-
                         </ul>
-
                     </div>
                 </div>
             </nav>
@@ -66,39 +62,38 @@
                     <a class="main_left_item " href="#">Đơn Hàng</a>
                 </li>
                 <li>
-                    <a class="main_left_item" href="perform_logout">Thoát</a>
+                    <a class="main_left_item" href="#">Thoát</a>
                 </li>
             </ul>
         </div>
 
         <div class="main_right">
-            <form class="account">
-                 <h3>Thông Tin Tài Khoản</h3>
+            <form class="account" th:object="${customer}">
+                <h3>Thông Tin Tài Khoản</h3>
+                <input type="hidden" th:field="*{idCustomer}" />
                 <div class="info">
                     <div class="column">
-                        <span>Họ và Tên:
-                           <p>Minh Sương</p>
-                        </span>
-                        <span>Số Điện Thoại
-                           <p>0898 244 264</p>
-                        </span>
-                        <input type="button" class="btnUpdate" value="Cập Nhập">
+                        <span>Họ và Tên:</span>
+                        <p th:text="${customer.name}"></p>
                     </div>
                     <div class="column">
-                         <span>Email
-                            <p>minhsuong19102002@gmail.com</p>
-                         </span>
-                         <span>CCCD
-                             <p>048293749375</p>
-                         </span>
-                        <a class="ChangePass" href="/customer/changePassword">Bạn Có Muốn Đổi Mật Khẩu ?</a>
+                        <span>Số Điện Thoại:</span>
+                        <p th:text="${customer.phone}"></p>
                     </div>
+                    <div class="column">
+                        <span>Email:</span>
+                        <p th:text="${customer.email}"></p>
+                    </div>
+                    <div class="column">
+                        <span>Địa chỉ:</span>
+                        <p th:text="${customer.address}"></p>
+                        <input type="button" class="btnUpdate" value="Cập Nhập">
+                    </div>
+                    <a class="ChangePass" href="/customer/changePassword">Bạn Có Muốn Đổi Mật Khẩu ?</a>
                 </div>
             </form>
         </div>
     </div>
-
-
 </main>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách nhân viên| Admin Web</title>
+  <title>Cập nhật Khách hàng | Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- BOXICONS -->
   <link href="https://fonts.gstatic.com" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/cssAdmin/adminAccount.css">
+  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">
 
 </head>
 <body>
@@ -39,9 +39,9 @@
   <!-- SIDEBAR MENU -->
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
-    <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
-    <li><a th:href="@{/admin/staffList}" class="active"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#" th:href="@{/admin/customerList}" > <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span>quản trị</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
+    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>Khách hàng</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
@@ -152,47 +152,50 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Nhân viên</span>
-          <span class="text2">Danh sách nhân viên</span>
+          <span class="text1">Khách hàng</span>
+          <span class="text2">Cập nhập khách hàng</span>
         </div>
         <div class="taikhoan-body">
-          <div class="search">
-            <!-- Ô tìm kiếm -->
-            <input type="text" id="search" placeholder="Tìm kiếm...">
-            <a href="/admin/searchStaff" class="searchStaff">Tìm Kiếm
-            </a>
-            <a href="/admin/addStaff" class="addStaff">
-             Thêm
-            </a>
-          </div>
+          <form class="form-containers" th:action="@{/admin/saveEditedCustomer}" method="POST" th:object="${customer}">
+            <input type="hidden" th:field="*{idCustomer}" />
+            <div class="form-row" >
+              <label for="name">Họ và Tên</label>
+              <input type="text" id="name" name="name" required th:value="*{name}">
+            </div>
 
+            <div class="form-row" >
+              <label for="username">Tên đăng nhập:</label>
+              <input type="text" id="username" name="username" required th:value="*{username}">
+            </div>
 
-          <table>
-            <tbody>
-            <tr class="headline">
-              <td>Họ tên</td>
-              <td>Tên đăng nhập</td>
-              <td>Ngày sinh</td>
-              <td>Số điện thoại</td>
-              <td>Địa chỉ</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr th:each="staff : ${users}">
-              <td th:text="${staff.name}"></td>
-              <td th:text="${staff.username}"></td>
-              <td th:text="${staff.dateOfBirth}"></td>
-              <td th:text="${staff.phone}"></td>
-              <td th:text="${staff.address}"></td>
-                <td class="payment-status payment-pending">
-                  <a th:href="@{/admin/editStaff/{id}(id=${staff.idUser})}">Cập nhập</a>
-                </td>
-                <td class="delete">
-                  <a th:href="@{/admin/deleteStaff/{id}(id=${staff.idUser})}">Xóa</a>
-                </td>
-            </tr>
-            </tbody>
-          </table>
+            <div class="form-row" >
+              <label for="password">Mật Khẩu</label>
+              <input type="password" id="password" name="password" placeholder="********" required th:text="${password}">
+            </div>
+            <div class="form-row" >
+              <label for="repassword">Xác nhận mật khẩu</label>
+              <input type="password" id="repassword" name="repassword" placeholder="********" required th:text="${rePassword}">
+            </div>
+
+            <div class="form-row" >
+              <label for="join_datepicker">Ngày sinh:</label>
+              <input type="date" class="form-control" placeholder="yyyy-MM-dd" id="join_datepicker" th:field="*{dateOfBirth}">
+            </div>
+            <div class="form-row" >
+              <label for="name">Số điện thoại</label>
+              <input type="text" id="phone" name="phone" required th:value="*{phone}">
+            </div>
+            <div class="form-row" >
+              <label for="Email">Email</label>
+              <input type="Email" id="Email" name="Email" required th:value="*{email}">
+            </div>
+            <div class="form-row" >
+              <label for="address">Địa chỉ</label>
+              <input type="text" id="address" name="address" required th:value="*{address}">
+            </div>
+
+            <input type="submit" value="Cập nhập" class="submit">
+          </form>
         </div>
       </div>
     </div>

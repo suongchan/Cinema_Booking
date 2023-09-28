@@ -1,67 +1,69 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Giúp tính toán kích thước chính xác hơn */
 }
 
-body
-{
+body {
     background-image: url('/static/image/login.png');
-    width: 1280px;
-    height: 720px;
+    width: 100vw; /* 100% chiều rộng của viewport */
+    height: 100vh; /* 100% chiều cao của viewport */
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-attachment: fixed;
     position: relative;
-}
-.login
-{
-    width: 33%;
-    height: 60%;
-    background-color: rgba(52, 152, 219, 0.25);
-    padding: 20px;
-    position: absolute;
-    top: 36%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-    color: white;
-}
-.login h3
-{
-    font-size: 28pt;
-    text-align: center;
-    padding-top: 10px;
-}
-.login .submit
-{
-    padding-left: 23%;
-    padding-top: 10px;
-    width: 70%;
-    height: 13%;
-    position: absolute;
-}
-.login .submit .btnSubmit
-{
+    display: flex; /* Cho phép canh giữa nội dung */
     justify-content: center;
-    font-size: 15pt;
-    font-weight: 600;
+    /*align-items: center;*/
+    padding-top: 4%;
+}
+
+.login {
+    width: 33%;
+    height: 80%;
+    background-color: rgba(52, 152, 219, 0.25); /* Tăng độ mờ của nền */
+    padding: 20px;
+    border-radius: 10px; /* Bo tròn các góc */
+    /*text-align: center; !* Canh giữa nội dung *!*/
     color: white;
-    border:10pt rgba(52, 152, 219, 10);
-    border-radius: 50% ;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(52, 152, 219, 0.3);
 }
-.login .submit :hover {
-    background-color: rgba(52, 152, 219, 0.5);
-}
-.login .signIn
-{
-    padding-top: 20%;
+
+.login h3 {
     text-align: center;
+ font-size: 30px; /* Sử dụng đơn vị px thay vì pt */
+    font-weight: bolder;
+    padding-top: 10px;
 }
-.login .signIn a
-{
-    font-size: 14pt;
+
+.login .submit {
+    text-align: center;
+ padding-top: 20px; /* Điều chỉnh khoảng cách với nút đăng nhập */
+}
+
+.login .submit .btnSubmit {
+    font-size: 18px; /* Tăng kích thước chữ */
+    font-weight: bold; /* Đậm chữ */
+    color: white;
+    background-color: rgba(52, 152, 219, 0.3); /* Sử dụng màu đậm hơn */
+    border:10pt rgba(52, 152, 219, 10);
+    border-radius: 50%;
+    padding: 10px 20px; /* Khoảng cách lề xung quanh nút */
+    cursor: pointer; /* Biểu tượng con trỏ khi di chuyển vào nút */
+}
+
+.login .submit .btnSubmit:hover {
+    background-color: rgba(52, 152, 219, 0.5); /* Độ mờ khi hover */
+}
+
+.login .signIn {
+    padding-top: 20px;
+}
+
+.login .signIn a {
+    font-size: 16px; /* Tăng kích thước chữ */
     margin: 0 15px;
+    color: white; /* Màu chữ trắng */
+    text-decoration: none; /* Loại bỏ gạch chân */
 }
+
+/* Tùy chỉnh các phần khác tùy theo ý muốn của bạn */

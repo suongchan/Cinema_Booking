@@ -1,87 +1,116 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Đăng ký tài khoản</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<form th:action="@{}" method="post" th:object="${user}">-->
-<!--    <label>Name:</label>-->
-<!--    <input type="text" th:field="*{name}" /><br/>-->
-
-<!--    <label>Age:</label>-->
-<!--    <input type="text" th:field="*{age}" /><br/>-->
-
-<!--    <label>Sdt </label>-->
-<!--    <input type="text" th:field="*{phone}" /><br/>-->
-
-<!--    <label>Email </label>-->
-<!--    <input type="text" th:field="*{mail}" /><br/>-->
-
-<!--    <label>Địa chỉ </label>-->
-<!--    <input type="text" th:field="*{adress}" /><br/>-->
-
-<!--    <button type="submit">Đăng ký</button>-->
-
-
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký tài khoản</title>
+    <style>
+        body {
+            background-image: url('/static/image/login.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            position: fixed;
+            display: flex;
+            background-color: #fff;
+            flex-direction: column;
+            /*align-items: center;*/
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            float: left;
+            font-weight: bold;,./
+            text-align: left; /* Căn chữ trái */
+            width: 100%;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="date"],
+        textarea {
+            /*display: flex;*/
+            float: right;
+            width: 70%;
+            padding: 5px; /* Điều chỉnh giá trị padding theo ý muốn */
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: rgba(52, 152, 219, 10);
+            color: #fff;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 10pt;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-
-    <h2>Register</h2>
-    <form method="POST" th:action="@{/register}" th:object="${customer}" > <!-- Đặt action theo URL xử lý đăng ký -->
-        <!-- Trường ID (id) - Sẽ tự động tạo khi đăng ký -->
+<div class="container">
+    <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+    <form method="POST" th:action="@{/register}" th:object="${customer}">
         <input type="hidden" name="id" value="0">
 
-        <label for="username">Họ và Tên:</label>
-        <input type="text" id="name" th:field="*{name}" required><br><br>
+        <label for="name">Họ và Tên:
+        <input type="text" id="name" th:field="*{name}" required>
+        </label>
 
+        <label for="username">Tên đăng nhập:
+        <input type="text" id="username" th:field="*{username}" required>
+        </label>
 
-        <!-- Trường Tên người dùng (username) -->
-        <label for="username">Tên đăng nhập:</label>
-        <input type="text" id="username" th:field="*{username}" required><br><br>
+        <label for="password">Mật khẩu:
+        <input type="password" id="password" th:field="*{password}" required>
+        </label>
 
+        <label for="checkpassword">Xác nhận mật khẩu:
+        <input type="password" id="checkpassword" th:field="*{rePassword}" required>
+        </label>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}" required><br><br>
+        <label for="join_datepicker">Ngày sinh:
+        <input type="date" id="join_datepicker" th:field="*{dateOfBirth}" required>
+        </label>
 
+        <label for="phone">Số điện thoại:
+        <input type="text" id="phone" th:field="*{phone}" required>
+        </label>
 
-        <label for="checkpassword">Password:</label>
-        <input type="password" id="checkpassword" th:field="*{rePassword}" required><br><br>
+        <label for="email">Email:
+        <input type="email" id="email" th:field="*{email}" required>
+        </label>
 
-        <!-- Trường Tuổi (age) -->
-        <label for="join_datepicker">Ngày sinh:</label>
-        <input type="date" class="form-control" placeholder="yyyy-MM-dd" id="join_datepicker" th:field="*{dateOfBirth}">
+        <label for="address">Địa chỉ:
+        <textarea id="address" th:field="*{address}" required></textarea>
+        </label>
 
-        <!-- Trường Số điện thoại (phone) -->
-        <label for="phone">Số điện thoại:</label>
-        <input type="text" id="phone" th:field="*{phone}" required><br><br>
-
-        <!-- Trường Email (email) -->
-        <label for="email">Email:</label>
-        <input type="email" id="email" th:field="*{email}" required><br><br>
-
-        <!-- Trường Địa chỉ (address) -->
-        <label for="address">Address:</label>
-        <textarea id="address" th:field="*{address}" rows="4" required></textarea><br><br>
-
-        <input type="submit" value="Register">
-    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
-    <!--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-    <!--    <script>-->
-    <!--        $(function() {-->
-    <!--            $("#join_datepicker").datepicker({dateFormat:"yy-mm-dd"});-->
-    <!--            $("#retire_datepicker").datepicker({dateFormat:"yy-mm-dd"});-->
-    <!--        });-->
-    <!--    </script>-->
+        <input type="submit" value="Đăng ký">
     </form>
-
+</div>
 </body>
 </html>

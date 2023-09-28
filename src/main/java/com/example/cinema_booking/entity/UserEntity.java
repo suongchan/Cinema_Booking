@@ -20,7 +20,6 @@ public class UserEntity {
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date dateOfBirth;
     private String phone;
-    private String email;
     private String address;
     private String role;
 
@@ -80,13 +79,6 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getAddress() {
         return address;

@@ -1,4 +1,3 @@
-@charset "ISO-8859-1";
 :root {
     --body-bg: #fafafb;
     --box-bg: #ffffff;
@@ -7,7 +6,6 @@
     --text-second-color: #72849ab3;
     --border-color: #e9e9e9;
     --menu-item-active-bg: rgba(62, 121, 247, 0.1);
-
     --box-border-radius: 15px;
     --sidebar-size: 300px;
     --sidebar-logo-img-size: 80px;
@@ -40,14 +38,13 @@ body {
 
 a {
     text-decoration: none;
-    color: white ;
+    color: white;
     display: inline-block;
 }
 
 .sidebar {
     background-color: var(--box-bg);
     position: fixed;
-    top: 0;
     left: 0;
     width: var(--sidebar-size);
     height: 100vh;
@@ -65,11 +62,10 @@ a {
     padding: 5px 5px;
     padding-top: 10px;
     display: flex;
-    /*align-items: center;*/
     justify-content: center;
     font-weight: bold;
     font-size: 30px;
-    background-color: RGB(62,124,173);
+    background-color: RGB(62, 124, 173);
     color: #ffffff;
     height: 60px;
 }
@@ -88,7 +84,7 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 12px;
-    background-color: RGB(34,45,51);
+    background-color: RGB(34, 45, 51);
 }
 
 .sidebar-user-info {
@@ -133,12 +129,14 @@ a {
 }
 
 .sidebar-menu {
+    width: 100%;
     padding: 10px 0;
     list-style-type: none;
-    background-color: RGB(34,45,51);
+    background-color: RGB(34, 45, 51);
+    max-width: 100%;
 }
 
-.sidebar-menu span{
+.sidebar-menu span {
     width: 100%;
     padding: 15px;
     height: 45px;
@@ -150,8 +148,8 @@ a {
     transition: color 0.2s ease-in-out;
 }
 
-.permanent{
-    background-color: RGB(29,33,39);
+.permanent {
+    background-color: RGB(29, 33, 39);
     color: #236377;
 }
 
@@ -175,7 +173,7 @@ a {
 
 .sidebar-menu > li > a:hover {
     color: var(--main-color);
-    background-color: RGB(50,58,72);
+    background-color: RGB(50, 58, 72);
 }
 
 .sidebar-menu > li > a > i {
@@ -283,18 +281,8 @@ a {
 }
 
 .main {
-    /* width: 200px; */
     padding-left: var(--sidebar-size);
 }
-
-/*.main-header {*/
-/*    height: var(--main-header-height);*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    padding: 20px;*/
-/*    background-color: var(--box-bg);*/
-/*    box-shadow: var(--shadow);*/
-/*}*/
 
 .dark .main-header {
     border-bottom: 2px solid var(--border-color);
@@ -327,106 +315,180 @@ a {
     margin-right: 15px;
 }
 
-.header-right{
+.header-right {
     width: 100%;
-    background-color: RGB(69,137,192);
+    background-color: RGB(69, 137, 192);
     color: #fff;
     text-align: right;
     padding-right: 30px;
-    /*box-sizing: border-box;*/
     padding-bottom: 9px;
     padding-top: 3px;
 }
 
-.header-text{
-    font-size: 20px; /* Kích th??c ch? */
+.header-text {
+    font-size: 20px;
     font-weight: bold;
 }
 
 .header-right img {
-    width: 35px; /* ??t chi?u r?ng c?a hình ?nh */
-    height: auto; /* ?? t? l? khung hình ?nh t? ?i?u ch?nh */
-    margin-right: 3px; /* ?? t?o kho?ng cách gi?a hình ?nh và v?n b?n "Admin" */
+    width: 35px;
+    height: auto;
+    margin-right: 3px;
     margin-top: 8px;
 }
 
-.admin-taikhoan{
-    background-color: RGB(236,240,246);
-    height: 808px;
+.admin-taikhoan {
+    position: fixed;
+    top: 10%; /* ??t v? trí t? phía trên */
+    left: 17%; /* ??t v? trí t? phía trái */
+    width: 95%;
+    background-color: RGB(236, 240, 246);
 }
+
 .taikhoan-header {
-    padding-left: 330px;
+    padding-left: 30px;
 }
-.taikhoan-body{
-    padding-left: 50px;
-    margin-left: 315px;
+
+.taikhoan-body {
+    padding-left: 1%;
+    margin-left: 1%;
     background-color: white;
-    width: 80%;
+    width: 100%;
     height: auto;
 }
-.text1{
+
+.text1 {
     font-size: 35px;
 }
-.text2{
+
+.text2 {
     font-size: 20px;
     margin-left: 15px;
-}.search{
+}
+
+.search {
     padding-top: 20px;
- }
-.search input{
+}
+
+.search input {
     width: 40%;
     height: 35px;
 }
-#searchButton{
-    margin-left: 20px;
-    width: 80px;
-    height: 27px;
-    background-color: #19a4a0;
-    border-color:#19a4a0;
-    border-radius:3px;
-    color: white;
-}
-#addTaikhoan{
-    width: 70px;
-    height: 27px;
-    background-color: #028836;
-    border-color:#028836;
-    border-radius:3px;
-    color: white;
-}
+
 
 
 
 table {
-    width: 100%;
-    min-width: 1000px;
-    margin-left: 5px;
-    border-collapse: collapse; /* Xóa kho?ng tr?ng gi?a các c?t */
+    width: 80%;
+    border-collapse: collapse;
 }
-
-.delete{
-    background-color: #f90404;
+.search .searchStaff
+{
+    border: none;
+    background-color: #fabc28;
     color: white;
     padding: 3px 7px;
     border-radius: 5px;
     display: inline-block;
+    font-size: 12pt;
+    transition: background-color 0.3s;
 }
-table td a:hover{
+
+.search .searchStaff:hover {
+    background-color: #efcf83; /* ??i màu n?n thành ?? khi hover */
+}
+
+ .editStaff
+{
+    border: none;
+    background-color: #1ce0ae;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 12pt;
+    transition: background-color 0.3s;
+}
+
+ .editStaff:hover {
+    background-color: #98ecd7; /* ??i màu n?n thành ?? khi hover */
+}
+/*.deleteStaff*/
+/*{*/
+/*    border: none;*/
+/*    background-color: #1ce0ae;*/
+/*    color: white;*/
+/*    padding: 3px 7px;*/
+/*    border-radius: 5px;*/
+/*    display: inline-block;*/
+/*    font-size: 12pt;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.editStaff:hover {*/
+/*    background-color: #98ecd7; !* ??i màu n?n thành ?? khi hover *!*/
+/*}*/
+
+/* ??nh d?ng cho liên k?t "C?p nh?p" (Edit) */
+td.payment-status.payment-pending a {
+    background-color: #1ce0ae;
+    color: white;
+    width: 105%;
+    padding: 3px 0;
+    border-radius: 5px ;
+}
+
+
+/* ??nh d?ng cho liên k?t "Xóa" (Delete) */
+td.delete a {
+    text-align: center;
+    color: white;
+    background-color: #e10b11;
+    width: 150%;
+    border-radius: 5px ;
+    padding: 3px 0;
+}
+
+/* ??nh d?ng cho liên k?t "C?p nh?p" (Edit) khi hover */
+td.payment-status.payment-pending a:hover {
+    background-color: #98ecd7; /* Màu xanh lá cây khi hover qua "C?p nh?p" */
+}
+
+/* ??nh d?ng cho liên k?t "Xóa" (Delete) khi hover */
+td.delete a:hover {
+    background-color: #b64242; /* Màu ?? khi hover qua "Xóa" */
+}
+
+
+
+.search .addStaff
+{
+    border: none;
+    background-color: #1ce0ae;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 12pt;
+    transition: background-color 0.3s;
+}
+.search .addStaff:hover
+{
+    background-color: #98ecd7;
+}
+
+
+table td a:hover {
     background-color: #fb7b7b;
 }
-/*table thead {*/
-/*    background-color: RGB(69,137,192) ;*/
-/*}*/
 
-/*table thead tr {*/
-/*    text-align: right;*/
-/*}*/
-
-table th,td {
+table th,
+td {
     padding: 20px 0;
     border-bottom: 1px solid var(--border-color);
 }
-.headline{
+
+.headline {
     margin-left: 5px;
     font-weight: bold;
 }
@@ -449,19 +511,18 @@ table th,td {
 
 .payment-status {
     display: inline-block;
-    /*align-items: center;*/
-
 }
 
-.payment-status a{
-    background-color: #04d182;
-    color: white;
-    padding: 3px 5px;
-    border-radius: 5px;
-}
-.payment-status a:hover{
-    background-color: #42f4b0;
-}
+/*.payment-status a {*/
+/*    background-color: #04d182;*/
+/*    color: white;*/
+/*    padding: 3px 5px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.payment-status a:hover {*/
+/*    background-color: #42f4b0;*/
+/*}*/
 
 .overflow-scroll {
     overflow-y: auto;
@@ -482,20 +543,16 @@ table th,td {
 }
 
 @media only screen and (max-width: 1280px) {
-    .sidebar {
-        transition: transform 0.3s ease-in-out;
-        max-width: 100%;
-        z-index: 99;
-        transform: translateX(-100%);
-    }
 
+    .sidebar {
+        width: 17%; /* ?i?u ch?nh kích th??c tùy theo nhu c?u */
+    }
     .sidebar.active {
         transform: translateX(0);
     }
 
     .main {
         clear: both;
-        /* padding-left: 0; */
     }
 
     .mobile-toggle,
@@ -511,4 +568,19 @@ table th,td {
         position: absolute;
         right: -15px;
     }
+}
+
+
+/* Lo?i b? thanh cu?n trong trình duy?t webkit */
+.sidebar::-webkit-scrollbar {
+    width: 0.2rem;
+}
+
+/* ?n thanh cu?n trong trình duy?t webkit */
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background-color: transparent;
 }

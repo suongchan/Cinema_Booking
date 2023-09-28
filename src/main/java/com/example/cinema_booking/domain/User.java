@@ -17,7 +17,6 @@ public class User {
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date dateOfBirth;
     private String phone;
-    private String email;
     private String address;
     private String rePassword;
 

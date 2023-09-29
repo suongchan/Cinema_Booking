@@ -58,7 +58,11 @@ public class SecurityConfig {
                                 .failureHandler(authenticationFailureHandler())
                 )
                 .logout(logout -> logout.logoutUrl("/perform_logout")
+                                .logoutSuccessUrl("/login/customer")
+                                .invalidateHttpSession(true)
                                 .deleteCookies("JSESSIONID")
+
+
 //                        .logoutSuccessHandler(logoutSuccessHandler())
                 )
 //                .rememberMe(me -> {}) //TODO search them tren mang

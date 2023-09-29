@@ -13,7 +13,7 @@ public interface CustomerService {
 
     List<CustomerEntity> getCustomerByRole();
 
-    boolean updatePassword(String name, String oldPassword, String newPassword);
+    String updatePassword(String username, String oldPassword, String newPassword, String ReNewPassword);
 
     CustomerEntity getCustomerById(Long id);
     CustomerEntity getCustomerByUsername(String username) throws CustomerNotFoundException;

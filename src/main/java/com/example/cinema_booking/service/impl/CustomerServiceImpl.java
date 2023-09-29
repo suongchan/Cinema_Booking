@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -43,18 +44,30 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByRole("ROLE_CUSTOMER");
     }
 
-    public boolean updatePassword(String username, String oldPassword, String newPassword) {
+    @Override
+    public String updatePassword(String username, String oldPassword, String newPassword, String ReNewPassword) {
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService.loadUserByUsername(username);
         CustomerEntity entity = customerRepository.findByUsername(username).orElseThrow();
-        if (passwordEncoder.matches(oldPassword, userPrincipal.getPassword())){
-            String encodedNewPassword = passwordEncoder.encode(newPassword);
-            entity.setPassword(encodedNewPassword);
-            customerRepository.save(entity);
-            return true;
-        } else {
-            return false;
+
+        if (!passwordEncoder.matches(oldPassword, userPrincipal.getPassword())) {
+            return "Mật khẩu cũ không đúng";
         }
-    }
+
+        if (newPassword.length() < 8) {
+            return "Mật khẩu mới phải có ít nhất 8 ký tự";
+        }
+
+        if (!newPassword.equals(ReNewPassword)) {
+            return "Nhập lại mật khẩu mới không khớp";
+        }
+
+        String encodedNewPassword = passwordEncoder.encode(newPassword);
+        entity.setPassword(encodedNewPassword);
+        customerRepository.save(entity);
+
+        return null; // Không có lỗi, trả về null
+}
+
 
     @Override
     public CustomerEntity getCustomerById(Long id) {

@@ -42,12 +42,14 @@ public class CustomerController {
     }
 
     @PostMapping("changePassword")
-    public String changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Principal principal, Model model){
+    public String changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("ReNewPassword") String ReNewPassword, Principal principal, Model model) {
 
-        if (customerService.updatePassword(principal.getName(), oldPassword, newPassword)){
+        String message = customerService.updatePassword(principal.getName(), oldPassword, newPassword, ReNewPassword);
+
+        if (message == null) {
             return "customerHtml/SuccessChangePassword";
         } else {
-            model.addAttribute("message", "Bạn đã nhập sai mật khẩu cũ");
+            model.addAttribute("message", message);
             return "customerHtml/changePassword";
         }
     }

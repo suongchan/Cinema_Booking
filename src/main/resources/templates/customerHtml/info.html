@@ -75,21 +75,17 @@
                     <div class="column">
                         <span>Họ và Tên:</span>
                         <p th:text="${customer.name}"></p>
-                    </div>
-                    <div class="column">
                         <span>Số Điện Thoại:</span>
                         <p th:text="${customer.phone}"></p>
+                        <input type="button" class="btnUpdate" value="Cập Nhập">
                     </div>
                     <div class="column">
                         <span>Email:</span>
                         <p th:text="${customer.email}"></p>
-                    </div>
-                    <div class="column">
                         <span>Địa chỉ:</span>
                         <p th:text="${customer.address}"></p>
-                        <input type="button" class="btnUpdate" value="Cập Nhập">
-                    </div>
                     <a class="ChangePass" href="/customer/changePassword">Bạn Có Muốn Đổi Mật Khẩu ?</a>
+                    </div>
                 </div>
             </form>
         </div>

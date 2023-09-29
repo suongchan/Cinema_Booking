@@ -47,7 +47,7 @@ public class CustomerController {
         if (customerService.updatePassword(principal.getName(), oldPassword, newPassword)){
             return "customerHtml/SuccessChangePassword";
         } else {
-            model.addAttribute("message", "Sai rồi mày");
+            model.addAttribute("message", "Bạn đã nhập sai mật khẩu cũ");
             return "customerHtml/changePassword";
         }
     }

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách Thể loại | Admin Web</title>
+  <title>Thêm Khách hàng | Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- BOXICONS -->
   <link href="https://fonts.gstatic.com" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/cssAdmin/adminCategory.css">
+  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">
 
 </head>
 <body>
@@ -39,10 +39,10 @@
   <!-- SIDEBAR MENU -->
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>quản trị</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span> khách hàng </span> </a></li>
-    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>thể loại</span> </a></li>
+    <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
+    <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
+    <li><a href="#" th:href="@{/admin/customerList}"  class="active"> <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
     <span class="permanent">Danh mục</span>
@@ -152,39 +152,36 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Thể loại</span>
-          <span class="text2">Danh sách thể loại</span>
+          <span class="text1">Rạp</span>
+          <span class="text2">Cập nhập rạp</span>
         </div>
         <div class="taikhoan-body">
-          <div class="search">
-            <input type="text" id="search" placeholder="Tìm kiếm...">
-            <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
-            </a>
-            <a th:href="@{/admin/addCategory}" class="addStaff">
-              Thêm
-            </a>
-          </div>
 
+          <form class="form-containers"  th:action="@{/admin/saveEditedCinema}" method="POST" th:object="${cinema}">
+            <input type="hidden" th:field="*{idCinema}" />
+            <div class="form-row">
+              <label for="image">Hình ảnh</label>
+              <input type="text" id="image" name="imageCinema" required th:value="*{imageCinema}">
+            </div>
 
-          <table>
-            <tbody>
-            <tr class="headline">
-              <td>Tên thể loại</td>
-              <td>Mô tả</td>
-              <td></td>
-            </tr>
-            <tr class="category" th:each="category:${category}">
-              <td th:text="${category.nameCategory}"></td>
-              <td th:text="${category.categoryDesc}">  </td>
-              <td class="payment-status payment-pending">
-                <a class="edit" th:href="@{/admin/editCategory/{id}(id=${category.idCategory})}">Cập nhập</a>
-                <a class="delete" th:href="@{/admin/deleteCategory/{id}(id=${category.idCategory})}">Xóa</a>
-              </td>
-            </tr>
+            <div class="form-row" >
+              <label for="name">Tên rạp</label>
+              <input type="text" id="name" name="nameCinema"  required th:value="*{nameCinema}" >
+            </div>
 
+            <div class="form-row" >
+              <label for="address">Địa chỉ</label>
+              <input type="text" id="address" name="addressCinema"  required th:value="*{addressCinema}" >
+            </div>
 
-            </tbody>
-          </table>
+            <div class="form-row" >
+              <label for="city">Thành phố</label>
+              <input type="text" id="city" name="city"  required th:value="*{city}" >
+            </div>
+
+            <input type="submit" value="Lưu" class="submit">
+          </form>
+
         </div>
       </div>
     </div>

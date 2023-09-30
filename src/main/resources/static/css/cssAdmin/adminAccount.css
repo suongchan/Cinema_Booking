@@ -338,10 +338,8 @@ a {
 }
 
 .admin-taikhoan {
-    position: fixed;
-    top: 10%; /* ??t v? trí t? phía trên */
-    left: 17%; /* ??t v? trí t? phía trái */
-    width: 95%;
+    padding-left: 17%;
+    width: 100%;
     background-color: RGB(236, 240, 246);
 }
 
@@ -353,7 +351,7 @@ a {
     padding-left: 1%;
     margin-left: 1%;
     background-color: white;
-    width: 100%;
+    width: 98%;
     height: auto;
 }
 
@@ -395,7 +393,7 @@ table {
 }
 
 .search .searchStaff:hover {
-    background-color: #efcf83; /* ??i màu n?n thành ?? khi hover */
+    background-color: #efcf83; /* ??i mï¿½u n?n thï¿½nh ?? khi hover */
 }
 
  .editStaff
@@ -411,7 +409,7 @@ table {
 }
 
  .editStaff:hover {
-    background-color: #98ecd7; /* ??i màu n?n thành ?? khi hover */
+    background-color: #98ecd7; /* ??i mï¿½u n?n thï¿½nh ?? khi hover */
 }
 /*.deleteStaff*/
 /*{*/
@@ -426,10 +424,10 @@ table {
 /*}*/
 
 /*.editStaff:hover {*/
-/*    background-color: #98ecd7; !* ??i màu n?n thành ?? khi hover *!*/
+/*    background-color: #98ecd7; !* ??i mï¿½u n?n thï¿½nh ?? khi hover *!*/
 /*}*/
 
-/* ??nh d?ng cho liên k?t "C?p nh?p" (Edit) */
+/* ??nh d?ng cho liï¿½n k?t "C?p nh?p" (Edit) */
 td.payment-status.payment-pending a {
     background-color: #1ce0ae;
     color: white;
@@ -439,7 +437,7 @@ td.payment-status.payment-pending a {
 }
 
 
-/* ??nh d?ng cho liên k?t "Xóa" (Delete) */
+/* ??nh d?ng cho liï¿½n k?t "Xï¿½a" (Delete) */
 td.delete a {
     text-align: center;
     color: white;
@@ -449,14 +447,14 @@ td.delete a {
     padding: 3px 0;
 }
 
-/* ??nh d?ng cho liên k?t "C?p nh?p" (Edit) khi hover */
+/* ??nh d?ng cho liï¿½n k?t "C?p nh?p" (Edit) khi hover */
 td.payment-status.payment-pending a:hover {
-    background-color: #98ecd7; /* Màu xanh lá cây khi hover qua "C?p nh?p" */
+    background-color: #98ecd7; /* Mï¿½u xanh lï¿½ cï¿½y khi hover qua "C?p nh?p" */
 }
 
-/* ??nh d?ng cho liên k?t "Xóa" (Delete) khi hover */
+/* ??nh d?ng cho liï¿½n k?t "Xï¿½a" (Delete) khi hover */
 td.delete a:hover {
-    background-color: #b64242; /* Màu ?? khi hover qua "Xóa" */
+    background-color: #b64242; /* Mï¿½u ?? khi hover qua "Xï¿½a" */
 }
 
 
@@ -545,7 +543,7 @@ td {
 @media only screen and (max-width: 1280px) {
 
     .sidebar {
-        width: 17%; /* ?i?u ch?nh kích th??c tùy theo nhu c?u */
+        width: 17%; /* ?i?u ch?nh kï¿½ch th??c tï¿½y theo nhu c?u */
     }
     .sidebar.active {
         transform: translateX(0);
@@ -571,12 +569,12 @@ td {
 }
 
 
-/* Lo?i b? thanh cu?n trong trình duy?t webkit */
+/* Lo?i b? thanh cu?n trong trï¿½nh duy?t webkit */
 .sidebar::-webkit-scrollbar {
     width: 0.2rem;
 }
 
-/* ?n thanh cu?n trong trình duy?t webkit */
+/* ?n thanh cu?n trong trï¿½nh duy?t webkit */
 .sidebar::-webkit-scrollbar-thumb {
     background-color: transparent;
 }

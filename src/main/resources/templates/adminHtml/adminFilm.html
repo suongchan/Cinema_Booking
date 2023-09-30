@@ -226,7 +226,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- BOXICONS -->
   <link href="https://fonts.gstatic.com" rel="stylesheet">
-<!--  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">-->
+  <!--  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">-->
   <link rel="stylesheet" href="../../static/css/cssAdmin/adminCategory.css">
 
 </head>
@@ -374,7 +374,7 @@
             <input type="text" id="search" placeholder="Tìm kiếm...">
             <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
             </a>
-            <a th:href="@{/admin/addCinema}" class="addStaff">
+            <a th:href="@{/admin/addFilm}" class="addStaff">
               Thêm
             </a>
           </div>
@@ -383,20 +383,30 @@
           <table>
             <tbody>
             <tr class="headline">
+              <td>Tên phim</td>
+              <td>Thể loại</td>
+              <td>Thời lượng</td>
+              <td>Ngày khởi chiếu</td>
+              <td>Giới thiệu</td>
+              <td>Trailer</td>
+              <td>Xếp hạng</td>
               <td>Hình ảnh</td>
-              <td>Tên rạp</td>
-              <td>Địa chỉ</td>
-              <td>Thành phố</td>
+              <td>Trạng thái</td>
               <td></td>
             </tr>
-            <tr class="cinema" th:each="cinema:${cinema}">
-              <td th:text="*{cinema.imageCinema}"></td>
-              <td th:text="*{cinema.nameCinema}"></td>
-              <td th:text="*{cinema.addressCinema}"></td>
-              <td th:text="*{cinema.city}"></td>
+            <tr class="film" th:each="film:${films}">
+              <td th:text="*{film.nameFilm}"></td>
+              <td th:text="*{film.categoryEntity.nameCategory}"></td>
+              <td th:text="*{film.time}"></td>
+              <td th:text="*{film.showtime}"></td>
+              <td th:text="*{film.introduce}"></td>
+              <td th:text="*{film.trailer}"></td>
+              <td th:text="*{film.rating}"></td>
+              <td th:text="*{film.imageFilm}"></td>
+              <td th:text="*{film.status}"></td>
               <td class="payment-status payment-pending">
-                <a class="edit" th:href="@{/admin/editCinema/{id}(id=${cinema.idCinema})}">Cập nhập</a>
-                <a class="delete" th:href="@{/admin/deleteCinema/{id}(id=${cinema.idCinema})}">Xóa</a>
+                <a class="edit" th:href="@{/admin/editCinema/{id}(id=${film.idFilm})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteCinema/{id}(id=${film.idFilm})}">Xóa</a>
               </td>
             </tr>
 

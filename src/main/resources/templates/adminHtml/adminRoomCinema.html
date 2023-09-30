@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- BOXICONS -->
   <link href="https://fonts.gstatic.com" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/cssAdmin/adminRoomCinema.css">
+  <link rel="stylesheet" href="../../static/css/cssAdmin/adminCategory.css">
 
 </head>
 <body>
@@ -160,8 +160,11 @@
           <div class="search">
             <!-- Ô tìm kiếm -->
             <input type="text" id="search" placeholder="Tìm kiếm...">
-            <button id="searchButton">Tìm kiếm</button>
-            <button id="addTaikhoan">Thêm</button>
+            <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
+            </a>
+            <a th:href="@{/admin/addRoom}" class="addStaff">
+              Thêm
+            </a>
           </div>
 
           <table>
@@ -170,35 +173,18 @@
               <td>Rạp</td>
               <td>Tên phòng</td>
               <td>Mô tả</td>
-              <td>Tác vụ</td>
+              <td></td>
             </tr>
-            <tr class="staff">
-              <td> Metiz Cinema </td>
-              <td> D06</td>
-              <td> </td>
-              <td>
-                <div class="payment-status payment-pending">
-                  <a href="#">Edit</a>
-                </div>
-                <div class="delete">
-                  <a href="#">Delete</a>
-                </div>
+            <tr class="staff" th:each="room:${rooms}">
+              <td th:text="${room.cinemaEntity.nameCinema}"></td>
+              <td th:text="${room.nameCinemaRoom}"></td>
+              <td th:text="${room.cinemaRoomDesc}"></td>
+              <td class="payment-status payment-pending">
+                <a class="edit" th:href="@{/admin/editCinema/{id}(id=${room.idCinemaRoom})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteCinema/{id}(id=${room.idCinemaRoom})}">Xóa</a>
               </td>
             </tr>
 
-            <tr class="staff">
-              <td> Galaxy Cinema </td>
-              <td> A03</td>
-              <td> </td>
-              <td>
-                <div class="payment-status payment-pending">
-                  <a href="#">Edit</a>
-                </div>
-                <div class="delete">
-                  <a href="#">Delete</a>
-                </div>
-              </td>
-            </tr>
 
             </tbody>
           </table>

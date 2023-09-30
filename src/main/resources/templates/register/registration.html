@@ -82,7 +82,7 @@
         </label>
 
         <label for="username">Tên đăng nhập:
-        <input type="text" id="username" th:field="*{username}" required>
+        <input type="text" id="username" th:field="*{username}" required pattern="^[^\s]+$" title="Bạn cần nhập các ký tự không cách rời nhau">
         </label>
 
         <label for="password">Mật khẩu:

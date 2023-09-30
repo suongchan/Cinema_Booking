@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Mua Đồ Uống</title>
@@ -39,8 +39,8 @@
                 XIN CHÀO : SUONGCHAN
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">TÀI KHOẢN</a></li>
-                <li><a class="dropdown-item" href="#">ĐĂNG XUẤT</a></li>
+                <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
+                <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
               </ul>
             </li>
 

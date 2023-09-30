@@ -116,6 +116,35 @@ header .toolbar .navbar {
     font-weight: bold;
 }
 
+/* Phần Xin chào thẳng hàng*/
+.user-info {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.greeting,
+.username {
+    display: flex;
+    vertical-align: middle;
+    margin-right: 10px;
+    line-height: 1; /* Đặt line-height về 1 để loại bỏ khoảng cách giữa các phần tử */
+}
+.username {
+    color: #1bd2ce; /* Đặt màu chữ là đỏ */
+}
+.dropdown-toggle {
+    display: flex;
+    /*vertical-align: middle;*/
+}
+
+.form-inline {
+    display: flex;
+    /*vertical-align: middle;*/
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
 /* Phần main */
 
 main {

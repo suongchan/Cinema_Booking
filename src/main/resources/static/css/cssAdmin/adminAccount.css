@@ -45,8 +45,9 @@ a {
 .sidebar {
     background-color: var(--box-bg);
     position: fixed;
+    width: 17%;
     left: 0;
-    width: var(--sidebar-size);
+    /*width: var(--sidebar-size);*/
     height: 100vh;
     box-shadow: var(--shadow);
     overflow-y: auto;
@@ -427,35 +428,42 @@ table {
 /*    background-color: #98ecd7; !* ??i m�u n?n th�nh ?? khi hover *!*/
 /*}*/
 
-/* ??nh d?ng cho li�n k?t "C?p nh?p" (Edit) */
+td.payment-status.payment-pending
+{
+    display: flex;
+}
 td.payment-status.payment-pending a {
-    background-color: #1ce0ae;
-    color: white;
-    width: 105%;
+    margin-left: 20px;
+    text-align: center;
+    width: 100px;
     padding: 3px 0;
     border-radius: 5px ;
 }
 
-
-/* ??nh d?ng cho li�n k?t "X�a" (Delete) */
-td.delete a {
+td.payment-status.payment-pending  .edit
+{
+    background-color: #1ce0ae;
+    color: white;
+}
+/* ??nh d?ng cho li?n k?t "X?a" (Delete) */
+td.payment-status.payment-pending  .delete  {
     text-align: center;
     color: white;
     background-color: #e10b11;
-    width: 150%;
     border-radius: 5px ;
     padding: 3px 0;
 }
 
-/* ??nh d?ng cho li�n k?t "C?p nh?p" (Edit) khi hover */
-td.payment-status.payment-pending a:hover {
-    background-color: #98ecd7; /* M�u xanh l� c�y khi hover qua "C?p nh?p" */
+/* ??nh d?ng cho li?n k?t "C?p nh?p" (Edit) khi hover */
+td.payment-status.payment-pending  .edit:hover {
+    background-color: #98ecd7; /* M?u xanh l? c?y khi hover qua "C?p nh?p" */
 }
 
-/* ??nh d?ng cho li�n k?t "X�a" (Delete) khi hover */
-td.delete a:hover {
-    background-color: #b64242; /* M�u ?? khi hover qua "X�a" */
+/* ??nh d?ng cho li?n k?t "X?a" (Delete) khi hover */
+td.payment-status.payment-pending  .delete:hover {
+    background-color: #b64242; /* M?u ?? khi hover qua "X?a" */
 }
+
 
 
 

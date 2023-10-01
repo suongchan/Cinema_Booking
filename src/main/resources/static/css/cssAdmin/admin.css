@@ -50,10 +50,10 @@ a {
 /* Sidebar Styles */
 .sidebar {
     background-color: var(--box-bg);
+    width: 17%;
     position: fixed;
     top: 0;
     left: 0;
-    width: var(--sidebar-size);
     height: 100vh;
     box-shadow: var(--shadow);
     overflow-y: auto;

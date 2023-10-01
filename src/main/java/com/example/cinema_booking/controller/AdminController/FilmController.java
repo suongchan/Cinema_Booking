@@ -1,5 +1,6 @@
 package com.example.cinema_booking.controller.AdminController;
 
+import com.example.cinema_booking.domain.Category;
 import com.example.cinema_booking.domain.Film;
 import com.example.cinema_booking.entity.CategoryEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 @Controller
@@ -29,20 +31,40 @@ public class FilmController {
         return "adminHtml/adminFilm";
     }
 
-    @GetMapping("addFilm")
+    @GetMapping("addFilmPage")
     public String addFilmPage(Model model, Film film) {
-        model.addAttribute("films", film);
         List<CategoryEntity> categories = categoryService.getAllCategory();
+        model.addAttribute("films", film);
         model.addAttribute("categories", categories);
-
-        return "adminHtml/addFilm";
+        return "adminHtml/addFilm"; // Trả về trang thêm phim (addFilm.html)
     }
 
     @PostMapping("addFilm")
-    public String addFilm(@ModelAttribute FilmEntity film, @RequestParam Long idCategory) {
-        CategoryEntity category = categoryService.getCategoryById(idCategory); // Lấy danh mục từ id
-        film.setCategoryEntity(category); // Thiết lập danh mục cho phim
+    public String addFilm(@ModelAttribute("films") FilmEntity film) {
+
         filmService.addFilm(film);
+
+        return "redirect:/admin/filmList";
+    }
+
+    @GetMapping("/editFilm/{id}")
+    public String editFilmPage(@PathVariable Long id, Model model) {
+        FilmEntity film = filmService.getFilmById(id);
+        List<CategoryEntity> categories = categoryService.getAllCategory();
+        model.addAttribute("films", film);
+        model.addAttribute("categories", categories);
+        return "adminHtml/editFilm";
+    }
+
+    @PostMapping("/editFilm")
+    public String editFilm(@ModelAttribute("films") FilmEntity film) throws UserPrincipalNotFoundException {
+        filmService.updateFilm(film);
+        return "redirect:/admin/filmList"; // Chuyển hướng sau khi chỉnh sửa phim
+    }
+
+    @GetMapping("/deleteFilm/{id}")
+    public String deleteFilm(@PathVariable Long id) throws UserPrincipalNotFoundException {
+        filmService.deleteFilm(id);
         return "redirect:/admin/filmList";
     }
 }

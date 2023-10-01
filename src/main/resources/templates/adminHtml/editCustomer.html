@@ -39,9 +39,9 @@
   <!-- SIDEBAR MENU -->
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>quản trị</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>Khách hàng</span> </a></li>
+    <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
+    <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
+    <li><a href="#" th:href="@{/admin/customerList}" class="active" > <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 

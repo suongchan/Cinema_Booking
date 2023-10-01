@@ -152,8 +152,8 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Phòng chiếu</span>
-          <span class="text2">Thêm phòng chiếu</span>
+          <span class="text1">Phim</span>
+          <span class="text2">Thêm phim</span>
         </div>
         <div class="taikhoan-body">
 
@@ -168,7 +168,7 @@
             <div class="form-row" >
               <label for="category">Thể loại</label>
 
-              <select id="category" name="category.idCategory" th:field="*{categoryEntity.idCategory}" required>
+              <select id="category" name="category.idCategory" required th:field="*{categoryEntity}">
                 <!-- Populate the options with cinema data -->
                 <option th:each="category : ${categories}" th:value="${category.idCategory}" th:text="${category.nameCategory}"></option>
               </select>
@@ -178,7 +178,7 @@
 
             <div class="form-row" >
               <label for="time">Thời lượng</label>
-              <input type="text" id="time" name="time"  required th:text="*{time}" >
+              <input type="text" id="time" name="time"   th:text="*{time}" >
             </div>
 
             <div class="form-row" >
@@ -188,32 +188,31 @@
 
             <div class="form-row" >
               <label for="introduce">Giới thiệu</label>
-              <input type="text" id="introduce" name="introduce"  required th:text="*{introduce}" >
+              <input type="text" id="introduce" name="introduce"   th:text="*{introduce}" >
             </div>
 
             <div class="form-row" >
               <label for="trailer">Trailer</label>
-              <input type="text" id="trailer" name="trailer"  required th:text="*{trailer}" >
+              <input type="text" id="trailer" name="trailer"   th:text="*{trailer}">
             </div>
 
             <div class="form-row" >
               <label for="rating">Xếp hạng</label>
-              <input type="text" id="rating" name="rating"  required th:text="*{rating}" >
+              <input type="text" id="rating" name="rating"   th:text="*{rating}" >
             </div>
 
             <div class="form-row" >
               <label for="image">Hình ảnh</label>
-              <input type="text" id="image" name="imageFilm"  required th:text="*{imageFilm}" >
+              <input type="text" id="image" name="imageFilm"   th:text="*{imageFilm}" >
             </div>
 
             <div class="form-row" >
               <label for="status">Trạng thái</label>
-              <input type="text" id="status" name="status"  required th:text="*{status}" >
+              <input type="text" id="status" name="status"   th:text="*{status}" >
             </div>
 
-
-
             <input type="submit" value="Lưu" class="submit">
+
           </form>
 
         </div>

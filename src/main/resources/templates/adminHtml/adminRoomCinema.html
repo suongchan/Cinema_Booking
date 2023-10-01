@@ -180,8 +180,8 @@
               <td th:text="${room.nameCinemaRoom}"></td>
               <td th:text="${room.cinemaRoomDesc}"></td>
               <td class="payment-status payment-pending">
-                <a class="edit" th:href="@{/admin/editCinema/{id}(id=${room.idCinemaRoom})}">Cập nhập</a>
-                <a class="delete" th:href="@{/admin/deleteCinema/{id}(id=${room.idCinemaRoom})}">Xóa</a>
+                <a class="edit" th:href="@{/admin/editRoom/{id}(id=${room.idCinemaRoom})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteRoom/{id}(id=${room.idCinemaRoom})}">Xóa</a>
               </td>
             </tr>
 

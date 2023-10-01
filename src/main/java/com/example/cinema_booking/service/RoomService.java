@@ -1,21 +1,20 @@
 package com.example.cinema_booking.service;
 
-import com.example.cinema_booking.domain.CinemaRoom;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 public interface RoomService {
 
     List<CinemaRoomEntity> getAllRoom();
 
-    Long createCinemaRoom(CinemaRoom cinemaRoom);
+    CinemaRoomEntity addRoom(CinemaRoomEntity cinemaRoom);
 
-//    public Long createRoom(String nameCinemaRoom, Long idCinema);
+    CinemaRoomEntity getRoomById(Long id);
 //
-//    CinemaRoomEntity getRoomById(Long id);
-//
-//    void updateRoom(CinemaRoom cinemaRoom) throws UserPrincipalNotFoundException;
-//
-//    void deleteRoom(Long id) throws UserPrincipalNotFoundException;
+    CinemaRoomEntity update(CinemaRoomEntity cinemaRoom) ;
+
+    void deleteRoom(Long id) throws UserPrincipalNotFoundException;
+
 }

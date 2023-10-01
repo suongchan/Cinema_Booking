@@ -44,11 +44,12 @@ a {
 }
 
 .sidebar {
+    width: 18%;
     background-color: var(--box-bg);
     position: fixed;
     top: 0;
     left: 0;
-    width: var(--sidebar-size);
+    /*width: var(--sidebar-size);*/
     height: 100vh;
     box-shadow: var(--shadow);
     overflow-y: auto;
@@ -467,12 +468,12 @@ label {
     }
 }
 
-/* Lo?i b? thanh cu?n trong trình duy?t webkit */
+/* Lo?i b? thanh cu?n trong trï¿½nh duy?t webkit */
 .sidebar::-webkit-scrollbar {
     width: 0.2rem;
 }
 
-/* ?n thanh cu?n trong trình duy?t webkit */
+/* ?n thanh cu?n trong trï¿½nh duy?t webkit */
 .sidebar::-webkit-scrollbar-thumb {
     background-color: transparent;
 }
@@ -497,6 +498,6 @@ label {
 }
 
 .submit :hover {
-    background-color: #efcf83; /* ??i màu n?n thành ?? khi hover */
+    background-color: #efcf83; /* ??i mï¿½u n?n thï¿½nh ?? khi hover */
 }
 

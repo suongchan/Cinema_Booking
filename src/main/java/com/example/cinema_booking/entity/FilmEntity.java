@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -31,6 +32,8 @@ public class FilmEntity {
     private Long rating;
     private String imageFilm;
     private String status;
+
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private Date showtime;
 
 }

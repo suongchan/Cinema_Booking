@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách khách hàng| Admin Web</title>
+  <title>Thêm Khách hàng | Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- BOXICONS -->
   <link href="https://fonts.gstatic.com" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/cssAdmin/adminAccount.css">
+  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">
 
 </head>
 <body>
@@ -41,7 +41,7 @@
     <span class="permanent">Quản trị</span>
     <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
     <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#" th:href="@{/admin/customerList}" class="active" > <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
+    <li><a href="#" th:href="@{/admin/customerList}"  class="active"> <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
@@ -152,47 +152,69 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Khách hàng</span>
-          <span class="text2">Danh sách khách hàng</span>
+          <span class="text1">Phim</span>
+          <span class="text2">Thêm phim</span>
         </div>
         <div class="taikhoan-body">
-          <div class="search">
-            <!-- Ô tìm kiếm -->
-            <input type="text" id="search" placeholder="Tìm kiếm...">
-            <a href="/admin/searchCustomer" class="searchStaff">Tìm Kiếm
-            </a>
-            <a href="/admin/addCustomer" class="addStaff">
-              Thêm
-            </a>
-          </div>
 
+          <form class="form-containers"  th:action="@{/admin/editFilm}" method="POST" th:object="${films}">
+            <input type="hidden" th:field="*{idFilm}" />
 
-          <table>
-            <tbody>
-            <tr class="headline">
-              <td>Họ tên</td>
-              <td>Tên đăng nhập</td>
-              <td>Ngày sinh</td>
-              <td>Số điện thoại</td>
-              <td>Email</td>
-              <td>Địa chỉ</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr th:each="customer : ${customers}">
-              <td th:text="${customer.name}"></td>
-              <td th:text="${customer.username}"></td>
-              <td th:text="${customer.dateOfBirth}"></td>
-              <td th:text="${customer.phone}"></td>
-              <td th:text="${customer.email}"></td>
-              <td th:text="${customer.address}"></td>
-              <td class="payment-status payment-pending">
-                <a th:href="@{/admin/editCustomer/{id}(id=${customer.idCustomer})}" class="edit">Cập nhập</a>
-                <a th:href="@{/admin/deleteCustomer/{id}(id=${customer.idCustomer})}" class="delete">Xóa</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+            <div class="form-row" >
+              <label for="name">Tên phim</label>
+              <input type="text" id="name" name="nameFilm"  required th:value="*{nameFilm}" >
+            </div>
+
+            <div class="form-row" >
+              <label for="category">Thể loại</label>
+
+              <select id="category" name="category.idCategory" required th:field="*{categoryEntity}">
+                <!-- Populate the options with cinema data -->
+                <option th:each="category : ${categories}" th:value="${category.idCategory}" th:text="${category.nameCategory}"></option>
+              </select>
+
+              <!--              <input type="text" id="nameCinema" name="nameCinema" required th:text="*{cinemaEntity.getNameCinema()}">-->
+            </div>
+
+            <div class="form-row" >
+              <label for="time">Thời lượng</label>
+              <input type="text" id="time" name="time"   th:value="*{time}" >
+            </div>
+
+            <div class="form-row" >
+              <label for="join_datepicker">Ngày khởi chiếu</label>
+              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="showtime" th:text="*{showtime}" >
+            </div>
+
+            <div class="form-row" >
+              <label for="introduce">Giới thiệu</label>
+              <input type="text" id="introduce" name="introduce"   th:value="*{introduce}" >
+            </div>
+
+            <div class="form-row" >
+              <label for="trailer">Trailer</label>
+              <input type="text" id="trailer" name="trailer"   th:value="*{trailer}">
+            </div>
+
+            <div class="form-row" >
+              <label for="rating">Xếp hạng</label>
+              <input type="text" id="rating" name="rating"   th:value="*{rating}" >
+            </div>
+
+            <div class="form-row" >
+              <label for="image">Hình ảnh</label>
+              <input type="text" id="image" name="imageFilm"   th:value="*{imageFilm}" >
+            </div>
+
+            <div class="form-row" >
+              <label for="status">Trạng thái</label>
+              <input type="text" id="status" name="status"   th:value="*{status}" >
+            </div>
+
+            <input type="submit" value="Lưu" class="submit">
+
+          </form>
+
         </div>
       </div>
     </div>

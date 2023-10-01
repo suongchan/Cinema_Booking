@@ -366,15 +366,15 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Rạp</span>
-          <span class="text2">Danh sách rạp</span>
+          <span class="text1">Phim</span>
+          <span class="text2">Danh sách phim</span>
         </div>
         <div class="taikhoan-body">
           <div class="search">
             <input type="text" id="search" placeholder="Tìm kiếm...">
             <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
             </a>
-            <a th:href="@{/admin/addFilm}" class="addStaff">
+            <a th:href="@{/admin/addFilmPage}" class="addStaff">
               Thêm
             </a>
           </div>
@@ -405,8 +405,8 @@
               <td th:text="*{film.imageFilm}"></td>
               <td th:text="*{film.status}"></td>
               <td class="payment-status payment-pending">
-                <a class="edit" th:href="@{/admin/editCinema/{id}(id=${film.idFilm})}">Cập nhập</a>
-                <a class="delete" th:href="@{/admin/deleteCinema/{id}(id=${film.idFilm})}">Xóa</a>
+                <a class="edit" th:href="@{/admin/editFilm/{id}(id=${film.idFilm})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteFilm/{id}(id=${film.idFilm})}">Xóa</a>
               </td>
             </tr>
 

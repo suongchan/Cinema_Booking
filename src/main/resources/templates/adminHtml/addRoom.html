@@ -157,12 +157,12 @@
         </div>
         <div class="taikhoan-body">
 
-          <form class="form-containers"  th:action="@{/admin/addRoom}" method="POST" th:object="${cinemaRoom}">
+          <form class="form-containers"  th:action="@{/admin/addRoom}" method="POST" th:object="${rooms}">
             <input type="hidden" name="id" value="0">
             <div class="form-row" >
               <label for="nameCinema">Rạp</label>
 
-              <select id="nameCinema" name="cinema.idCinema" th:field="*{cinemaEntity.idCinema}" required>
+              <select id="nameCinema" name="cinema.idCinema" th:field="*{cinemaEntity}" required>
                 <!-- Populate the options with cinema data -->
                 <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
               </select>

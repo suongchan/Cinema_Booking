@@ -339,14 +339,14 @@
 /*}*/
 
 /*.header-text{*/
-/*    font-size: 20px; !* Kích th??c ch? *!*/
+/*    font-size: 20px; !* Kï¿½ch th??c ch? *!*/
 /*    font-weight: bold;*/
 /*}*/
 
 /*.header-right img {*/
-/*    width: 35px; !* ??t chi?u r?ng c?a hình ?nh *!*/
-/*    height: auto; !* ?? t? l? khung hình ?nh t? ?i?u ch?nh *!*/
-/*    margin-right: 3px; !* ?? t?o kho?ng cách gi?a hình ?nh và v?n b?n "Admin" *!*/
+/*    width: 35px; !* ??t chi?u r?ng c?a hï¿½nh ?nh *!*/
+/*    height: auto; !* ?? t? l? khung hï¿½nh ?nh t? ?i?u ch?nh *!*/
+/*    margin-right: 3px; !* ?? t?o kho?ng cï¿½ch gi?a hï¿½nh ?nh vï¿½ v?n b?n "Admin" *!*/
 /*    margin-top: 8px;*/
 /*}*/
 
@@ -401,7 +401,7 @@
 /*    width: 100%;*/
 /*    min-width: 1000px;*/
 /*    margin-left: 5px;*/
-/*    border-collapse: collapse; !* Xóa kho?ng tr?ng gi?a các c?t *!*/
+/*    border-collapse: collapse; !* Xï¿½a kho?ng tr?ng gi?a cï¿½c c?t *!*/
 /*}*/
 
 /*.delete{*/
@@ -558,10 +558,11 @@ a {
 }
 
 .sidebar {
+    width: 17%;
     background-color: var(--box-bg);
     position: fixed;
     left: 0;
-    width: var(--sidebar-size);
+    /*width: var(--sidebar-size);*/
     height: 100vh;
     box-shadow: var(--shadow);
     overflow-y: auto;

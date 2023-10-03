@@ -17,5 +17,6 @@ public interface UserService {
     void updateUser(User user) throws UserPrincipalNotFoundException;
 
     void deleteUser(Long id) throws UserPrincipalNotFoundException;
+    List<UserEntity> searchUsersByPhone(String phone);
 
 }

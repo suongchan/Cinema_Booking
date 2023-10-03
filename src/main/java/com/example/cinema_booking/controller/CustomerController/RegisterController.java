@@ -1,4 +1,4 @@
-package com.example.cinema_booking.controller;
+package com.example.cinema_booking.controller.CustomerController;
 
 import com.example.cinema_booking.domain.Customer;
 import com.example.cinema_booking.service.CustomerService;

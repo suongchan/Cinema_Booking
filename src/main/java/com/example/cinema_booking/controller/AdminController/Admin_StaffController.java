@@ -75,4 +75,12 @@ public class Admin_StaffController {
         userService.deleteUser(id);
         return "redirect:/admin/staffList"; // Chuyển hướng đến danh sách khách hàng hoặc trang khác
     }
+
+    @GetMapping("staff-search")
+    public String searchPhone(@RequestParam("phone") String phone, Model model) {
+
+        List<UserEntity> staffs = userService.searchUsersByPhone(phone);
+        model.addAttribute("users", staffs);
+        return "adminHtml/adminAccount";
+    }
 }

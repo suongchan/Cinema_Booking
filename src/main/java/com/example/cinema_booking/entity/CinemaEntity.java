@@ -18,4 +18,12 @@ public class CinemaEntity {
     private String addressCinema;
     private String imageCinema;
     private String city;
+
+    public CinemaEntity(Long idCinema) {
+        this.idCinema = idCinema;
+    }
+
+    public CinemaEntity() {
+
+    }
 }

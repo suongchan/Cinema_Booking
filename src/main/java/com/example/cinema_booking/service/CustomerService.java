@@ -21,4 +21,6 @@ public interface CustomerService {
     void updateCustomer(Customer customer) throws UserPrincipalNotFoundException;
 
     void deleteCustomer(Long id) throws UserPrincipalNotFoundException;
+
+    List<CustomerEntity> searchCustomersByPhone(String phone);
 }

@@ -1,9 +1,7 @@
-package com.example.cinema_booking.controller;
+package com.example.cinema_booking.controller.CustomerController;
 
-import com.example.cinema_booking.domain.Customer;
 import com.example.cinema_booking.entity.CustomerEntity;
 import com.example.cinema_booking.exception.CustomerNotFoundException;
-import com.example.cinema_booking.repository.CustomerRepository;
 import com.example.cinema_booking.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,7 @@ public class CustomerController {
 
     @GetMapping("")
     public String listFilm() {
-        return "customerHtml/film";
+        return "filmSC";
     }
 
     @GetMapping("info")

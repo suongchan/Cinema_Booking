@@ -41,7 +41,6 @@
                 <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
               </ul>
             </li>
-
           </ul>
 
         </div>
@@ -53,73 +52,31 @@
 <main>
   <div class="controller_main">
     <div class="controller_film">
-    <div class="film">
-      <div class="column column_left">
-        <img src="../../static/image/film1.png">
-      </div>
-      <div class="column column_right">
-        <h3>Địa Đàng Sụp Đổ(T16)</h3>
-        <p class="timeFilm">129 phút</p>
-        <p>Thể Loại: Hành Động</p>
-        <p>Khởi Chiếu: 31/08/2023</p>
-        <div class="order">
-          <span class="ticket">
-            <img src="../../static/image/ticket.png">
-            Đặt Vé
-          </span>
-          <span>
-            <img src="../../static/image/trailer.png">
-            Xem Trailer
-          </span>
+      <div class="film" th:each=" f : ${filmDC}">
+        <div class="column column_left">
+          <a th:href="@{'/film/detail/' + ${f.idFilm}}"><img src="../../static/image/film1.png"></a>
         </div>
-      </div>
-    </div>
-
-      <div class="controller_film">
-        <div class="film">
-          <div class="column column_left">
-            <img src="../../static/image/film1.png">
-          </div>
-          <div class="column column_right">
-            <h3>Địa Đàng Sụp Đổ(T16)</h3>
-            <p class="timeFilm">129 phút</p>
-            <p>Thể Loại: Hành Động</p>
-            <p>Khởi Chiếu: 31/08/2023</p>
-            <div class="order">
-          <span class="ticket">
-            <img src="/image/ticket.png">
-            Đặt Vé
-          </span>
+        <div class="column column_right">
+          <a href="#"><h3 th:text="${f.nameFilm}"></h3></a>
+          <p class="timeFilm" th:text="${f.time}"></p>
+          <p th:text="${f.category.nameCategory}"></p>
+          <div class="order">
+            <a href="#">
+              <span class="ticket">
+              <img src="../../static/image/ticket.png">
+              Đặt Vé
+            </span>
+            </a>
+            <a th:href="${f.trailer}">
               <span>
-            <img src="/image/trailer.png">
-            Xem Trailer
-          </span>
-            </div>
+              <img src="../../static/image/trailer.png">
+              Xem Trailer
+            </span>
+            </a>
           </div>
         </div>
+      </div>
 
-        <div class="controller_film">
-          <div class="film">
-            <div class="column column_left">
-              <img src="../../static/image/film1.png">
-            </div>
-            <div class="column column_right">
-              <h3>Địa Đàng Sụp Đổ(T16)</h3>
-              <p class="timeFilm">129 phút</p>
-              <p>Thể Loại: Hành Động</p>
-              <p>Khởi Chiếu: 31/08/2023</p>
-              <div class="order">
-          <span class="ticket">
-            <img src="../../static/image/ticket.png">
-            Đặt Vé
-          </span>
-                <span>
-            <img src="../../static/image/trailer.png">
-            Xem Trailer
-          </span>
-              </div>
-            </div>
-          </div>>
        </div>
       </div>
     </div>

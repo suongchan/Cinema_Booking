@@ -20,20 +20,12 @@ import java.util.List;
 @Controller
 @RequestMapping("admin")
 public class Admin_CustomerController {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private CustomerRegisterValidator customerRegisterValidator;
 
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private CustomerRepository customerRepository;
 
-    @GetMapping("")
+
+    @GetMapping()
     public String adminHome() {
 
         return "adminHtml/admin";
@@ -92,6 +84,14 @@ public class Admin_CustomerController {
         // Gọi dịch vụ để xóa khách hàng từ cơ sở dữ liệu
         customerService.deleteCustomer(id);
         return "redirect:/admin/customerList"; // Chuyển hướng đến danh sách khách hàng hoặc trang khác
+    }
+
+    @GetMapping("customer-search")
+    public String searchPhone(@RequestParam("phone") String phone, Model model) {
+
+        List<CustomerEntity> customers = customerService.searchCustomersByPhone(phone);
+        model.addAttribute("customers", customers);
+        return "adminHtml/adminCustomer";
     }
 }
 

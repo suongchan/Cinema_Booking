@@ -2,9 +2,7 @@ package com.example.cinema_booking.controller.AdminController;
 
 import com.example.cinema_booking.domain.Category;
 import com.example.cinema_booking.domain.Film;
-import com.example.cinema_booking.entity.CategoryEntity;
-import com.example.cinema_booking.entity.CinemaRoomEntity;
-import com.example.cinema_booking.entity.FilmEntity;
+import com.example.cinema_booking.entity.*;
 import com.example.cinema_booking.service.CategoryService;
 import com.example.cinema_booking.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +64,13 @@ public class FilmController {
     public String deleteFilm(@PathVariable Long id) throws UserPrincipalNotFoundException {
         filmService.deleteFilm(id);
         return "redirect:/admin/filmList";
+    }
+
+    @GetMapping("film-search")
+    public String searchPhone(@RequestParam("name_film") String name_film, Model model) {
+
+        List<FilmEntity> films = filmService.searchFilmsByName(name_film);
+        model.addAttribute("films", films);
+        return "adminHtml/adminFilm";
     }
 }

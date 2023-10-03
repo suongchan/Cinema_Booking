@@ -58,8 +58,8 @@
         </div>
         <div class="column column_right">
           <h3 th:text="${f.nameFilm}"></h3>
-          <p class="timeFilm" th:text="${f.time}"></p>
-          <p th:text="${f.category.nameCategory}"></p>
+          <p class="timeFilm" th:text="'Thời lượng: '+${f.time}"></p>
+          <p th:text="'Thể loại: '+${f.category.nameCategory}"></p>
           <div class="order">
             <a>
               <span class="ticket">

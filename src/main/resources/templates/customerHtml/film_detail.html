@@ -61,17 +61,17 @@
         <div class="column column_right">
           <h3 th:text="${film.nameFilm}"></h3>
           <div class="decsFilm">
-          <p th:text="${film.categoryEntity.nameCategory}"></p>
+          <p th:text="'Thể loại: '+ ${film.categoryEntity.nameCategory}"> </p>
           <p class="coming" th:if="${film.status}">SẮP CHIẾU</p>
           <p class="coming" th:if="${!film.status}">ĐANG CHIẾU</p>
           <div class="date_Time">
            <span class="date">
             <img src="../../static/image/date.png">
-             <p th:text="${film.dateStart}"></p>
+             <p th:text="'Ngày khởi chiếu: '+${film.dateStart}"></p>
            </span>
             <span>
             <img src="../../static/image/time.png">
-            <p th:text="${film.time}"></p>
+            <p th:text="'Thời lượng: '+${film.time}"> </p>
            </span>
           </div>
           </div>
@@ -84,7 +84,7 @@
 <nav>
     <div class="rank">
             <span >
-              <p th:text="${film.rating} + ' /10'"></p>
+              <p th:text="'Đánh giá: ' +${film.rating} + ' /10'"> </p>
             </span>
 <!--      <span class="material-symbols-outlined">-->
 <!--              favoritefavoritefavoritefavoritefavorite-->
@@ -95,7 +95,7 @@
     <div class="controller_Intro">
       <div class="introduce">
         <div class="column column_left">
-            <img src="">
+            <img src="../../static/image/bgDetailFilm.png">
         </div>
         <div class="column column_right">
             <h3>GIỚI THIỆU</h3>

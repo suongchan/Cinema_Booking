@@ -6,56 +6,23 @@
     --accent-color: chocolate;
 }
 
-/* Thiết lập media queries cho màn hình nhỏ */
-@media screen and (max-width: 768px) {
-    body {
-        width: 100%;
-        padding: 0;
-    }
-
-    header {
-        height: auto;
-        flex-direction: column;
-    }
-
-    header .logo {
-        width: 30%;
-        transform: none;
-    }
-
-    header .toolbar {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .main_left {
-        width: 100%;
-        padding-left: 0;
-        text-align: center;
-    }
-
-    .main_right {
-        width: 100%;
-        padding-left: 0;
-        margin-left: 0;
-    }
-}
+/* CSS chung không phụ thuộc vào kích thước màn hình */
 
 body {
-    width: 1280px;
-    height: 100vh;
+    max-width: 1280px;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
+/* Header */
 header {
     position: relative;
     display: flex;
-    background-color: var(--primary-bg-color);
+    background-color: #0D0942;
     width: 100%;
-    height: 12%;
+    height: 16%;
     border-bottom: 1px solid #045050;
 }
 
@@ -63,7 +30,7 @@ header .logo {
     position: absolute;
     width: 8%;
     display: flex;
-    transform: translate(80%, 30%);
+    transform: translate(80%, 10%);
 }
 
 header .logo img {
@@ -74,15 +41,12 @@ header .toolbar {
     width: 70%;
     display: flex;
     margin-left: 200px;
-    background-color: var(--primary-bg-color);
+    background-color: #0D0942;
+    padding-left: 10px;
 }
 
 header .toolbar .navbar {
-    background-color: var(--primary-bg-color);
-}
-
-.toolbar {
-    padding-left: 10px;
+    background-color: #0D0942;
 }
 
 .toolbar ul li {
@@ -90,20 +54,16 @@ header .toolbar .navbar {
 }
 
 .toolbar a {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
 }
 
 .toolbar a:hover {
-    color: var(--accent-color);
-}
-
-.nav-link.active {
-    color: var(--accent-color);
+    color: aquamarine;
 }
 
 .navbar-nav .nav-item:last-child .nav-link {
-    border: none;
+    border: 1px solid black;
     border-radius: 50%;
     width: 150%;
     height: 100%;
@@ -112,44 +72,14 @@ header .toolbar .navbar {
 }
 
 .navbar-nav .dropdown-item {
-    color: var(--primary-bg-color);
+    color: #0D0942;
     font-weight: bold;
-}
-
-/* Phần Xin chào thẳng hàng*/
-.user-info {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.greeting,
-.username {
-    display: flex;
-    vertical-align: middle;
-    margin-right: 10px;
-    line-height: 1; /* Đặt line-height về 1 để loại bỏ khoảng cách giữa các phần tử */
-}
-.username {
-    color: #1bd2ce; /* Đặt màu chữ là đỏ */
-}
-.dropdown-toggle {
-    display: flex;
-    /*vertical-align: middle;*/
-}
-
-.form-inline {
-    display: flex;
-    /*vertical-align: middle;*/
-}
-
-.dropdown-menu {
-    margin-top: 0;
 }
 /* Phần main */
 
 main {
     width: 100%;
-    height: 88%;
+    height: 100vh;
     background-color: var(--primary-bg-color);
 }
 
@@ -242,4 +172,29 @@ main .main_left {
 
 .ChangePass {
     text-decoration: none;
+}
+
+/* Media queries cho các kích thước màn hình khác nhau */
+@media (max-width: 768px) {
+    header {
+        height: 10%;
+    }
+    .column_left {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    header {
+        height: 8%;
+    }
+    .column_left img {
+        width: 150px;
+    }
+    .ticket {
+        padding-right: 100px;
+    }
 }

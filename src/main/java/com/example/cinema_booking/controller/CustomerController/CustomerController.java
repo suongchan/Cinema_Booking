@@ -21,7 +21,7 @@ public class CustomerController {
 
     @GetMapping("")
     public String listFilm() {
-        return "filmSC";
+        return "redirect:film/dang-chieu";
     }
 
     @GetMapping("info")

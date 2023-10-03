@@ -125,4 +125,9 @@ public class CustomerServiceImpl implements CustomerService {
             throw new UserPrincipalNotFoundException("Không tìm thấy khách hàng với ID " + id);
         }
     }
+
+    @Override
+    public List<CustomerEntity> searchCustomersByPhone(String phoneNumber) {
+        return customerRepository.findByPhoneContaining(phoneNumber);
+    }
 }

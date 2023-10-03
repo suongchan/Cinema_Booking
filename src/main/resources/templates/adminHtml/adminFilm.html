@@ -371,12 +371,11 @@
         </div>
         <div class="taikhoan-body">
           <div class="search">
-            <input type="text" id="search" placeholder="Tìm kiếm...">
-            <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
-            </a>
-            <a th:href="@{/admin/addFilmPage}" class="addStaff">
-              Thêm
-            </a>
+            <form action="/admin/film-search" method="get">
+              <input type="text" name="name_film" id="search" placeholder="Tìm kiếm...">
+              <button type="submit">Tìm Kiếm</button>
+              <a th:href="@{/admin/addFilm}" class="addStaff">Thêm </a>
+            </form>
           </div>
 
 
@@ -398,7 +397,7 @@
               <td th:text="*{film.nameFilm}"></td>
               <td th:text="*{film.categoryEntity.nameCategory}"></td>
               <td th:text="*{film.time}"></td>
-              <td th:text="*{film.showtime}"></td>
+<!--              <td th:text="*{film.showtime}"></td>-->
               <td th:text="*{film.introduce}"></td>
               <td th:text="*{film.trailer}"></td>
               <td th:text="*{film.rating}"></td>

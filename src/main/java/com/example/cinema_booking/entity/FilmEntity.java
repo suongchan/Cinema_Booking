@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -31,9 +33,19 @@ public class FilmEntity {
     private String trailer;
     private Long rating;
     private String imageFilm;
-    private String status;
+    private boolean status;
 
-    @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date showtime;
+    private LocalDate dateStart;
+
+    private LocalDate dateEnd;
+
+    @OneToMany(mappedBy = "filmEntity", fetch = FetchType.EAGER)
+    private List<ShowEntity> showEntities;
+
+
+
+
+//    @DateTimeFormat(pattern ="yyyy-MM-dd")
+//    private Date showtime;
 
 }

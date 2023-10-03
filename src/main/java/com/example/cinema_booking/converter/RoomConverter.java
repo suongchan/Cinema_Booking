@@ -10,6 +10,7 @@ public class RoomConverter {
         CinemaRoomEntity cinemaRoomEntity = new CinemaRoomEntity();
         cinemaRoomEntity.setNameCinemaRoom(cinemaRoom.getNameCinemaRoom());
         cinemaRoomEntity.setCinemaRoomDesc(cinemaRoom.getCinemaRoomDesc());
+        cinemaRoomEntity.setNumberChair(cinemaRoom.getNumberChair());
 
         CinemaEntity cinemaEntity = new CinemaEntity();
 //        cinemaEntity.setNameCinema(cinemaRoom.getNameCinema());

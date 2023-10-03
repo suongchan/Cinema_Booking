@@ -11,6 +11,8 @@ public class CinemaRoom {
     private Long idCinemaRoom;
     private String nameCinemaRoom;
     private String cinemaRoomDesc;
+    private Chair[][] chairs;
+    private int numberChair;
 
 //    private String nameCinema;
 //    public String getNameCinema() {

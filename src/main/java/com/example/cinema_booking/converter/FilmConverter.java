@@ -16,13 +16,30 @@ public class FilmConverter {
         filmEntity.setIntroduce(film.getIntroduce());
         filmEntity.setRating(film.getRating());
         filmEntity.setTrailer(film.getTrailer());
-        filmEntity.setStatus(film.getStatus());
-        filmEntity.setShowtime(film.getShowtime());
+//        filmEntity.setStatus(film.getStatus());
+//        filmEntity.setShowtime(film.getShowtime());
 
         CategoryEntity categoryEntity = new CategoryEntity();
 //        cinemaEntity.setNameCinema(cinemaRoom.getNameCinema());
         filmEntity.setCategoryEntity(categoryEntity);
 
         return filmEntity;
+    }
+
+    public static Film toModel(FilmEntity entity) {
+        Film film = new Film();
+        film.setIdFilm(entity.getIdFilm());
+        film.setNameFilm(entity.getNameFilm());
+        film.setCategory(CategoryConverter.toModel(entity.getCategoryEntity()));
+        film.setTime(entity.getTime());
+        film.setIntroduce(entity.getIntroduce());
+        film.setTrailer(entity.getTrailer());
+        film.setRating(entity.getRating());
+        film.setImageFilm(entity.getImageFilm());
+        film.setStatus(entity.isStatus());
+        film.setDateStart(entity.getDateStart());
+        film.setDateEnd(entity.getDateEnd());
+
+        return film;
     }
 }

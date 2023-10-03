@@ -3,6 +3,7 @@ package com.example.cinema_booking.service.impl;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.entity.FilmEntity;
 import com.example.cinema_booking.repository.RoomRepository;
+import com.example.cinema_booking.service.ChairService;
 import com.example.cinema_booking.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private ChairService chairService;
+
     @Override
     public List<CinemaRoomEntity> getAllRoom() {
         return roomRepository.findAll();
@@ -41,9 +46,8 @@ public class RoomServiceImpl implements RoomService {
             CinemaRoomEntity updatedRoom = existingRoom.get();
             updatedRoom.setNameCinemaRoom(cinemaRoom.getNameCinemaRoom());
             updatedRoom.setCinemaRoomDesc(cinemaRoom.getCinemaRoomDesc());
+            updatedRoom.setNumberChair(cinemaRoom.getNumberChair());
             updatedRoom.setCinemaEntity(cinemaRoom.getCinemaEntity());
-
-
             return roomRepository.save(updatedRoom);
         } else {
 

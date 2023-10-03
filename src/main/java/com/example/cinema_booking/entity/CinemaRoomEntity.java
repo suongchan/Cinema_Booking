@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -18,8 +20,12 @@ public class CinemaRoomEntity {
     @ManyToOne
     @JoinColumn(name = "idCinema")
     private CinemaEntity cinemaEntity;
-
+    private int numberChair;
     private String nameCinemaRoom;
     private String cinemaRoomDesc;
+
+    @OneToMany(mappedBy = "cinemaRoom", cascade = CascadeType.ALL)
+    private List<ChairEntity> chairs;
+
 
 }

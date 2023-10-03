@@ -2,6 +2,7 @@ package com.example.cinema_booking.service.impl;
 
 import com.example.cinema_booking.converter.UserConverter;
 import com.example.cinema_booking.domain.User;
+import com.example.cinema_booking.entity.CustomerEntity;
 import com.example.cinema_booking.entity.UserEntity;
 import com.example.cinema_booking.repository.UserRepository;
 import com.example.cinema_booking.service.UserService;
@@ -72,7 +73,11 @@ public class UserServiceImpl implements UserService {
             // Xử lý trường hợp không tìm thấy khách hàng
             throw new UserPrincipalNotFoundException("Không tìm thấy khách hàng với ID " + id);
         }
+    }
 
+    @Override
+    public List<UserEntity> searchUsersByPhone(String phoneNumber) {
+        return userRepository.findByPhoneContaining(phoneNumber);
     }
 
 }

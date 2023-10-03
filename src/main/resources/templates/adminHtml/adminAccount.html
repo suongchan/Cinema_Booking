@@ -158,12 +158,11 @@
         <div class="taikhoan-body">
           <div class="search">
             <!-- Ô tìm kiếm -->
-            <input type="text" id="search" placeholder="Tìm kiếm...">
-            <a href="/admin/searchStaff" class="searchStaff">Tìm Kiếm
-            </a>
-            <a href="/admin/addStaff" class="addStaff">
-             Thêm
-            </a>
+            <form action="/admin/staff-search" method="get">
+              <input type="text" name="phone" id="search" placeholder="Tìm kiếm...">
+              <button type="submit">Tìm Kiếm</button>
+              <a href="/admin/addStaff" class="addStaff">Thêm </a>
+            </form>
           </div>
 
 

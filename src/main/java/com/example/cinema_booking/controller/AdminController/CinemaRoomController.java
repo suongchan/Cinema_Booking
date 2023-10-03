@@ -7,6 +7,7 @@ import com.example.cinema_booking.entity.CategoryEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.entity.FilmEntity;
+import com.example.cinema_booking.service.ChairService;
 import com.example.cinema_booking.service.CinemaService;
 import com.example.cinema_booking.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class CinemaRoomController {
     @Autowired
     private CinemaService cinemaService;
 
+    @Autowired
+    private ChairService chairService;
+
     @GetMapping("roomList")
     public String listFilm(Model model) {
         List<CinemaRoomEntity> room = roomService.getAllRoom();
@@ -42,8 +46,8 @@ public class CinemaRoomController {
     @PostMapping("addRoom")
     public String addFilm(@ModelAttribute("rooms") CinemaRoomEntity cinemaRoom) {
 
-        roomService.addRoom(cinemaRoom);
-
+        CinemaRoomEntity cinemaRoomEntity = roomService.addRoom(cinemaRoom);
+        chairService.createChair(cinemaRoomEntity);
         return "redirect:/admin/roomList";
     }
 

@@ -1,6 +1,9 @@
 package com.example.cinema_booking.service.impl;
 
+import com.example.cinema_booking.converter.FilmConverter;
+import com.example.cinema_booking.domain.Film;
 import com.example.cinema_booking.entity.CinemaEntity;
+import com.example.cinema_booking.entity.CustomerEntity;
 import com.example.cinema_booking.entity.FilmEntity;
 import com.example.cinema_booking.repository.FilmRepository;
 import com.example.cinema_booking.service.FilmService;
@@ -8,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,10 +46,10 @@ public class FilmServiceImpl implements FilmService {
             updatedFilm.setNameFilm(film.getNameFilm());
             updatedFilm.setCategoryEntity(film.getCategoryEntity());
             updatedFilm.setImageFilm(film.getImageFilm());
-            updatedFilm.setStatus(film.getStatus());
+//            updatedFilm.setStatus(film.getStatus());
             updatedFilm.setTrailer(film.getTrailer());
             updatedFilm.setRating(film.getRating());
-            updatedFilm.setShowtime(film.getShowtime());
+//            updatedFilm.setShowtime(film.getShowtime());
             updatedFilm.setIntroduce(film.getIntroduce());
             updatedFilm.setTime(film.getTime());
 
@@ -68,5 +73,27 @@ public class FilmServiceImpl implements FilmService {
             // Xử lý trường hợp không tìm thấy khách hàng
             throw new UserPrincipalNotFoundException("Không tìm thấy khách hàng với ID " + id);
         }
+    }
+
+    @Override
+    public List<Film> getAllFilmDC(LocalDate now) {
+        List<Film> films = filmRepository.findAllByDateRange(now).stream().map(FilmConverter::toModel).toList();
+        List<Film> filmsDC = new ArrayList<>();
+        for (Film f: films) {
+            if (f.isStatus()) {
+                filmsDC.add(f);
+            }
+        }
+        return filmsDC;
+    }
+
+    @Override
+    public List<Film> getAllFilmSC(LocalDate now) {
+        return filmRepository.findAllByDateSC(now.plusDays(1), now.plusDays(5)).stream().map(FilmConverter::toModel).toList();
+    }
+
+    @Override
+    public List<FilmEntity> searchFilmsByName(String filmName) {
+        return filmRepository.findByNameFilmContaining(filmName);
     }
 }

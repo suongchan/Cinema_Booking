@@ -12,6 +12,8 @@
   <div class="logo">
     <img src="../../static/image/logo.png">
   </div>
+
+  <div class="container_toolbar">
   <div class="toolbar">
     <nav class="navbar navbar-expand-lg ">
       <div class="container-fluid">
@@ -47,6 +49,7 @@
       </div>
     </nav>
   </div>
+  </div>
 </header>
 
 <main>
@@ -58,8 +61,8 @@
         </div>
         <div class="column column_right">
           <a href="#"><h3 th:text="${f.nameFilm}"></h3></a>
-          <p class="timeFilm" th:text="${f.time}"></p>
-          <p th:text="${f.category.nameCategory}"></p>
+          <p class="timeFilm" th:text="'Thời lượng: '+${f.time}+' phút'"></p>
+          <p th:text="'Thể loại: '+${f.category.nameCategory}"> </p>
           <div class="order">
             <a href="#">
               <span class="ticket">

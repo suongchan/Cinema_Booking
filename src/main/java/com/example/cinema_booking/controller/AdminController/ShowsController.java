@@ -43,7 +43,7 @@ public class ShowsController {
         List<FilmEntity> film = filmService.getAllFilm();
         List<CinemaEntity> cinema = cinemaService.getAllCinema();
         List<CinemaRoomEntity> rooms = roomService.getAllRoom();
-        model.addAttribute("shows", shows);
+        model.addAttribute("shows", new ShowsEntity());
         model.addAttribute("films", film);
         model.addAttribute("cinemas", cinema);
         model.addAttribute("rooms", rooms);
@@ -51,7 +51,7 @@ public class ShowsController {
     }
 
 
-    @PostMapping("/createShow")
+    @PostMapping("/addShow")
     public ResponseEntity<?> createShow(@RequestBody ShowsEntity show) {
         try {
             ShowsEntity createdShow = showsService.createShow(show);

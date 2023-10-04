@@ -14,7 +14,6 @@ public class CinemaRoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCinemaRoom", nullable = false)
-
     private Long idCinemaRoom;
 
     @ManyToOne
@@ -26,6 +25,9 @@ public class CinemaRoomEntity {
 
     @OneToMany(mappedBy = "cinemaRoom", cascade = CascadeType.ALL)
     private List<ChairEntity> chairs;
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
+    private List<ShowsEntity> showEntities;
 
 
 }

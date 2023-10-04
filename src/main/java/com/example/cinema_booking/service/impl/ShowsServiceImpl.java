@@ -36,10 +36,16 @@ public class ShowsServiceImpl implements ShowsService {
     }
 
     private boolean isScheduleConflict(ShowsEntity newShow) {
-        // Kiểm tra xem có buổi chiếu nào khác cho cùng phòng chiếu và trùng thời gian không
-        List<ShowsEntity> conflictingShows = showsRepository.findByRoomAndStartBetween(newShow.getIdShow(),newShow.getCinemaRoomEntity(), newShow.getFilmEntity(), newShow.getStart(), newShow.getEnd());
-
+//         Kiểm tra xem có buổi chiếu nào khác cho cùng phòng chiếu và trùng thời gian không
+        List<ShowsEntity> conflictingShows = showsRepository.findShowsByRoomAndTimeRange(newShow.getCinemaRoomEntity(), newShow.getStart(), newShow.getEnd());
+        for (ShowsEntity showsEntity: conflictingShows
+             ) {
+            System.out.println(showsEntity.getIdShow());
+        }
+        if (conflictingShows != null) {
+            return true;
+        }
         // Trả về true nếu có xung đột, ngược lại trả về false
-        return !conflictingShows.isEmpty();
+        return false;
     }
 }

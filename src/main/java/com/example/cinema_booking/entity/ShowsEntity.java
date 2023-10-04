@@ -7,14 +7,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "shows")
-
 public class ShowsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idShow;
-    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private LocalDateTime start;
-    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private LocalDateTime end;
 
     @ManyToOne

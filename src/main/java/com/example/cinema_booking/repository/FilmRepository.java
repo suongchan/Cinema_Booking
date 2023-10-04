@@ -1,6 +1,5 @@
 package com.example.cinema_booking.repository;
 
-import com.example.cinema_booking.entity.CustomerEntity;
 import com.example.cinema_booking.entity.FilmEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

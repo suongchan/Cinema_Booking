@@ -1,0 +1,196 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <title>Thêm Lịch chiếu | Admin Web</title>-->
+<!--  <link rel="stylesheet" href="js/app.js">-->
+<!--  <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">-->
+<!--  &lt;!&ndash; GOOGLE FONT &ndash;&gt;-->
+<!--  <link rel="preconnect" href="https://fonts.gstatic.com">-->
+<!--  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">-->
+<!--  &lt;!&ndash; BOXICONS &ndash;&gt;-->
+<!--  <link href="https://fonts.gstatic.com" rel="stylesheet">-->
+<!--  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">-->
+
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash; SIDEBAR &ndash;&gt;-->
+<!--<div class="sidebar">-->
+<!--  <div class="sidebar-logo">-->
+<!--    &lt;!&ndash;    &lt;!&ndash; logo video &ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;    <a th:href="${home}"> <img src="../static/ImageAdmin/cinema_logo.jpg" alt="Comapny logo"></a>&ndash;&gt;-->
+<!--    ADMIN WEB-->
+<!--    &lt;!&ndash;    <div class="sidebar-close" id="sidebar-close">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <i class='bx bx-left-arrow-alt'></i>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  </div>-->
+<!--  <div class="sidebar-user">-->
+<!--    <div class="sidebar-user-info">-->
+<!--      <img src="../../static/ImageAdmin/user-image-2.png" alt="User picture" class="profile-image">-->
+<!--      <div class="sidebar-user-name">Admin</div>-->
+<!--    </div>-->
+<!--    <button class="btn btn-outline">-->
+<!--      <i class='bx bx-log-out bx-flip-horizontal'></i>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  &lt;!&ndash; SIDEBAR MENU &ndash;&gt;-->
+<!--  <ul class="sidebar-menu">-->
+<!--    <span class="permanent">Quản trị</span>-->
+<!--    <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>-->
+<!--    <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>-->
+<!--    <li><a href="#" th:href="@{/admin/customerList}"  class="active"> <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>-->
+
+<!--    <span class="permanent">Danh mục</span>-->
+<!--    <li><a href="#"> <i class='bx bx-shopping-bag'></i> <span>Rạp chiếu</span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span>Phòng chiếu</span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span>Ghế</span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span> Phim </span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span> Dịch vụ </span> </a></li>-->
+
+<!--    <span class="permanent" >Nghiệp vụ</span>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span>Đặt vé</span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span> Lịch chiếu </span> </a></li>-->
+
+<!--    <span class="permanent" >Báo cáo - Thống kê</span>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span>Báo cáo</span> </a></li>-->
+<!--    <li><a href="#"> <i class='bx bx-chart'></i> <span>Thống kê</span> </a></li>-->
+
+
+<!--    &lt;!&ndash;    <li class="sidebar-submenu"><a href="#"&ndash;&gt;-->
+<!--    &lt;!&ndash;                                   class="sidebar-menu-dropdown"> <i class='bx bx-user-circle'></i>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <span>account</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="dropdown-icon"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <ul class="sidebar-menu sidebar-menu-dropdown-content">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> edit profile </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> account settings </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> billing </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </ul></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <li class="sidebar-submenu"><a href="#" class="sidebar-menu-dropdown"> <i class='bx bx-category'></i> <span>project</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="dropdown-icon"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <ul class="sidebar-menu sidebar-menu-dropdown-content">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> list </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> add project </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </ul></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <li class="sidebar-submenu"><a th:href="${adminProduct}" class="sidebar-menu-dropdown"> <i class='bx bx-category'></i> <span>Product</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;      &lt;!&ndash; <div class="dropdown-icon"></div> &ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <ul class="sidebar-menu sidebar-menu-dropdown-content">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> list product </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> add product </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#"> orders </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </ul></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <li><a href="#"> <i class='bx bx-mail-send'></i> <span>mail</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <li><a href="#"> <i class='bx bx-chat'></i> <span>chat</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <li><a href="#"> <i class='bx bx-calendar'></i> <span>calendar</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <li class="sidebar-submenu"><a href="#"&ndash;&gt;-->
+<!--    &lt;!&ndash;                                   class="sidebar-menu-dropdown"> <i class='bx bx-cog'></i> <span>settings</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="dropdown-icon"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </a>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <ul class="sidebar-menu sidebar-menu-dropdown-content">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <li><a href="#" class="darkmode-toggle" id="darkmode-toggle">&ndash;&gt;-->
+<!--    &lt;!&ndash;          darkmode <span class="darkmode-switch"></span>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </ul></li>&ndash;&gt;-->
+<!--  </ul>-->
+<!--  &lt;!&ndash; END SIDEBAR MENU &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; END SIDEBAR &ndash;&gt;-->
+<!--<main>-->
+<!--  <div class="box">-->
+
+<!--    <div class="box-body overflow-scroll">-->
+
+<!--      <div class="header-right">-->
+<!--        <img src="../../static/ImageAdmin/user-image-2.png" alt="admin-logo">-->
+<!--        <span class="header-text"> Admin</span>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;        <thead>&ndash;&gt;-->
+<!--      &lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--      &lt;!&ndash;&lt;!&ndash;          <th>ID</th>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;&lt;!&ndash;          <th>User Name</th>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;&lt;!&ndash;          <th>Email</th>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;&lt;!&ndash;          <th>Password</th>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;&lt;!&ndash;          <th>Edit</th>&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;          <th><img src="../static/ImageAdmin/user-image-2.png" alt=""> Delete</th>&ndash;&gt;-->
+<!--      &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--      &lt;!&ndash;        </thead>&ndash;&gt;-->
+
+<!--      &lt;!&ndash;      <table>&ndash;&gt;-->
+<!--      &lt;!&ndash;        <tbody>&ndash;&gt;-->
+<!--      &lt;!&ndash;        <th:forEach items="${UserList}" var="user">&ndash;&gt;-->
+<!--      &lt;!&ndash;          <tr>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td>${user.id}</td>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td>&ndash;&gt;-->
+<!--      &lt;!&ndash;              <div class="order-owner">&ndash;&gt;-->
+<!--      &lt;!&ndash;                <img src="../static/ImageAdmin/user-image-2.png"&ndash;&gt;-->
+<!--      &lt;!&ndash;                     alt="user image"> <span>${user.username}</span>&ndash;&gt;-->
+<!--      &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;            </td>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td>${user.email}</td>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td><span class="order-status order-ready"> ${user.password}&ndash;&gt;-->
+<!--      &lt;!&ndash;								</span></td>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td>&ndash;&gt;-->
+<!--      &lt;!&ndash;              <div class="payment-status payment-pending">&ndash;&gt;-->
+<!--      &lt;!&ndash;                <div class="dot"></div>&ndash;&gt;-->
+<!--      &lt;!&ndash;                <a href="#">Edit</a>&ndash;&gt;-->
+<!--      &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;            </td>&ndash;&gt;-->
+<!--      &lt;!&ndash;            <td><a href="#">Delete</a></td>&ndash;&gt;-->
+<!--      &lt;!&ndash;          </tr>&ndash;&gt;-->
+<!--      &lt;!&ndash;        </th:forEach>&ndash;&gt;-->
+<!--      &lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--      &lt;!&ndash;      </table>&ndash;&gt;-->
+<!--      <div class="admin-taikhoan">-->
+<!--        <div class="taikhoan-header">-->
+<!--          <span class="text1">Lịch chiếu</span>-->
+<!--          <span class="text2">Thêm lịch chiếu</span>-->
+<!--        </div>-->
+<!--        <div class="taikhoan-body">-->
+
+<!--          <form class="form-containers"  th:action="@{/admin/addShow}" method="POST" th:object="${shows}">-->
+<!--            <input type="hidden" name="id" value="0">-->
+<!--            <div class="form-row" >-->
+<!--              <label for="join_datepicker1">Ngày bắt đầu</label>-->
+<!--              <input type="date" class="start" placeholder="yyyy-MM-dd" id="join_datepicker1" name="start" th:text="*{start}" >-->
+<!--            </div>-->
+
+<!--            <div class="form-row" >-->
+<!--              <label for="join_datepicker">Ngày kết thúc</label>-->
+<!--              <input type="date" class="end" placeholder="yyyy-MM-dd" id="join_datepicker" name="end" th:text="*{end}" >-->
+<!--            </div>-->
+
+<!--            <div class="form-row" >-->
+<!--              <label for="name">Tên phim</label>-->
+<!--              <input type="text" id="name" name="categoryDesc"  required th:text="*{filmEntity.nameFilm}" >-->
+<!--            </div>-->
+
+<!--            <div class="form-row" >-->
+<!--              <label for="cinema">Tên rạp</label>-->
+<!--              <input type="text" id="cinema" name="categoryDesc"  required th:text="*{cinemaEntity.nameCinema}" >-->
+<!--            </div>-->
+
+<!--            <div class="form-row" >-->
+<!--              <label for="room">Tên phòng</label>-->
+<!--              <input type="text" id="room" name="categoryDesc"  required th:text="*{cinemaRoomEntity.nameCinemaRoom}" >-->
+<!--            </div>-->
+
+
+<!--            <input type="submit" value="Lưu" class="submit">-->
+<!--          </form>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</main>-->
+<!--</body>-->

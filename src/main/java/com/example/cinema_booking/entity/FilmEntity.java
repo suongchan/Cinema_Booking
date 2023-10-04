@@ -1,14 +1,10 @@
 package com.example.cinema_booking.entity;
 
-import com.example.cinema_booking.domain.Category;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
@@ -40,7 +36,7 @@ public class FilmEntity {
     private LocalDate dateEnd;
 
     @OneToMany(mappedBy = "filmEntity", fetch = FetchType.EAGER)
-    private List<ShowEntity> showEntities;
+    private List<ShowsEntity> showEntities;
 
 
 

@@ -14,6 +14,9 @@
   <div class="logo">
     <img src="../../static/image/logo.png">
   </div>
+
+
+    <div class="container_toolbar">
   <div class="toolbar">
     <nav class="navbar navbar-expand-lg ">
       <div class="container-fluid">
@@ -50,6 +53,7 @@
       </div>
     </nav>
   </div>
+    </div>
 </header>
 <main>
   <div class="controller_main">
@@ -62,8 +66,8 @@
           <h3 th:text="${film.nameFilm}"></h3>
           <div class="decsFilm">
           <p th:text="'Thể loại: '+ ${film.categoryEntity.nameCategory}"> </p>
-          <p class="coming" th:if="${film.status}">SẮP CHIẾU</p>
-          <p class="coming" th:if="${!film.status}">ĐANG CHIẾU</p>
+          <p class="coming" th:if="${!film.status}">SẮP CHIẾU</p>
+          <p class="coming" th:if="${film.status}">ĐANG CHIẾU</p>
           <div class="date_Time">
            <span class="date">
             <img src="../../static/image/date.png">
@@ -71,7 +75,7 @@
            </span>
             <span>
             <img src="../../static/image/time.png">
-            <p th:text="'Thời lượng: '+${film.time}"> </p>
+            <p th:text="'Thời lượng: '+${film.time} +' phút'"> </p>
            </span>
           </div>
           </div>

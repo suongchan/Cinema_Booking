@@ -36,7 +36,13 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                XIN CHÀO : SUONGCHAN
+<!--                <div class="user-info">-->
+<!--                  <span class="greeting">XIN CHÀO:</span>-->
+<!--                  <form th:object="${customer}">-->
+<!--                    <input type="hidden" th:field="*{idCustomer}" />-->
+<!--                    <p class="username" th:text="${customer.username}"></p>-->
+<!--                  </form>-->
+<!--                </div>-->
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
@@ -64,7 +70,7 @@
           <p class="timeFilm" th:text="'Thời lượng: '+${f.time}+' phút'"></p>
           <p th:text="'Thể loại: '+${f.category.nameCategory}"></p>
           <div class="order">
-            <a>
+            <a th:href="@{/customer/listShowtime/{id}(id=${f.idFilm})}">
               <span class="ticket">
               <img src="../../static/image/ticket.png">
               Đặt Vé

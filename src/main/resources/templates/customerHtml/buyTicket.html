@@ -55,16 +55,16 @@
     <div class="controller_main">
       <div class="controller_film">
         <div class="film">
-            <h3>Địa Đàng Sụp Đổ(T16)</h3>
-              <p>HÀNH ĐỘNG,PHIÊU LƯU</p>
+            <h3 th:text="${films.nameFilm}"></h3>
+              <p th:text="${films.categoryEntity.nameCategory}"></p>
               <div class="date_Time">
            <span class="date">
             <img src="../../static/image/date.png">
-             31/08/2023
+             <p th:text="${films.dateStart}"></p>
            </span>
                 <span>
             <img src="../../static/image/time.png">
-            129 phút
+            <p th:text="${films.dateEnd}">
            </span>
               </div>
         </div>
@@ -81,44 +81,23 @@
     </span>
     <span>
       <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  METIZ
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">GALAXY</a></li>
-                  <li><a class="dropdown-item" href="#">LOTTE</a></li>
-                </ul>
+                <select id="nameCinema" name="cinema.idCinema" th:field="*{cinemas}" required>
+                <!-- Populate the options with cinema data -->
+                <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
+              </select>
       </li>
     </span>
   </div>
     <div class="container_showtime">
       <div class="showtime">
         <div class="column column_left">
-          <div class="dateTime">
+          <div class="dateTime" th:each="showtime : ${showtimes}">
           <span class="date">
             <img src="../../static/image/date.png">
-            31/08/2023
+            <p th:text="${showtime.dateShow}"></p>
           </span>
-          <input type="button" class="time" value="08:00" >
-            <input type="button" class="time" value="10:00" >
-          </div>
+<!--          <input type="button" class="time" th:value="${}" >-->
 
-          <div class="dateTime">
-          <span class="date">
-            <img src="../../static/image/date.png">
-            31/08/2023
-          </span>
-            <input type="button" class="time" value="08:00" >
-            <input type="button" class="time" value="10:00" >
-          </div>
-
-          <div class="dateTime">
-          <span class="date">
-            <img src="../../static/image/date.png">
-            31/08/2023
-          </span>
-            <input type="button" class="time" value="08:00" >
-            <input type="button" class="time" value="10:00" >
           </div>
         </div>
         <div class="column column_right">

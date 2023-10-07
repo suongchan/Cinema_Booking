@@ -4,6 +4,7 @@ import com.example.cinema_booking.entity.CinemaRoomEntity;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 public interface RoomService {
 
@@ -16,5 +17,7 @@ public interface RoomService {
     CinemaRoomEntity update(CinemaRoomEntity cinemaRoom) ;
 
     void deleteRoom(Long id) throws UserPrincipalNotFoundException;
+
+    Optional<CinemaRoomEntity> getRoomByCinemaId(Long id);
 
 }

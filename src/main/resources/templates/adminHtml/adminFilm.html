@@ -374,7 +374,7 @@
             <form action="/admin/film-search" method="get">
               <input type="text" name="name_film" id="search" placeholder="Tìm kiếm...">
               <button type="submit">Tìm Kiếm</button>
-              <a th:href="@{/admin/addFilm}" class="addStaff">Thêm </a>
+              <a th:href="@{/admin/addFilmPage}" class="addStaff">Thêm </a>
             </form>
           </div>
 
@@ -386,6 +386,7 @@
               <td>Thể loại</td>
               <td>Thời lượng</td>
               <td>Ngày khởi chiếu</td>
+              <td>Ngày kết thúc</td>
               <td>Giới thiệu</td>
               <td>Trailer</td>
               <td>Xếp hạng</td>
@@ -397,7 +398,8 @@
               <td th:text="*{film.nameFilm}"></td>
               <td th:text="*{film.categoryEntity.nameCategory}"></td>
               <td th:text="*{film.time}"></td>
-<!--              <td th:text="*{film.showtime}"></td>-->
+              <td th:text="*{film.dateStart}"></td>
+              <td th:text="*{film.dateEnd}"></td>
               <td th:text="*{film.introduce}"></td>
               <td th:text="*{film.trailer}"></td>
               <td th:text="*{film.rating}"></td>

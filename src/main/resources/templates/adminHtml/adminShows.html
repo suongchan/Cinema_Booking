@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thêm Khách hàng | Admin Web</title>
+  <title>Danh sách lịch chiếu | Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- BOXICONS -->
   <link href="https://fonts.gstatic.com" rel="stylesheet">
-  <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">
+  <link rel="stylesheet" href="../../static/css/cssAdmin/adminCategory.css">
 
 </head>
 <body>
@@ -39,10 +39,10 @@
   <!-- SIDEBAR MENU -->
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
-    <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
-    <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#" th:href="@{/admin/customerList}"  class="active"> <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span>quản trị</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span> khách hàng </span> </a></li>
+    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>thể loại</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
     <span class="permanent">Danh mục</span>
@@ -152,73 +152,46 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Phim</span>
-          <span class="text2">Thêm phim</span>
+          <span class="text1">Lịch chiếu</span>
+          <span class="text2">Danh sách lịch chiếu</span>
         </div>
         <div class="taikhoan-body">
+          <div class="search">
+            <input type="text" id="search" placeholder="Tìm kiếm...">
+            <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
+            </a>
+            <a th:href="@{/admin/addShow}" class="addStaff">
+              Thêm
+            </a>
+          </div>
 
-          <form class="form-containers"  th:action="@{/admin/addFilm}" method="POST" th:object="${films}">
-            <input type="hidden" name="id" value="0">
+          <table>
+            <tbody>
+            <tr class="headline">
+              <td>Ngày chiếu</td>
+              <td>Giờ bắt đầu</td>
+              <td>Giờ kết thúc</td>
+              <td>Tên phim</td>
+              <td>Rạp</td>
+              <td>Phòng</td>
+              <td></td>
+            </tr>
+            <tr class="category" th:each="showtime:${showtime}">
+              <td th:text="${showtime.dateShow}"></td>
+              <td th:text="${showtime.start}"></td>
+              <td th:text="${showtime.end}"></td>
+              <td th:text="${showtime.filmEntity.nameFilm}">  </td>
+              <td th:text="${showtime.cinemaEntity.nameCinema}"></td>
+              <td th:text="${showtime.cinemaRoomEntity.nameCinemaRoom}">  </td>
+              <td class="payment-status payment-pending">
+                <a class="edit" th:href="@{/admin/editShow/{id}(id=${showtime.idShow})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteShow/{id}(id=${showtime.idShow})}">Xóa</a>
+              </td>
+            </tr>
 
-            <div class="form-row" >
-              <label for="name">Tên phim</label>
-              <input type="text" id="name" name="nameFilm"  required th:text="*{nameFilm}" >
-            </div>
 
-            <div class="form-row" >
-              <label for="category">Thể loại</label>
-
-              <select id="category" name="category.idCategory" required th:field="*{category}">
-                <!-- Populate the options with cinema data -->
-                <option th:each="category : ${categories}" th:value="${category.idCategory}" th:text="${category.nameCategory}"></option>
-              </select>
-
-              <!--              <input type="text" id="nameCinema" name="nameCinema" required th:text="*{cinemaEntity.getNameCinema()}">-->
-            </div>
-
-            <div class="form-row" >
-              <label for="time">Thời lượng</label>
-              <input type="text" id="time" name="time"   th:text="*{time}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateStart" th:text="*{dateStart}" >
-            </div>
-            <div class="form-row" >
-              <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker1" name="dateEnd" th:text="*{dateEnd}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="introduce">Giới thiệu</label>
-              <input type="text" id="introduce" name="introduce"   th:text="*{introduce}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="trailer">Trailer</label>
-              <input type="text" id="trailer" name="trailer"   th:text="*{trailer}">
-            </div>
-
-            <div class="form-row" >
-              <label for="rating">Xếp hạng</label>
-              <input type="text" id="rating" name="rating"   th:text="*{rating}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="image">Hình ảnh</label>
-              <input type="text" id="image" name="imageFilm"   th:text="*{imageFilm}" >
-            </div>
-
-<!--            <div class="form-row" >-->
-<!--              <label for="status">Trạng thái</label>-->
-<!--              <input type="text" id="status" name="status"   th:text="*{status}" >-->
-<!--            </div>-->
-
-            <input type="submit" value="Lưu" class="submit">
-
-          </form>
-
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

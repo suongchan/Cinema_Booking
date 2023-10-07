@@ -1,5 +1,6 @@
 package com.example.cinema_booking.entity;
 
+import com.example.cinema_booking.domain.CinemaRoom;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -157,59 +157,61 @@
         </div>
         <div class="taikhoan-body">
 
-          <form class="form-containers"  th:action="@{/admin/createShow}" method="POST" th:object="${showtime}">
+          <form class="form-containers"  th:action="@{/admin/editShow}" method="POST" th:object="${showtime}">
             <div th:if="${conflictingShowtimes}" class="alert alert-danger">
               Lịch chiếu trùng lịch. Vui lòng chọn thời gian khác.
             </div>
-            <input type="hidden" name="id" value="0">
+            <input type="hidden" th:field="*{idShow}" />
+
             <div class="form-row" >
               <label for="join_datepicker"> Ngày chiếu</label>
-              <input type="date" class="dateShow" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateShow" th:field="*{dateShow}" >
+              <input type="datetime-local" class="start" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateShow" th:value="*{dateShow}" >
             </div>
+
             <div class="form-row" >
               <label for="join_datepicker1"> Giờ bắt đầu</label>
-              <input type="time" class="start" placeholder="HH:mm" id="join_datepicker1" name="start" th:value="*{start}" >
+              <input type="datetime-local" class="start" placeholder="HH:mm" id="join_datepicker1" name="start" th:value="*{start}" >
             </div>
 
             <div class="form-row" >
               <label for="join_datepicker2">Giờ kết thúc</label>
-              <input type="time" class="end" placeholder="HH:mm" id="join_datepicker2" name="end" th:value="*{end}" >
+              <input type="datetime-local" class="end" placeholder="HH:mm" id="join_datepicker2" name="end" th:value="*{end}" >
             </div>
 
 
 
-              <div class="form-row" >
-                <label for="cinema">Rạp</label>
-                <select id="cinema" name="cinemaEntity.idCinema" th:field="*{cinemaEntity}" required>
-<!--                  <option value="" selected disabled>Chọn rạp</option> &lt;!&ndash; Option mặc định &ndash;&gt;-->
-                  <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
-                </select>
+            <div class="form-row" >
+              <label for="cinema">Rạp</label>
+              <select id="cinema" name="cinemaEntity.idCinema" th:field="*{cinemaEntity}">
+<!--                <option value="" selected disabled>Chọn rạp</option> &lt;!&ndash; Option mặc định &ndash;&gt;-->
+                <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
+              </select>
 
-                <div>
+              <div>
 
-                  <div class="form-row" >
-                    <label for="room">Phòng chiếu</label>
+                <div class="form-row" >
+                  <label for="room">Phòng chiếu</label>
 
-                    <select id="room" name="cinemaRoomEntity.idCinemaRoom" th:field="*{cinemaRoomEntity}">
-<!--                      <option value="" selected disabled>Chọn phòng</option> &lt;!&ndash; Option mặc định &ndash;&gt;-->
-                      <option th:each="room : ${rooms}" th:value="${room.idCinemaRoom}" th:text="${room.nameCinemaRoom}" th:data-cinema-id="${room.cinemaEntity.idCinema}"></option>
-                    </select>
+                  <select id="room" name="cinemaRoomEntity.idCinemaRoom" th:field="*{cinemaRoomEntity}" required>
+<!--                    <option value="" selected disabled>Chọn phòng</option> &lt;!&ndash; Option mặc định &ndash;&gt;-->
+                    <option th:each="room : ${rooms}" th:value="${room.idCinemaRoom}" th:text="${room.nameCinemaRoom}" th:data-cinema-id="${room.cinemaEntity.idCinema}"></option>
+                  </select>
 
-                    <div>
+                  <div>
 
-                      <div class="form-row" >
-                        <label for="name">Tên phim</label>
+                    <div class="form-row" >
+                      <label for="name">Tên phim</label>
 
-                        <select id="name" name="filmEntity.idFilm" th:field="*{filmEntity}" required>
-                          <!-- Populate the options with cinema data -->
-                          <option th:each="film : ${films}" th:value="${film.idFilm}" th:text="${film.nameFilm}"></option>
-                        </select>
-                        <div>
+                      <select id="name" name="filmEntity.idFilm" th:field="*{filmEntity}" required>
+                        <!-- Populate the options with cinema data -->
+                        <option th:each="film : ${films}" th:value="${film.idFilm}" th:text="${film.nameFilm}"></option>
+                      </select>
+                      <div>
 
 
-            <input type="submit" value="Lưu" class="submit">
+                        <input type="submit" value="Lưu" class="submit">
 
-                      <script>
+                        <script>
 
                           // Lấy thẻ select của rạp và phòng chiếu
                           const cinemaSelect = document.getElementById("cinema");
@@ -217,27 +219,27 @@
 
                           // Sự kiện khi thay đổi giá trị của select "Rạp"
                           cinemaSelect.addEventListener("change", function () {
-                          const selectedCinemaId = cinemaSelect.value;
+                            const selectedCinemaId = cinemaSelect.value;
 
-                          // Lặp qua danh sách phòng chiếu và hiển thị chỉ những phòng thuộc rạp được chọn
-                          const roomOptions = roomSelect.querySelectorAll("option");
-                          roomOptions.forEach(function (option) {
-                          const cinemaId = option.getAttribute("data-cinema-id");
-                          if (cinemaId === selectedCinemaId || selectedCinemaId === "") {
-                          option.style.display = "block"; // Hiển thị phòng chiếu
-                        } else {
-                          option.style.display = "none"; // Ẩn phòng chiếu
-                        }
-                        });
-                        });
-                      </script>
+                            // Lặp qua danh sách phòng chiếu và hiển thị chỉ những phòng thuộc rạp được chọn
+                            const roomOptions = roomSelect.querySelectorAll("option");
+                            roomOptions.forEach(function (option) {
+                              const cinemaId = option.getAttribute("data-cinema-id");
+                              if (cinemaId === selectedCinemaId || selectedCinemaId === "") {
+                                option.style.display = "block"; // Hiển thị phòng chiếu
+                              } else {
+                                option.style.display = "none"; // Ẩn phòng chiếu
+                              }
+                            });
+                          });
+                        </script>
 
 
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
             </div>
           </form>
 

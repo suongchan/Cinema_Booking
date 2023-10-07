@@ -160,7 +160,7 @@
             <input type="text" id="search" placeholder="Tìm kiếm...">
             <a href="/admin/searchCategory" class="searchStaff">Tìm Kiếm
             </a>
-            <a th:href="@{/admin/addShow}" class="addShow">
+            <a th:href="@{/admin/addShow}" class="addStaff">
               Thêm
             </a>
           </div>
@@ -168,6 +168,7 @@
           <table>
             <tbody>
             <tr class="headline">
+              <td>Ngày chiếu</td>
               <td>Giờ bắt đầu</td>
               <td>Giờ kết thúc</td>
               <td>Tên phim</td>
@@ -175,15 +176,16 @@
               <td>Phòng</td>
               <td></td>
             </tr>
-            <tr class="category" th:each="shows:${shows}">
-              <td th:text="${shows.start}"></td>
-              <td th:text="${shows.end}">  </td>
-              <td th:text="${shows.filmEntity.nameFilm}">  </td>
-              <td th:text="${shows.cinemaEntity.nameCinema}">  </td>
-              <td th:text="${shows.cinemaRoomEntity.nameCinemaRoom}">  </td>
+            <tr class="category" th:each="showtime:${showtime}">
+              <td th:text="${showtime.dateShow}"></td>
+              <td th:text="${showtime.start}"></td>
+              <td th:text="${showtime.end}"></td>
+              <td th:text="${showtime.filmEntity.nameFilm}">  </td>
+              <td th:text="${showtime.cinemaEntity.nameCinema}"></td>
+              <td th:text="${showtime.cinemaRoomEntity.nameCinemaRoom}">  </td>
               <td class="payment-status payment-pending">
-                <a class="edit" th:href="@{/admin/editShow/{id}(id=${shows.idShow})}">Cập nhập</a>
-                <a class="delete" th:href="@{/admin/deleteShow/{id}(id=${shows.idShow})}">Xóa</a>
+                <a class="edit" th:href="@{/admin/editShow/{id}(id=${showtime.idShow})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteShow/{id}(id=${showtime.idShow})}">Xóa</a>
               </td>
             </tr>
 

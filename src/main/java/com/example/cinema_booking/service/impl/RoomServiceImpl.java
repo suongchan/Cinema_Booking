@@ -1,7 +1,6 @@
 package com.example.cinema_booking.service.impl;
 
 import com.example.cinema_booking.entity.CinemaRoomEntity;
-import com.example.cinema_booking.entity.FilmEntity;
 import com.example.cinema_booking.repository.ChairRepository;
 import com.example.cinema_booking.repository.RoomRepository;
 import com.example.cinema_booking.service.ChairService;
@@ -85,5 +84,10 @@ public class RoomServiceImpl implements RoomService {
             // Xử lý trường hợp không tìm thấy khách hàng
             throw new UserPrincipalNotFoundException("Không tìm thấy khách hàng với ID " + id);
         }
+    }
+
+    @Override
+    public Optional<CinemaRoomEntity> getRoomByCinemaId(Long id) {
+        return roomRepository.findById(id);
     }
 }

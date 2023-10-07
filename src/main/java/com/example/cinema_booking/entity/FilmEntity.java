@@ -16,6 +16,7 @@ public class FilmEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFilms", nullable = false)
+
     private Long idFilm;
     private String nameFilm;
 
@@ -35,7 +36,7 @@ public class FilmEntity {
     private LocalDate dateEnd;
 
     @OneToMany(mappedBy = "filmEntity", fetch = FetchType.EAGER)
-    private List<ShowsEntity> showEntities;
+    private List<ShowtimeEntity> showsEntities;
 
 
 

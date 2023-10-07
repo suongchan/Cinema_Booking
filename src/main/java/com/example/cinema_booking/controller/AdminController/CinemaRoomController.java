@@ -31,6 +31,13 @@ public class CinemaRoomController {
         model.addAttribute("rooms", room);
         return "adminHtml/adminRoomCinema";
     }
+
+    @GetMapping("cinemaList/{id}")
+    public Optional<CinemaRoomEntity> getCinemaRooms(@PathVariable Long id) {
+        Optional<CinemaRoomEntity> rooms = roomService.getRoomByCinemaId(id);
+        return rooms;
+    }
+
     @GetMapping("addRoom")
     public String addFilmPage(Model model, CinemaRoom cinemaRoom) {
         List<CinemaEntity> cinema = cinemaService.getAllCinema();

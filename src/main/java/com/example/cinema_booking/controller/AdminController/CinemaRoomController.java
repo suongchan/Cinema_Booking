@@ -1,12 +1,8 @@
 package com.example.cinema_booking.controller.AdminController;
 
-import com.example.cinema_booking.domain.Cinema;
 import com.example.cinema_booking.domain.CinemaRoom;
-import com.example.cinema_booking.domain.Film;
-import com.example.cinema_booking.entity.CategoryEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
-import com.example.cinema_booking.entity.FilmEntity;
 import com.example.cinema_booking.service.ChairService;
 import com.example.cinema_booking.service.CinemaService;
 import com.example.cinema_booking.service.RoomService;
@@ -36,6 +32,13 @@ public class CinemaRoomController {
         model.addAttribute("rooms", room);
         return "adminHtml/adminRoomCinema";
     }
+
+    @GetMapping("cinemaList/{id}")
+    public Optional<CinemaRoomEntity> getCinemaRooms(@PathVariable Long id) {
+        Optional<CinemaRoomEntity> rooms = roomService.getRoomByCinemaId(id);
+        return rooms;
+    }
+
     @GetMapping("addRoom")
     public String addFilmPage(Model model, CinemaRoom cinemaRoom) {
         List<CinemaEntity> cinema = cinemaService.getAllCinema();

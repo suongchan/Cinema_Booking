@@ -64,7 +64,7 @@
           <p class="timeFilm" th:text="'Thời lượng: '+${f.time}+' phút'"></p>
           <p th:text="'Thể loại: '+${f.category.nameCategory}"> </p>
           <div class="order">
-            <a href="#">
+            <a th:href="@{/customer/listShowtime/{id}(id=${f.idFilm})}">
               <span class="ticket">
               <img src="../../static/image/ticket.png">
               Đặt Vé

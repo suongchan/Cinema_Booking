@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thêm Khách hàng | Admin Web</title>
+  <title>Thêm Lịch chiếu | Admin Web</title>
   <link rel="stylesheet" href="js/app.js">
   <link rel="shortcut icon" href="../../static/ImageAdmin/logo-mb.png" type="image/png">
   <!-- GOOGLE FONT -->
@@ -152,71 +152,95 @@
       <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
-          <span class="text1">Phim</span>
-          <span class="text2">Thêm phim</span>
+          <span class="text1">Lịch chiếu</span>
+          <span class="text2">Thêm lịch chiếu</span>
         </div>
         <div class="taikhoan-body">
 
-          <form class="form-containers"  th:action="@{/admin/addFilm}" method="POST" th:object="${films}">
-            <input type="hidden" name="id" value="0">
+          <form class="form-containers"  th:action="@{/admin/editShow}" method="POST" th:object="${showtime}">
+            <div th:if="${conflictingShowtimes}" class="alert alert-danger">
+              Lịch chiếu trùng lịch. Vui lòng chọn thời gian khác.
+            </div>
+            <input type="hidden" th:field="*{idShow}" />
 
             <div class="form-row" >
-              <label for="name">Tên phim</label>
-              <input type="text" id="name" name="nameFilm"  required th:text="*{nameFilm}" >
+              <label for="join_datepicker"> Ngày chiếu</label>
+              <input type="datetime-local" class="start" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateShow" th:value="*{dateShow}" >
             </div>
 
             <div class="form-row" >
-              <label for="category">Thể loại</label>
+              <label for="join_datepicker1"> Giờ bắt đầu</label>
+              <input type="datetime-local" class="start" placeholder="HH:mm" id="join_datepicker1" name="start" th:value="*{start}" >
+            </div>
 
-              <select id="category" name="category.idCategory" required th:field="*{category}">
-                <!-- Populate the options with cinema data -->
-                <option th:each="category : ${categories}" th:value="${category.idCategory}" th:text="${category.nameCategory}"></option>
+            <div class="form-row" >
+              <label for="join_datepicker2">Giờ kết thúc</label>
+              <input type="datetime-local" class="end" placeholder="HH:mm" id="join_datepicker2" name="end" th:value="*{end}" >
+            </div>
+
+
+
+            <div class="form-row" >
+              <label for="cinema">Rạp</label>
+              <select id="cinema" name="cinemaEntity.idCinema" th:field="*{cinemaEntity}">
+<!--                <option value="" selected disabled>Chọn rạp</option> &lt;!&ndash; Option mặc định &ndash;&gt;-->
+                <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
               </select>
 
-              <!--              <input type="text" id="nameCinema" name="nameCinema" required th:text="*{cinemaEntity.getNameCinema()}">-->
+              <div>
+
+                <div class="form-row" >
+                  <label for="room">Phòng chiếu</label>
+
+                  <select id="room" name="cinemaRoomEntity.idCinemaRoom" th:field="*{cinemaRoomEntity}" required>
+<!--                    <option value="" selected disabled>Chọn phòng</option> &lt;!&ndash; Option mặc định &ndash;&gt;-->
+                    <option th:each="room : ${rooms}" th:value="${room.idCinemaRoom}" th:text="${room.nameCinemaRoom}" th:data-cinema-id="${room.cinemaEntity.idCinema}"></option>
+                  </select>
+
+                  <div>
+
+                    <div class="form-row" >
+                      <label for="name">Tên phim</label>
+
+                      <select id="name" name="filmEntity.idFilm" th:field="*{filmEntity}" required>
+                        <!-- Populate the options with cinema data -->
+                        <option th:each="film : ${films}" th:value="${film.idFilm}" th:text="${film.nameFilm}"></option>
+                      </select>
+                      <div>
+
+
+                        <input type="submit" value="Lưu" class="submit">
+
+                        <script>
+
+                          // Lấy thẻ select của rạp và phòng chiếu
+                          const cinemaSelect = document.getElementById("cinema");
+                          const roomSelect = document.getElementById("room");
+
+                          // Sự kiện khi thay đổi giá trị của select "Rạp"
+                          cinemaSelect.addEventListener("change", function () {
+                            const selectedCinemaId = cinemaSelect.value;
+
+                            // Lặp qua danh sách phòng chiếu và hiển thị chỉ những phòng thuộc rạp được chọn
+                            const roomOptions = roomSelect.querySelectorAll("option");
+                            roomOptions.forEach(function (option) {
+                              const cinemaId = option.getAttribute("data-cinema-id");
+                              if (cinemaId === selectedCinemaId || selectedCinemaId === "") {
+                                option.style.display = "block"; // Hiển thị phòng chiếu
+                              } else {
+                                option.style.display = "none"; // Ẩn phòng chiếu
+                              }
+                            });
+                          });
+                        </script>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="form-row" >
-              <label for="time">Thời lượng</label>
-              <input type="text" id="time" name="time"   th:text="*{time}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateStart" th:text="*{dateStart}" >
-            </div>
-            <div class="form-row" >
-              <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker1" name="dateEnd" th:text="*{dateEnd}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="introduce">Giới thiệu</label>
-              <input type="text" id="introduce" name="introduce"   th:text="*{introduce}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="trailer">Trailer</label>
-              <input type="text" id="trailer" name="trailer"   th:text="*{trailer}">
-            </div>
-
-            <div class="form-row" >
-              <label for="rating">Xếp hạng</label>
-              <input type="text" id="rating" name="rating"   th:text="*{rating}" >
-            </div>
-
-            <div class="form-row" >
-              <label for="image">Hình ảnh</label>
-              <input type="text" id="image" name="imageFilm"   th:text="*{imageFilm}" >
-            </div>
-
-<!--            <div class="form-row" >-->
-<!--              <label for="status">Trạng thái</label>-->
-<!--              <input type="text" id="status" name="status"   th:text="*{status}" >-->
-<!--            </div>-->
-
-            <input type="submit" value="Lưu" class="submit">
-
           </form>
 
         </div>

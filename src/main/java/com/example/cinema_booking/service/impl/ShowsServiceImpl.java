@@ -20,14 +20,14 @@ public class ShowsServiceImpl implements ShowsService {
     private ShowsRepository showsRepository;
 
     @Override
-    public ShowsEntity createShow(ShowsEntity show) throws ScheduleConflictException {
+    public ShowsEntity createShow(ShowsEntity shows) throws ScheduleConflictException {
         // Kiểm tra trùng lịch chiếu
-        if (isScheduleConflict(show)) {
+        if (isScheduleConflict(shows)) {
             throw new ScheduleConflictException("Lịch chiếu bị trùng");
         }
 
         // Lưu ShowEntity vào cơ sở dữ liệu
-        return showsRepository.save(show);
+        return showsRepository.save(shows);
     }
 
     @Override

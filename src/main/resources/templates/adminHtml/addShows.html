@@ -15,6 +15,38 @@
   <link href="https://fonts.gstatic.com" rel="stylesheet">
   <link rel="stylesheet" href="../../static/css/cssAdmin/addCustomer.css">
 
+  <script>
+    // Đặt sự kiện "change" cho rạp chiếu
+    document.getElementById("nameCinema").addEventListener("change", function () {
+      // Lấy giá trị của rạp chiếu được chọn
+      var selectedCinemaId = this.value;
+
+      // Tạo một yêu cầu AJAX để lấy danh sách phòng chiếu
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/admin/roomList?cinemaId=" + selectedCinemaId, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Xóa tất cả các option cũ trong danh sách phòng chiếu
+          var selectCinemaRoom = document.getElementById("nameCinemaRoom");
+          selectCinemaRoom.innerHTML = "";
+
+          // Parse JSON response từ máy chủ
+          var rooms = JSON.parse(xhr.responseText);
+
+          // Tạo option mới cho mỗi phòng chiếu
+          rooms.forEach(function (room) {
+            var option = document.createElement("option");
+            option.value = room.nameCinemaRoom;
+            option.text = room.nameCinemaRoom;
+            selectCinemaRoom.appendChild(option);
+          });
+        }
+      };
+      xhr.send();
+    });
+  </script>
+
+
 </head>
 <body>
 <!-- SIDEBAR -->
@@ -170,15 +202,6 @@
             </div>
 
             <div class="form-row" >
-              <label>Tên phim</label>
-<!--              <input type="text" id="name" name="categoryDesc"  required th:text="*{filmEntity}" >-->
-              <select id="nameFilm" name="cinema.idCinema" th:field="*{filmEntity}" required>
-                <!-- Populate the options with cinema data -->
-                <option th:each="film: ${films}" th:value="${film.idFilm}" th:text="${film.nameFilm}"></option>
-              </select>
-            </div>
-
-            <div class="form-row" >
               <label>Tên rạp</label>
 <!--              <input type="text" id="cinema" name="categoryDesc"  required th:text="*{cinemaEntity}" >-->
               <select id="nameCinema" name="cinema.idCinema" th:field="*{cinemaEntity}" required>
@@ -187,14 +210,21 @@
               </select>
             </div>
 
-
-
             <div class="form-row" >
               <label>Tên phòng</label>
 <!--              <input type="text" id="room" name="categoryDesc"  required th:text="*{cinemaRoomEntity}" >-->
               <select id="nameCinemaRoom" name="cinema.idCinema" th:field="*{cinemaRoomEntity}" required>
                 <!-- Populate the options with cinema data -->
                 <option th:each="cinemaRoome : ${rooms}" th:value="${cinemaRoome.idCinemaRoom}" th:text="${cinemaRoome.nameCinemaRoom}"></option>
+              </select>
+            </div>
+
+            <div class="form-row" >
+              <label>Tên phim</label>
+              <!--              <input type="text" id="name" name="categoryDesc"  required th:text="*{filmEntity}" >-->
+              <select id="nameFilm" name="cinema.idCinema" th:field="*{filmEntity}" required>
+                <!-- Populate the options with cinema data -->
+                <option th:each="film: ${films}" th:value="${film.idFilm}" th:text="${film.nameFilm}"></option>
               </select>
             </div>
             <input type="submit" value="Lưu" class="submit">

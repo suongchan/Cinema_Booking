@@ -52,9 +52,9 @@ public class ShowsController {
 
 
     @PostMapping("/addShow")
-    public ResponseEntity<?> createShow(@RequestBody ShowsEntity show) {
+    public ResponseEntity<?> createShow(@RequestBody ShowsEntity shows) {
         try {
-            ShowsEntity createdShow = showsService.createShow(show);
+            ShowsEntity createdShow = showsService.createShow(shows);
             return ResponseEntity.ok(createdShow);
         } catch (ScheduleConflictException e) {
             return ResponseEntity.badRequest().body("Lịch chiếu bị trùng");

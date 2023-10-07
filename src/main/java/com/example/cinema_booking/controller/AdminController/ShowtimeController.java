@@ -78,6 +78,7 @@ public class ShowtimeController {
         ShowtimeEntity showtimeEntity = new ShowtimeEntity();
         showtimeEntity.setStart(showtime.getStart());
         showtimeEntity.setEnd(showtime.getEnd());
+        showtimeEntity.setDateShow(showtime.getDateShow());
 
         // Lấy đối tượng CinemaEntity từ dịch vụ hoặc repository
         CinemaEntity cinemaEntity = cinemaService.getCinemaById(showtime.getCinemaEntity().getIdCinema());

@@ -27,7 +27,7 @@ public class CinemaRoomController {
     private ChairService chairService;
 
     @GetMapping("roomList")
-    public String listFilm(Model model) {
+    public String listRoom(Model model) {
         List<CinemaRoomEntity> room = roomService.getAllRoom();
         model.addAttribute("rooms", room);
         return "adminHtml/adminRoomCinema";

@@ -30,18 +30,17 @@ public class FilmController {
     }
 
     @GetMapping("addFilmPage")
-    public String addFilmPage(Model model, Film film) {
+    public String addFilmPage(Model model) {
         List<CategoryEntity> categories = categoryService.getAllCategory();
-        model.addAttribute("films", film);
+        model.addAttribute("filmEntity", new FilmEntity());
         model.addAttribute("categories", categories);
         return "adminHtml/addFilm"; // Trả về trang thêm phim (addFilm.html)
     }
 
-    @PostMapping("addFilm")
-    public String addFilm(@ModelAttribute("films") FilmEntity film) {
-
-        filmService.addFilm(film);
-
+    @PostMapping("/addFilm")
+    public String addFilm(@ModelAttribute FilmEntity filmEntity) {
+        filmEntity.setStatus(true);
+        filmService.addFilm(filmEntity);
         return "redirect:/admin/filmList";
     }
 

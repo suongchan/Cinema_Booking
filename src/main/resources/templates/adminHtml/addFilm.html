@@ -157,18 +157,18 @@
         </div>
         <div class="taikhoan-body">
 
-          <form class="form-containers"  th:action="@{/admin/addFilm}" method="POST" th:object="${films}">
+          <form class="form-containers"  th:action="@{/admin/addFilm}" method="POST" th:object="${filmEntity}">
             <input type="hidden" name="id" value="0">
 
             <div class="form-row" >
               <label for="name">Tên phim</label>
-              <input type="text" id="name" name="nameFilm"  required th:text="*{nameFilm}" >
+              <input type="text" id="name" name="nameFilm"  required th:field="*{nameFilm}" >
             </div>
 
             <div class="form-row" >
               <label for="category">Thể loại</label>
 
-              <select id="category" name="category.idCategory" required th:field="*{category}">
+              <select id="category" name="category.idCategory" required th:field="*{categoryEntity}">
                 <!-- Populate the options with cinema data -->
                 <option th:each="category : ${categories}" th:value="${category.idCategory}" th:text="${category.nameCategory}"></option>
               </select>
@@ -178,42 +178,37 @@
 
             <div class="form-row" >
               <label for="time">Thời lượng</label>
-              <input type="text" id="time" name="time"   th:text="*{time}" >
+              <input type="text" id="time" name="time" th:field="*{time}" >
             </div>
 
             <div class="form-row" >
               <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateStart" th:text="*{dateStart}" >
+              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateStart" th:field="*{dateStart}" >
             </div>
             <div class="form-row" >
               <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker1" name="dateEnd" th:text="*{dateEnd}" >
+              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker1" name="dateEnd" th:field="*{dateEnd}" >
             </div>
 
             <div class="form-row" >
               <label for="introduce">Giới thiệu</label>
-              <input type="text" id="introduce" name="introduce"   th:text="*{introduce}" >
+              <input type="text" id="introduce" name="introduce" th:field="*{introduce}" >
             </div>
 
             <div class="form-row" >
               <label for="trailer">Trailer</label>
-              <input type="text" id="trailer" name="trailer"   th:text="*{trailer}">
+              <input type="text" id="trailer" name="trailer" th:field="*{trailer}">
             </div>
 
             <div class="form-row" >
               <label for="rating">Xếp hạng</label>
-              <input type="text" id="rating" name="rating"   th:text="*{rating}" >
+              <input type="text" id="rating" name="rating" th:field="*{rating}" >
             </div>
 
             <div class="form-row" >
               <label for="image">Hình ảnh</label>
-              <input type="text" id="image" name="imageFilm"   th:text="*{imageFilm}" >
+              <input type="text" id="image" name="imageFilm" th:field="*{imageFilm}" >
             </div>
-
-<!--            <div class="form-row" >-->
-<!--              <label for="status">Trạng thái</label>-->
-<!--              <input type="text" id="status" name="status"   th:text="*{status}" >-->
-<!--            </div>-->
 
             <input type="submit" value="Lưu" class="submit">
 

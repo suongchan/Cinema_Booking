@@ -183,7 +183,11 @@
 
             <div class="form-row" >
               <label for="join_datepicker">Ngày khởi chiếu</label>
-              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="showtime" th:text="*{showtime}" >
+              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateStart" th:value="*{dateStart}" >
+            </div>
+            <div class="form-row" >
+              <label for="join_datepicker">Ngày khởi chiếu</label>
+              <input type="date" class="showtime" placeholder="yyyy-MM-dd" id="join_datepicker1" name="dateEnd" th:value="*{dateEnd}" >
             </div>
 
             <div class="form-row" >
@@ -206,10 +210,10 @@
               <input type="text" id="image" name="imageFilm"   th:value="*{imageFilm}" >
             </div>
 
-            <div class="form-row" >
-              <label for="status">Trạng thái</label>
-              <input type="text" id="status" name="status"   th:value="*{status}" >
-            </div>
+<!--            <div class="form-row" >-->
+<!--              <label for="status">Trạng thái</label>-->
+<!--              <input type="text" id="status" name="status"   th:value="*{status}"  >-->
+<!--            </div>-->
 
             <input type="submit" value="Lưu" class="submit">
 

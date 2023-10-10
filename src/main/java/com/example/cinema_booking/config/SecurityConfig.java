@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.io.IOException;
+
 @Configuration
 @EnableWebSecurity
 
@@ -26,42 +28,26 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                                auth.requestMatchers("/admin*")
+                                auth.requestMatchers("/admin/**")
                                         .hasRole("ADMIN")
-                                        .requestMatchers("/staff*")
+                                        .requestMatchers("/staff/**")
                                         .hasRole("STAFF")
-                                        .requestMatchers("/customer*")
+                                        .requestMatchers("/customer/**")
                                         .hasRole("CUSTOMER")
 //                        .requestMatchers("/anonymous*")
 //                        .anonymous()
                                         .requestMatchers("/login/**","/register", "/home_customer*", "/static/**", "/film/**")
                                         .permitAll()
-//                                        .requestMatchers("/css/cssAdmin/**")
-//                                        .permitAll()
-//                                        .requestMatchers("/css/cssCustomer/**")
-//                                        .permitAll()
-//                                        .requestMatchers("/image/**")
-//                                        .permitAll()
-//                                        .requestMatchers("/ImageAdmin/**")
-//                                        .permitAll()
                                         .anyRequest()
                                         .authenticated()
                 )
-                .formLogin(formLogin -> formLogin.loginPage("/login/**")
-                                .loginProcessingUrl("/perform_login")
-//                        .defaultSuccessUrl("/admin")
-                                .successHandler(authenticationSuccessHandler())
-//                        .failureUrl("/login?error=true")
-                                .failureHandler(authenticationFailureHandler())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login") // Trang đăng nhập chung
+                        .loginProcessingUrl("/perform_login")
+                        .successHandler(authenticationSuccessHandler())
+                        .failureHandler(authenticationFailureHandler())
                 )
-                .logout(logout -> logout.logoutUrl("/perform_logout")
-                                .logoutSuccessUrl("/login/customer")
-                                .invalidateHttpSession(true)
-                                .deleteCookies("JSESSIONID")
 
-
-//                        .logoutSuccessHandler(logoutSuccessHandler())
-                )
 //                .rememberMe(me -> {}) //TODO search them tren mang
         ;
 

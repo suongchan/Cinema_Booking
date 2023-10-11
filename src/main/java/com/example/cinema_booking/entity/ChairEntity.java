@@ -2,9 +2,15 @@ package com.example.cinema_booking.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Chairs")
+@Getter
+@Setter
 public class ChairEntity {
 
     @Id
@@ -21,35 +27,8 @@ public class ChairEntity {
     @JoinColumn(name = "id_cinema")
     private CinemaEntity cinemaEntity;
 
-    public CinemaEntity getCinemaEntity() {
-        return cinemaEntity;
-    }
+    @OneToMany(mappedBy = "chairEntity", cascade = CascadeType.ALL)
+    private List<OrderDetailTicketEntity> orderDetailTicketEntities;
 
-    public void setCinemaEntity(CinemaEntity cinemaEntity) {
-        this.cinemaEntity = cinemaEntity;
-    }
 
-    public CinemaRoomEntity getCinemaRoom() {
-        return cinemaRoom;
-    }
-
-    public void setCinemaRoom(CinemaRoomEntity cinemaRoom) {
-        this.cinemaRoom = cinemaRoom;
-    }
-
-    public Long getIdChair() {
-        return idChair;
-    }
-
-    public void setIdChair(Long idChair) {
-        this.idChair = idChair;
-    }
-
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
-    }
 }

@@ -19,17 +19,4 @@ public class LoginController {
         return "customerHtml/loginCustomer";
     }
 
-    @GetMapping("")
-    public String login(HttpServletRequest request) {
-        String servletPath = request.getServletPath();
-        if (servletPath.startsWith("/admin")) {
-            return "redirect:/login/admin_staff";
-        } else if (servletPath.startsWith("/customer")) {
-            return "redirect:/login/customer";
-        } else if (servletPath.startsWith("/staff")) {
-            return "redirect:/login/staff";
-        } else {
-            return "redirect:/login/customer";
-        }
-    }
 }

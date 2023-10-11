@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "shows")
@@ -33,6 +34,14 @@ public class ShowtimeEntity {
     @ManyToOne
     @JoinColumn(name = "idCinemaRoom")
     private CinemaRoomEntity cinemaRoomEntity;
+
+    @OneToMany(mappedBy = "showtimeEntity", cascade = CascadeType.ALL)
+    private List<OrderEntity> orderEntities;
+
+    @OneToMany(mappedBy = "showtimeEntity", cascade = CascadeType.ALL)
+    private List<OrderDetailTicketEntity> orderDetailTicketEntities;
+
+
 
 //    @ManyToOne
 //    @JoinColumn(name = "idCinema")

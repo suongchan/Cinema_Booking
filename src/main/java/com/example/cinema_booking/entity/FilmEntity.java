@@ -41,6 +41,8 @@ public class FilmEntity {
 
 
 
+
+
 //    @DateTimeFormat(pattern ="yyyy-MM-dd")
 //    private Date showtime;
 

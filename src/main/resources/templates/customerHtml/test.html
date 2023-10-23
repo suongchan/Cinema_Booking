@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <header>
+        <span>
+      <li class="nav-item dropdown">
+                <select id="cinema" name="cinema.idCinema" th:field="*{cinemas}">
+                <!-- Populate the options with cinema data -->
+                <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
+              </select>
+      </li>
+    </span>
+
+
+      <div class="dateTime" th:each="showtime,iterStat : ${showtimeForFilm}" th:id="'showtimeList-' + ${showtime.cinemaEntity.idCinema}" th:attr="data-showtime-id=${showtime.idShow}">
+          <!-- Lọc lịch chiếu theo rạp và sắp xếp theo ngày -->
+          <ul class="date">
+              <li th:text="${showtime.dateShow}" class="dateShow"></li>
+          </ul>
+          <ul class="date">
+              <li class="start" th:text="${showtime.start}">
+                  <a href="#" class="showtime-link" th:text="${showtime.start}"></a>
+              </li>
+          </ul>
+      </div>
+
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              const selectCinema = document.getElementById('cinema');
+              const dateTimeDivs = document.querySelectorAll('.dateTime');
+
+              const dateShowStartMap = {};
+              const dateShowStartIdMap = {}; // This map will store id_show values for each start time
+
+              dateTimeDivs.forEach(div => {
+                  const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
+                  const dateShow = div.querySelector('.dateShow').textContent;
+                  const start = div.querySelector('.start').textContent;
+                  const showtimeId = div.getAttribute('data-showtime-id');
+
+                  if (!dateShowStartMap[cinemaId]) {
+                      dateShowStartMap[cinemaId] = {};
+                      dateShowStartIdMap[cinemaId] = {};
+                  }
+
+                  if (!dateShowStartMap[cinemaId][dateShow]) {
+                      dateShowStartMap[cinemaId][dateShow] = [];
+                      dateShowStartIdMap[cinemaId][dateShow] = {};
+                  }
+
+                  if (!dateShowStartMap[cinemaId][dateShow].includes(start)) {
+                      dateShowStartMap[cinemaId][dateShow].push(start);
+                      dateShowStartIdMap[cinemaId][dateShow][start] = showtimeId;
+                  }
+              });
+
+              let lastSelectedCinemaId;
+
+              function convertTimeToComparableDate(timeString) {
+                  const [hours, minutes] = timeString.split(":");
+                  return new Date(1970, 0, 1, hours, minutes); // Using a fixed date and only varying the time for comparison
+              }
+              function displayTimesForCinema(cinemaId) {
+                  if (lastSelectedCinemaId === cinemaId) {
+                      return;
+                  }
+                  lastSelectedCinemaId = cinemaId;
+
+                  dateTimeDivs.forEach(div => {
+                      div.style.display = 'none';
+                      const startUl = div.querySelector('.date .start');
+                      while (startUl.firstChild) {
+                          startUl.removeChild(startUl.firstChild);
+                      }
+                  });
+
+                  let displayedDates = {};
+
+                  dateTimeDivs.forEach(div => {
+                      const divCinemaId = div.getAttribute('id').replace('showtimeList-', '');
+                      const dateShow = div.querySelector('.dateShow').textContent;
+
+                      if (Number(divCinemaId) === Number(cinemaId)) {
+                          if (!displayedDates[dateShow]) {
+                              div.style.display = 'block';
+                              const startUl = div.querySelector('.date .start');
+                              const commonHref = `/customer/listChair/`;
+
+                              // Sắp xếp thời gian tăng dần trước khi hiển thị
+                              dateShowStartMap[cinemaId][dateShow].sort((a, b) => {
+                                  return convertTimeToComparableDate(a) - convertTimeToComparableDate(b);
+                              }).forEach(start => {
+                                  const startLi = document.createElement('a');
+                                  startLi.textContent = start;
+                                  startLi.href = commonHref + dateShowStartIdMap[cinemaId][dateShow][start];
+                                  startUl.appendChild(startLi);
+                              });
+
+                              displayedDates[dateShow] = true;
+                          }
+                      }
+                  });
+              }
+              selectCinema.addEventListener('change', function () {
+                  const selectedCinemaId = this.value;
+                  displayTimesForCinema(selectedCinemaId);
+              });
+
+              displayTimesForCinema(selectCinema.options[selectCinema.selectedIndex].value);
+          });
+
+      </script>
+
+
+
+      <!--            <script>-->
+<!--          document.addEventListener('DOMContentLoaded', function () {-->
+<!--              const selectCinema = document.getElementById('cinema');-->
+<!--              const dateTimeDivs = document.querySelectorAll('.dateTime');-->
+
+<!--              const defaultCinemaId = selectCinema.options[0].value;-->
+<!--                  dateTimeDivs.forEach(div => {-->
+<!--                      const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
+<!--                      if (Number(cinemaId) === Number(defaultCinemaId)) {-->
+<!--                          div.style.display = 'block';-->
+<!--                      } else {-->
+<!--                          div.style.display = 'none';-->
+<!--                      }-->
+<!--                  });-->
+
+
+<!--              selectCinema.addEventListener('change', function () {-->
+<!--                  const selectedCinemaId = this.value;-->
+
+<!--                  // Xóa tất cả phần tử .dateTime-->
+<!--                  dateTimeDivs.forEach(div => {-->
+<!--                      div.style.display = 'none';-->
+<!--                  });-->
+
+<!--                  // Tạo một đối tượng để lưu trữ thông tin về dateShow và start-->
+<!--                  const dateShowStartMap = {};-->
+
+<!--                  // Thu thập thông tin và lưu trữ vào đối tượng-->
+<!--                  dateTimeDivs.forEach(div => {-->
+<!--                      const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
+<!--                      if (Number(cinemaId) === Number(selectedCinemaId)) {-->
+<!--                          const dateShow = div.querySelector('.dateShow').textContent;-->
+<!--                          const start = div.querySelector('.start').textContent;-->
+
+<!--                          if (!dateShowStartMap[dateShow]) {-->
+<!--                              dateShowStartMap[dateShow] = start;-->
+<!--                          } else {-->
+<!--                              dateShowStartMap[dateShow] += ', ' + start;-->
+<!--                          }-->
+<!--                      }-->
+<!--                  });-->
+
+
+<!--                  // Hiển thị thông tin đã thu thập-->
+<!--                  let displayedDates = {}; // To keep track of displayed dateShow values-->
+<!--                  Object.keys(dateShowStartMap).forEach(dateShow => {-->
+<!--                      const startTimes = dateShowStartMap[dateShow];-->
+<!--                      dateTimeDivs.forEach(div => {-->
+<!--                          const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
+<!--                          if (Number(cinemaId) === Number(selectedCinemaId) && div.querySelector('.dateShow').textContent === dateShow) {-->
+<!--                              if (!displayedDates[dateShow]) {-->
+<!--                                  div.style.display = 'block';-->
+<!--                                  displayedDates[dateShow] = true;-->
+<!--                              }-->
+<!--                              const startUl = div.querySelector('.date .start');-->
+<!--                              startUl.textContent = startTimes;-->
+<!--                          }-->
+<!--                      });-->
+<!--                  });-->
+
+
+<!--                  let defaultDates = {};-->
+<!--                  Object.keys(dateShowStartMap).forEach(dateShow => {-->
+<!--                      const startTimes = dateShowStartMap[dateShow].join(', ');-->
+<!--                      dateTimeDivs.forEach(div => {-->
+<!--                          const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
+<!--                          if (Number(cinemaId) === Number(defaultCinemaId) && div.querySelector('.dateShow').textContent === dateShow) {-->
+<!--                              console.log("dskjghks,ad")-->
+<!--                              if (!defaultDates[dateShow]) {-->
+<!--                                  div.style.display = 'block';-->
+<!--                                  defaultDates[dateShow] = true;-->
+<!--                              }-->
+<!--                              const startUl = div.querySelector('.date .start');-->
+<!--                              startUl.textContent = startTimes;-->
+<!--                          }-->
+<!--                      });-->
+
+<!--                  });-->
+<!--              });-->
+<!--              });-->
+<!--      </script>-->
+  </header>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!--      <script>-->
+
+<!--          document.addEventListener('DOMContentLoaded', function () {-->
+<!--              const selectCinema = document.getElementById('cinema');-->
+<!--              const dateTimeDivs = document.querySelectorAll('.dateTime');-->
+
+<!--              selectCinema.addEventListener('change', function () {-->
+<!--                  const selectedCinemaId = this.value;-->
+<!--                  const shownDateShows = {}; // Sử dụng đối tượng này để theo dõi giá trị dateShow đã được hiển thị-->
+
+<!--                  // Xóa tất cả phần tử .dateTime và .dateShow-->
+<!--                  dateTimeDivs.forEach(div => {-->
+<!--                      div.style.display = 'none';-->
+<!--                  });-->
+
+<!--                  // Thu thập thông tin và hiển thị dateShow và start-->
+<!--                  dateTimeDivs.forEach(div => {-->
+<!--                      const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
+<!--                      if (Number(cinemaId) === Number(selectedCinemaId)) {-->
+<!--                          const dateShow = div.querySelector('.dateShow').textContent;-->
+<!--                          if (!shownDateShows[dateShow]) {-->
+<!--                              div.style.display = 'block';-->
+<!--                              shownDateShows[dateShow] = true;-->
+<!--                          }-->
+<!--                          const start = div.querySelector('.start').textContent;-->
+<!--                          div.querySelector('.dateShow').textContent += ' - ' + start;-->
+<!--                      }-->
+<!--                  });-->
+<!--              });-->
+<!--          });-->
+
+
+
+
+
+          // document.addEventListener('DOMContentLoaded', function() {
+          //     const selectCinema = document.getElementById('cinema');
+          //     const dateTimeDivs = document.querySelectorAll('.dateTime');
+          //
+          //     // Mặc định, chọn rạp phim đầu tiên
+          //     const selectedCinemaId = selectCinema.value;
+          //
+          //     // Hiển thị `dateShow` của rạp phim đầu tiên
+          //     dateTimeDivs.forEach(div => {
+          //         const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
+          //         if (Number(cinemaId) === Number(selectedCinemaId)) {
+          //             div.style.display = 'block';
+          //         } else {
+          //             div.style.display = 'none';
+          //         }
+          //     });
+          //
+          //     selectCinema.addEventListener('change', function () {
+          //         const selectedCinemaId = this.value;
+          //
+          //         // Ẩn tất cả các thẻ .dateTime
+          //         dateTimeDivs.forEach(div => {
+          //             const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
+          //             if (Number(cinemaId) === Number(selectedCinemaId)) {
+          //                 div.style.display = 'block';
+          //             } else {
+          //                 div.style.display = 'none';
+          //             }
+          //         });
+          //     });
+          // });
+<!--      </script>-->
+<!--  </header>-->
+<!--</body>-->
+<!--</html>-->

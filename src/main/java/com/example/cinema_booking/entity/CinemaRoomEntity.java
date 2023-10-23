@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,6 @@ public class CinemaRoomEntity {
 
     @OneToMany(mappedBy = "cinemaRoom", cascade = CascadeType.ALL)
     private List<ChairEntity> chairs;
-
 
 
 }

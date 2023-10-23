@@ -34,9 +34,7 @@ public class ShowtimeEntity {
     @JoinColumn(name = "idCinemaRoom")
     private CinemaRoomEntity cinemaRoomEntity;
 
-//    @ManyToOne
-//    @JoinColumn(name = "idCinema")
-//    private CinemaRoomEntity cinemaRoom;
+
 
 
 }

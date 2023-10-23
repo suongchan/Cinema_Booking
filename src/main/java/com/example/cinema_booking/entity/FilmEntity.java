@@ -35,11 +35,8 @@ public class FilmEntity {
 
     private LocalDate dateEnd;
 
-    @OneToMany(mappedBy = "filmEntity", fetch = FetchType.EAGER)
-    private List<ShowtimeEntity> showsEntities;
-
-
-
+    @OneToMany(mappedBy = "filmEntity", fetch = FetchType.LAZY)
+    private List<ShowtimeEntity> showtimeEntity;
 
 //    @DateTimeFormat(pattern ="yyyy-MM-dd")
 //    private Date showtime;

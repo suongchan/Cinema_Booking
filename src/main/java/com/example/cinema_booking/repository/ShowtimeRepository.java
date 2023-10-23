@@ -1,5 +1,6 @@
 package com.example.cinema_booking.repository;
 
+import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.entity.ShowtimeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,9 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 public interface ShowtimeRepository extends JpaRepository<ShowtimeEntity, Long> {
@@ -28,4 +27,9 @@ public interface ShowtimeRepository extends JpaRepository<ShowtimeEntity, Long> 
     );
 
 
+    List<ShowtimeEntity> findByFilmEntityIdFilm(Long id);
+
+    List<ShowtimeEntity> findByFilmEntityIdFilmAndCinemaEntityIdCinema(Long filmId, Long idCinema);
+
+    List<ShowtimeEntity> findByCinemaEntityIdCinema(Long idCinema);
 }

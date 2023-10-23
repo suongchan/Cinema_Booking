@@ -1,5 +1,6 @@
 package com.example.cinema_booking.service.impl;
 
+import com.example.cinema_booking.entity.ChairEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.repository.ChairRepository;
 import com.example.cinema_booking.repository.RoomRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +41,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public CinemaRoomEntity addRoom(CinemaRoomEntity cinemaRoom) {
+
         return roomRepository.save(cinemaRoom);
     }
 
@@ -85,6 +88,7 @@ public class RoomServiceImpl implements RoomService {
             throw new UserPrincipalNotFoundException("Không tìm thấy khách hàng với ID " + id);
         }
     }
+
 
     @Override
     public Optional<CinemaRoomEntity> getRoomByCinemaId(Long id) {

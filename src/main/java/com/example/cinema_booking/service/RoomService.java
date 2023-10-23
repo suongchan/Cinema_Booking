@@ -20,4 +20,5 @@ public interface RoomService {
 
     Optional<CinemaRoomEntity> getRoomByCinemaId(Long id);
 
+
 }

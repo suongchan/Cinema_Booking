@@ -177,7 +177,7 @@
               <td></td>
             </tr>
             <tr class="cinema" th:each="service:${services}">
-              <td th:text="*{service.image}"></td>
+              <td> <img class="img-service" th:src="@{'/images/' + ${service.image}}" alt="java"> </td>
               <td th:text="*{service.nameService}"></td>
               <td th:text="*{service.price}"></td>
               <td th:text="*{service.status}"></td>

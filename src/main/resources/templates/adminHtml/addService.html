@@ -157,11 +157,11 @@
         </div>
         <div class="taikhoan-body">
 
-          <form class="form-containers"  th:action="@{/admin/addService}" method="POST" th:object="${services}">
+          <form class="form-containers"  th:action="@{/admin/addService}" method="POST" th:object="${services}" enctype="multipart/form-data">
             <input type="hidden" name="id" value="0">
             <div class="form-row" >
-              <label for="image">Hình ảnh</label>
-              <input type="text" id="image" name="image" required th:text="*{image}">
+              <label for="input-file">Hình ảnh</label>
+              <input type="file" id="input-file" name="file" required th:text="*{image}">
             </div>
 
             <div class="form-row" >

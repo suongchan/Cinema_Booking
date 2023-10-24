@@ -7,10 +7,17 @@ import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.service.CategoryService;
 import com.example.cinema_booking.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
@@ -20,6 +27,9 @@ public class CinemaController {
 
     @Autowired
     private CinemaService cinemaService;
+
+    @Value("${imagePath}")
+    private String imagePath;
 
     @GetMapping("cinemaList")
     public String listCinema(Model model) {
@@ -33,8 +43,21 @@ public class CinemaController {
         return "adminHtml/addCinema";
     }
     @PostMapping("addCinema")
-    public String addCinema(@ModelAttribute("cinema")Cinema cinema)
+    public String addCinema(@ModelAttribute("cinema")Cinema cinema, @RequestParam("file") MultipartFile file, Model model) throws IOException, URISyntaxException
     {
+        String message = "";
+        try {
+            File file1 = new File(imagePath + file.getOriginalFilename());
+            try (OutputStream os = new FileOutputStream(file1)) {
+                os.write(file.getBytes());
+            }
+
+            message = "Uploaded the file successfully: " +file.getOriginalFilename();
+            model.addAttribute("message", message);
+        } catch (Exception e){
+            message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+            model.addAttribute("message", message);
+        }
         Long id = cinemaService.createCinema(cinema);
         cinema.setIdCinema(id);
         return "redirect:/admin/cinemaList";

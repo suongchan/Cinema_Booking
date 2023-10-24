@@ -160,10 +160,19 @@
           <form class="form-containers"  th:action="@{/admin/saveEditedNews}" method="POST" th:object="${news}">
             <input type="hidden" th:field="*{idNew}" />
 
+
+
             <div class="form-row" >
-              <label for="image">Hình ảnh</label>
-              <input type="text" id="image" name="imageNew"  required th:value="*{imageNew}" >
+              <label for="input-file">Hình ảnh</label>
+              <input type="file" id="input-file" name="file"  required th:value="*{imageNew}">
             </div>
+
+<!--            <div class="form-row" >-->
+<!--              <label for="input-file">Hình ảnh</label>-->
+<!--              <td>-->
+<!--                <input id="input-file" type="file" name="file">-->
+<!--              </td>-->
+<!--            </div>-->
 
             <div class="form-row" >
               <label for="title">Tiêu đề</label>

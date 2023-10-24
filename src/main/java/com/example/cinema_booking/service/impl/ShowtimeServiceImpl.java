@@ -73,8 +73,8 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     }
 
     @Override
-    public Optional<ShowtimeEntity> getShowtimeById(Long id) {
-     return showtimeRepository.findById(id);
+    public ShowtimeEntity getShowtimeById(Long id) {
+     return showtimeRepository.getById(id);
     }
 
 }

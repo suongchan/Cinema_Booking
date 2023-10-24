@@ -4,7 +4,6 @@ import com.example.cinema_booking.entity.ShowtimeEntity;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 public interface ShowtimeService {
 
@@ -17,5 +16,5 @@ public interface ShowtimeService {
 
     ShowtimeEntity update(ShowtimeEntity showtime);
 
-    Optional<ShowtimeEntity> getShowtimeById(Long id);
+    ShowtimeEntity getShowtimeById(Long id);
 }

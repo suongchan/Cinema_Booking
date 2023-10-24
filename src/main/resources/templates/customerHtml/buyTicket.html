@@ -55,10 +55,11 @@
     <div class="controller_main">
       <div class="controller_film">
         <div class="film">
+            <input type="hidden" id="filmId" th:value="${films.idFilm}">
             <h3 th:text="${films.nameFilm}"></h3>
               <p th:text="${films.categoryEntity.nameCategory}"></p>
               <div class="date_Time">
-           <span class="date">
+           <span class="show">
             <img src="../../static/image/date.png">
              <p th:text="${films.dateStart}"></p>
            </span>
@@ -81,32 +82,134 @@
     </span>
     <span>
       <li class="nav-item dropdown">
-                <select id="nameCinema" name="cinema.idCinema" th:field="*{cinemas}" required>
+                <select id="cinema" name="cinema.idCinema" th:field="*{cinemas}">
                 <!-- Populate the options with cinema data -->
                 <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
               </select>
       </li>
     </span>
   </div>
-    <div class="container_showtime">
-      <div class="showtime">
-        <div class="column column_left">
-          <div class="dateTime" th:each="showtime : ${showtimes}">
-          <span class="date">
-            <img src="../../static/image/date.png">
-            <p th:text="${showtime.dateShow}"></p>
-          </span>
-<!--          <input type="button" class="time" th:value="${}" >-->
 
-          </div>
-        </div>
+          <div class="container_showtime">
+      <div class="showtime">
+        <div class="column column_left" >
+            <div class="container_dateTime">
+            <div class="dateTime" th:each="showtime,iterStat : ${showtimeForFilm}" th:id="'showtimeList-' + ${showtime.cinemaEntity.idCinema}"  th:attr="data-showtime-id=${showtime.idShow}">
+                    <ul class="date">
+                        <li><img src="../../static/image/date.png"></li>
+                        <li id="dateShow" th:text="${showtime.dateShow}" class="dateShow"></li>
+                    </ul>
+
+                   <ul class="date">
+                       <li class="start" th:text="${showtime.start}"></li>
+                    </ul>
+                  </div>
+              </div>
+            </div>
+
+            </div>
+
         <div class="column column_right">
           <img src="../../static/image/bgDetailFilm.png">
         </div>
-      </div>
-    </div>
+  </div>
+
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              const selectCinema = document.getElementById('cinema');
+              const dateTimeDivs = document.querySelectorAll('.dateTime');
+
+              const dateShowStartMap = {};
+              const dateShowStartIdMap = {}; // This map will store id_show values for each start time
+
+              dateTimeDivs.forEach(div => {
+                  const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
+                  const dateShow = div.querySelector('.dateShow').textContent;
+                  const start = div.querySelector('.start').textContent;
+                  const showtimeId = div.getAttribute('data-showtime-id');
+
+                  if (!dateShowStartMap[cinemaId]) {
+                      dateShowStartMap[cinemaId] = {};
+                      dateShowStartIdMap[cinemaId] = {};
+                  }
+
+                  if (!dateShowStartMap[cinemaId][dateShow]) {
+                      dateShowStartMap[cinemaId][dateShow] = [];
+                      dateShowStartIdMap[cinemaId][dateShow] = {};
+                  }
+
+                  if (!dateShowStartMap[cinemaId][dateShow].includes(start)) {
+                      dateShowStartMap[cinemaId][dateShow].push(start);
+                      dateShowStartIdMap[cinemaId][dateShow][start] = showtimeId;
+                  }
+              });
+
+              let lastSelectedCinemaId;
+
+              function convertTimeToComparableDate(timeString) {
+                  const [hours, minutes] = timeString.split(":");
+                  return new Date(1970, 0, 1, hours, minutes); // Using a fixed date and only varying the time for comparison
+              }
+              function displayTimesForCinema(cinemaId) {
+                  if (lastSelectedCinemaId === cinemaId) {
+                      return;
+                  }
+                  lastSelectedCinemaId = cinemaId;
+
+                  dateTimeDivs.forEach(div => {
+                      div.style.display = 'none';
+                      const startUl = div.querySelector('.date .start');
+                      while (startUl.firstChild) {
+                          startUl.removeChild(startUl.firstChild);
+                      }
+                  });
+
+                  let displayedDates = {};
+
+                  dateTimeDivs.forEach(div => {
+                      const divCinemaId = div.getAttribute('id').replace('showtimeList-', '');
+                      const dateShow = div.querySelector('.dateShow').textContent;
+
+                      if (Number(divCinemaId) === Number(cinemaId)) {
+                          if (!displayedDates[dateShow]) {
+                              div.style.display = 'block';
+                              const startUl = div.querySelector('.date .start');
+                              const commonHref = `/customer/listChair/`;
+
+                              // Sắp xếp thời gian tăng dần trước khi hiển thị
+                              dateShowStartMap[cinemaId][dateShow].sort((a, b) => {
+                                  return convertTimeToComparableDate(a) - convertTimeToComparableDate(b);
+                              }).forEach(start => {
+                                  const startLi = document.createElement('a');
+                                  startLi.textContent = start;
+                                  startLi.href = commonHref + dateShowStartIdMap[cinemaId][dateShow][start];
+                                  startUl.appendChild(startLi);
+                              });
+
+                              displayedDates[dateShow] = true;
+                          }
+                      }
+                  });
+              }
+              selectCinema.addEventListener('change', function () {
+                  const selectedCinemaId = this.value;
+                  displayTimesForCinema(selectedCinemaId);
+              });
+
+              displayTimesForCinema(selectCinema.options[selectCinema.selectedIndex].value);
+          });
+
+      </script>
+
+
+
+
+
   </div>
 </nav>
+
+
+
 
 </body>
 </html>

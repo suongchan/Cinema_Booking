@@ -1,8 +1,5 @@
 package com.example.cinema_booking.controller.AdminController;
 
-import com.example.cinema_booking.domain.Cinema;
-import com.example.cinema_booking.domain.Film;
-import com.example.cinema_booking.domain.Showtime;
 import com.example.cinema_booking.entity.*;
 import com.example.cinema_booking.repository.ShowtimeRepository;
 import com.example.cinema_booking.service.CinemaService;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("admin")
@@ -101,7 +97,7 @@ public class ShowtimeController {
 
     @GetMapping("/editShow/{id}")
     public String editShowPage(@PathVariable Long id, Model model) {
-        ShowtimeEntity showtime = showtimeService.getShowtimeById(id).orElse(null);
+        ShowtimeEntity showtime = showtimeService.getShowtimeById(id);
         List<FilmEntity> film = filmService.getAllFilm();
         List<CinemaEntity> cinema = cinemaService.getAllCinema();
         List<CinemaRoomEntity> room = roomService.getAllRoom();

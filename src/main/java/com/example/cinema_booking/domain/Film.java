@@ -21,6 +21,7 @@ public class Film {
     private Long rating;
     private String imageFilm;
     private boolean status;
+    private ShowtimeEntity showtimeEntity;
 
     private LocalDate dateStart;
     private LocalDate dateEnd;

@@ -3,6 +3,7 @@ package com.example.cinema_booking.service.impl;
 import com.example.cinema_booking.entity.ChairEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
+import com.example.cinema_booking.entity.ShowtimeEntity;
 import com.example.cinema_booking.repository.ChairRepository;
 import com.example.cinema_booking.repository.RoomRepository;
 import com.example.cinema_booking.service.ChairService;
@@ -32,6 +33,11 @@ public class ChairServiceImpl implements ChairService {
             chairRepository.save(chairEntity);
             chairEntities.add(chairEntity);
         }
+    }
+
+    @Override
+    public List<ChairEntity> getChairsByShowtime(ShowtimeEntity showtime) {
+        return chairRepository.findByShowtime(showtime); // Giả sử có phương thức findByShowtime trong ChairRepository
     }
 
 }

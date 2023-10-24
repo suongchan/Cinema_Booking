@@ -1,6 +1,7 @@
 package com.example.cinema_booking.domain;
 
 import com.example.cinema_booking.entity.CategoryEntity;
+import com.example.cinema_booking.entity.ShowtimeEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,8 @@ public class Film {
     private LocalDate dateEnd;
     private Long price;
 
+    private ShowtimeEntity showtimeEntity;
+    }
+
 //    @DateTimeFormat(pattern ="yyyy-MM-dd")
 //    private  Date showtime;
-}

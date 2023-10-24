@@ -10,5 +10,4 @@ import java.util.List;
 public interface ChairService {
     void createChair(CinemaRoomEntity cinemaRoom);
 
-    List<ChairEntity> getChairsByShowtime(ShowtimeEntity showtime);
 }

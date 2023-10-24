@@ -16,22 +16,12 @@ public class Chair {
 
     private String nameChair;
 
-    private ShowtimeEntity showtime;
 
     private boolean isOccupied;
-
 
     private CinemaRoomEntity cinemaRoom;
 
     private CinemaEntity cinemaEntity;
 
-    public Chair toChair() {
-        Chair chair = new Chair();
-        chair.setIdChair(this.idChair);
-        chair.setOccupied(this.isOccupied);
-        // Các dòng code khác để sao chép dữ liệu từ ChairEntity sang Chair
-
-        return chair;
-    }
 
 }

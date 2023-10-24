@@ -1,6 +1,7 @@
 package com.example.cinema_booking.controller.AdminController;
 
 import com.example.cinema_booking.domain.CinemaRoom;
+import com.example.cinema_booking.entity.ChairEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.service.ChairService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,7 @@ public class CinemaRoomController {
     }
 
     @GetMapping("addRoom")
-    public String addFilmPage(Model model, CinemaRoom cinemaRoom) {
+    public String addRoomPage(Model model, CinemaRoom cinemaRoom) {
         List<CinemaEntity> cinema = cinemaService.getAllCinema();
         model.addAttribute("rooms", cinemaRoom);
         model.addAttribute("cinemas", cinema);
@@ -49,8 +51,10 @@ public class CinemaRoomController {
     @PostMapping("addRoom")
     public String addFilm(@ModelAttribute("rooms") CinemaRoomEntity cinemaRoom) {
 
-        CinemaRoomEntity cinemaRoomEntity = roomService.addRoom(cinemaRoom);
-        chairService.createChair(cinemaRoomEntity);
+        roomService.addRoom(cinemaRoom);
+
+        chairService.createChair(cinemaRoom);
+
         return "redirect:/admin/roomList";
     }
 

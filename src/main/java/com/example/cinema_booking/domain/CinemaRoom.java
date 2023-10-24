@@ -15,16 +15,9 @@ public class CinemaRoom {
     private Long idCinemaRoom;
     private String nameCinemaRoom;
     private String cinemaRoomDesc;
-    private Chair[][] chairs;
+    private ChairEntity chairs;
     private int numberChair;
 
-    public void setChairs(List<ChairEntity> chairEntities) {
-        this.chairs = convertToChairArray(chairEntities);
-    }
-
-    public Chair[][] getChairs() {
-        return chairs;
-    }
 
     private Chair[][] convertToChairArray(List<ChairEntity> chairEntities) {
         // Kiểm tra xem danh sách ghế có dữ liệu hay không

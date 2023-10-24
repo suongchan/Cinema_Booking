@@ -11,7 +11,7 @@ public class FilmConverter {
         FilmEntity filmEntity = new FilmEntity();
         filmEntity.setNameFilm(film.getNameFilm());
         filmEntity.setTime(film.getTime());
-        filmEntity.setShowtimeEntity((List<ShowtimeEntity>) film.getShowtimeEntity());
+        filmEntity.setShowsEntities((List<ShowtimeEntity>) film.getShowtimeEntity());
         filmEntity.setImageFilm(film.getImageFilm());
         filmEntity.setIntroduce(film.getIntroduce());
         filmEntity.setRating(film.getRating());

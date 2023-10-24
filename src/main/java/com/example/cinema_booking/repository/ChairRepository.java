@@ -1,6 +1,7 @@
 package com.example.cinema_booking.repository;
 
 import com.example.cinema_booking.entity.ChairEntity;
+import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.entity.ShowtimeEntity;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -16,5 +17,4 @@ public interface ChairRepository extends JpaRepository<ChairEntity, Long> {
     @Query("DELETE FROM ChairEntity c WHERE c.cinemaRoom = :cinemaRoom")
     void deleteAllByCinemaRoom(@Param("cinemaRoom") CinemaRoomEntity cinemaRoom);
 
-    List<ChairEntity> findByShowtime(ShowtimeEntity showtime); // Định nghĩa phương thức tìm kiếm theo ShowtimeEntity
 }

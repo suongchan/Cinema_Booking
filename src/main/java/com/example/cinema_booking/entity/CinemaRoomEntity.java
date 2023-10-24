@@ -27,6 +27,4 @@ public class CinemaRoomEntity {
 
     @OneToMany(mappedBy = "cinemaRoom", cascade = CascadeType.ALL)
     private List<ChairEntity> chairs;
-
-
 }

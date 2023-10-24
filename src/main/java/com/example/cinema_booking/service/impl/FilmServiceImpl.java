@@ -52,6 +52,7 @@ public class FilmServiceImpl implements FilmService {
 //            updatedFilm.setShowtime(film.getShowtime());
             updatedFilm.setIntroduce(film.getIntroduce());
             updatedFilm.setTime(film.getTime());
+            updatedFilm.setPrice(film.getPrice());
 
             return filmRepository.save(updatedFilm);
         } else {

@@ -20,6 +20,7 @@ public class FilmConverter {
 //        filmEntity.setShowtime(film.getShowtime());
 
         CategoryEntity categoryEntity = new CategoryEntity();
+        filmEntity.setPrice(film.getPrice());
 //        cinemaEntity.setNameCinema(cinemaRoom.getNameCinema());
         filmEntity.setCategoryEntity(categoryEntity);
 
@@ -39,6 +40,7 @@ public class FilmConverter {
         film.setStatus(entity.isStatus());
         film.setDateStart(entity.getDateStart());
         film.setDateEnd(entity.getDateEnd());
+        film.setPrice(entity.getPrice());
 
         return film;
     }

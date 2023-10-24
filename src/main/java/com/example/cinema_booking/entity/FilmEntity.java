@@ -37,6 +37,7 @@ public class FilmEntity {
 
     @OneToMany(mappedBy = "filmEntity", fetch = FetchType.EAGER)
     private List<ShowtimeEntity> showsEntities;
+    private Long price;
 
 
 

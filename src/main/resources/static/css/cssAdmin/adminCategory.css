@@ -1010,6 +1010,11 @@ td {
     border-bottom: 1px solid var(--border-color);
 }
 
+.img-film{
+    max-height: 130px;
+    max-width: 130px;
+}
+
 .headline {
     margin-left: 5px;
     font-weight: bold;

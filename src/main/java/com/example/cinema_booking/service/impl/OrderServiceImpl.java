@@ -39,23 +39,23 @@ public class OrderServiceImpl implements OrderService {
     public Order setOrder(OrderEntity orderEntity) {
         Order order = new Order();
         order.setOrderCode(orderEntity.getIdOrder());
+//        order.setOrderCode(99999999L);
         order.setAmount(orderEntity.getAmount());
         order.setDescription(orderEntity.getCustomerEntity().getEmail());
         order.setCustomer_id(orderEntity.getCustomerEntity().getIdCustomer());
         order.setBuyerName(orderEntity.getCustomerEntity().getName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("Url thanh cong");
+        order.setReturnUrl("http://localhost:8080/payment/success");
         order.setCancelUrl("Url huy thanh toan");
 
         List<OrderDetail> orderDetails = new ArrayList<>();
         List<OrderDetailTicketEntity> orderDetailTicketEntities = orderDetailTicketService.getAllByOrderId(orderEntity);
         List<OrderDetailServiceEntity> orderDetailServiceEntities = orderDetailServiceService.getAllByOrderId(orderEntity);
 
-
         for (OrderDetailTicketEntity orderDetailTicketEntity: orderDetailTicketEntities) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setName(orderDetailTicketEntity.getShowtimeEntity().getFilmEntity().getNameFilm());
-            orderDetail.setPrice(10000L);
+            orderDetail.setPrice(orderDetailTicketEntity.getShowtimeEntity().getFilmEntity().getPrice());
             orderDetail.setQuantity(1);
             orderDetails.add(orderDetail);
         }
@@ -67,12 +67,16 @@ public class OrderServiceImpl implements OrderService {
             orderDetail.setQuantity(1);
             orderDetails.add(orderDetail);
         }
+
+        order.setItems(orderDetails);
+
         Map<String, String> params = Map.of(
                 "amount", String.valueOf(order.getAmount()),
                 "cancelUrl", order.getCancelUrl(),
                 "description", order.getDescription(),
                 "orderCode", String.valueOf(order.getOrderCode()),
                 "returnUrl", order.getReturnUrl()
+//                  "orderCode", "99999999"
         );
 
         String ChecksumKey = "22ee21ab306b80fac1782bb426e6140498bc4b5b9f483f30d4883f320731e29e";
@@ -80,4 +84,5 @@ public class OrderServiceImpl implements OrderService {
         order.setSignature(signature);
         return order;
     }
+
 }

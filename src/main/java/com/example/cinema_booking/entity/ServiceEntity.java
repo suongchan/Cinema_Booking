@@ -20,5 +20,4 @@ public class ServiceEntity {
     private Long price;
     private String status;
 
-
 }

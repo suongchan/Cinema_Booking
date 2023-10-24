@@ -24,14 +24,11 @@ public class Admin_CustomerController {
     @Autowired
     private CustomerService customerService;
 
-
     @GetMapping()
     public String adminHome() {
 
         return "adminHtml/admin";
     }
-
-
 
     @GetMapping("customerList")
     public String listCustomer(Model model) {

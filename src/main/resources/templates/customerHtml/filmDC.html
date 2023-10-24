@@ -6,7 +6,9 @@
   <link rel="stylesheet" href="../../static/css/cssCustomer/film.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <header>
@@ -24,7 +26,11 @@
                 <a class="nav-link" aria-current="page" href="#">TRANG CHỦ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">PHIM</a>
+                <a class="nav-link" href="#">PHIM <span class="arrow">▼</span></a>
+                <ul class="sub-menu">
+                  <li><a class="sub-menu-item" href="#">PHIM ĐANG CHIẾU</a></li>
+                  <li><a class="sub-menu-item" href="#">PHIM SẮP CHIẾU</a></li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">RẠP CHIẾU</a>
@@ -36,12 +42,13 @@
                 <a class="nav-link" href="#">LIÊN HỆ</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  XIN CHÀO : SUONGCHAN
+                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                  XIN CHÀO : SUONGCHAN <span class="arrow">▼</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
-                  <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
+<!--                  <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>-->
+<!--                  <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>-->
+
                 </ul>
               </li>
             </ul>
@@ -64,14 +71,20 @@
           <p class="timeFilm" th:text="'Thời lượng: '+${f.time}+' phút'"></p>
           <p th:text="'Thể loại: '+${f.category.nameCategory}"> </p>
           <div class="order">
+            <div id="videoContainer" class="videoContainer" style="display: none;" th:each=" f : ${filmDC}">
+              <iframe th:src="${f.trailer}"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+              <button id="closeVideo" class="closeVideo"><ion-icon name="exit-outline"></ion-icon></button>
+            </div>
             <a th:href="@{/customer/listShowtime/{id}(id=${f.idFilm})}">
               <span class="ticket">
               <img src="../../static/image/ticket.png">
               Đặt Vé
             </span>
             </a>
-            <a th:href="${f.trailer}">
-                <span>
+            <a class="showTrailer">
+                <span id="showTrailer">
                     <img src="../../static/image/trailer.png">
                     Xem Trailer
                 </span>
@@ -84,5 +97,40 @@
   </div>
   </div>
 </main>
+      <script>
+        $(document).ready(function() {
+
+          // Show the video container when "Trailer" button is clicked
+          $('.showTrailer').on('click', function() {
+            $(this).siblings('.videoContainer').show();
+          });
+
+          // Hide the video container when "Thoát" button is clicked
+          $('.closeVideo').on('click', function() {
+            $(this).closest('.videoContainer').hide();
+          });
+
+        });
+      </script>
+
+      <script>
+        const phimDC = document.getElementById("phimDC");
+        const phimSC = document.getElementById("phimSC");
+
+        // Lắng nghe sự kiện click trên liên kết "PHIM"
+        document.querySelector("a.nav-link[href='#']").addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chuyển hướng mặc định
+
+          // Kiểm tra trạng thái hiển thị của "PHIM DC"
+          if (phimDC.style.display === "none") {
+            phimDC.style.display = "block";
+            phimSC.style.display = "block";
+          } else {
+            phimDC.style.display = "none";
+            phimSC.style.display = "none";
+          }
+        });
+      </script>
+
 </body>
 </html>

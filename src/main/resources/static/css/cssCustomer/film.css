@@ -102,18 +102,13 @@ header .logo img {
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #0D0942;
-    border: 1px solid #045050;
-    border-radius: 5px;
-    padding: 5px 0;
     display: none;
-}
-
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
+    top: 90%;
+    position: absolute;
+    background-color: #181065;
+    list-style-type: none;
+    border-radius: 3px;
+    padding: 15px 10px 15px 10px;
 }
 
 .dropdown-item {
@@ -125,6 +120,41 @@ header .logo img {
 .dropdown-item:hover {
     color: white;
 }
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.sub-menu {
+    display: none;
+    top: 90%;
+    position: absolute;
+    background-color: #181065;
+    list-style-type: none;
+    border-radius: 3px;
+    padding: 15px 10px 15px 10px;
+}
+.sub-menu-item {
+    text-decoration: none;
+    color: white;
+    margin-right: 10px; /* Thêm khoảng cách 10px về bên phải của mỗi mục */
+    padding: 10px; /* Tạo khoảng trống bên trong mục để tạo kích thước phản hồi cho hover */
+    transition: color 0.3s; /* Tạo hiệu ứng chuyển đổi màu cho mục khi trỏ chuột */
+}
+.arrow {
+    margin-left: 5px; /* Thêm khoảng cách giữa văn bản và biểu tượng mũi tên */
+    font-size: 12px;
+    padding-top: 1px;
+}
+
+.sub-menu-item:hover {
+    color: aquamarine; /* Màu khi trỏ chuột vào */;
+}
+
+.nav-item:hover .sub-menu {
+    display: block;
+}
+
 
 /* Main Content */
 main {
@@ -208,22 +238,51 @@ main {
     }
 }
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
-    z-index: 9999; /* Số lớp z-index cao hơn để nó hiển thị trên cùng */
+/* Định dạng nút "Trailer" */
+.showTrailer {
+    background-color: #007bff; /* Màu nền của nút */
+    color: #fff; /* Màu chữ của nút */
+    padding: 10px 20px; /* Kích thước và khoảng cách giữa chữ và biên nút */
+    border: none; /* Loại bỏ viền */
+    cursor: pointer; /* Biểu tượng con trỏ khi di chuột vào nút */
+    border-radius: 5px; /* Bo tròn các góc của nút */
 }
 
-.popup-content {
-    background-color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
+/* Định dạng div chứa iframe */
+/* Định dạng div chứa iframe */
+.videoContainer {
+    position: fixed; /* Hiển thị div ở vị trí cố định trên trang web */
+    top: 50%; /* Đặt top 50% để đưa ra giữa theo chiều dọc */
+    left: 50%; /* Đặt left 50% để đưa ra giữa theo chiều ngang */
+    transform: translate(-50%, -50%); /* Dịch chuyển div ngược lại 50% chiều dọc và chiều ngang để căn giữa */
+    width: 80%; /* Chiều rộng của iframe trong div */
+    height: 80%; /* Chiều cao của iframe trong div */
+    background-color: rgba(0, 0, 0, 0.8); /* Màu nền đục để tạo hiệu ứng mờ */
+    display: none; /* Ẩn div ban đầu */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+}
+
+/* Định dạng iframe */
+.videoContainer iframe {
+    width: 100%; /* Chiều rộng của iframe trong div */
+    height: 100%; /* Chiều cao của iframe trong div */
+    border: none; /* Loại bỏ viền của iframe */
+}
+
+/* Định dạng nút "Thoát" */
+.closeVideo {
+    position: absolute; /* Hiển thị nút "Thoát" ở vị trí tuyệt đối */
+    top: 18px; /* Khoảng cách từ phía trên */
+    right: 180px; /* Khoảng cách từ phía bên phải */
+    background-color: #fff; /* Màu nền của nút */
+    color: #0D0942; /* Màu chữ của nút */
+    padding: 5px 10px; /* Kích thước và khoảng cách giữa chữ và biên nút */
+    border: none; /* Loại bỏ viền */
+    cursor: pointer; /* Biểu tượng con trỏ khi di chuột vào nút */
+    border-radius: 5px; /* Bo tròn các góc của nút */
+}
+ion-icon {
+    font-size: 24px;
+    color: black;
 }

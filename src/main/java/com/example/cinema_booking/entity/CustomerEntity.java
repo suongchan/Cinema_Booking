@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -23,6 +24,9 @@ public class CustomerEntity {
     private String email;
     private String address;
     private String role;
+
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL)
+    private List<OrderEntity> orderEntities;
 
     public String getName() {
         return name;

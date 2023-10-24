@@ -2,10 +2,8 @@ package com.example.cinema_booking.config;
 
 import com.example.cinema_booking.handler.CustomAuthenticationFailureHandler;
 import com.example.cinema_booking.handler.CustomAuthenticationSuccessHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,42 +24,30 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                                auth.requestMatchers("/admin*")
+                                auth.requestMatchers("/admin/**")
                                         .hasRole("ADMIN")
-                                        .requestMatchers("/staff*")
+                                        .requestMatchers("/staff/**")
                                         .hasRole("STAFF")
-                                        .requestMatchers("/customer*")
+                                        .requestMatchers("/customer/**")
                                         .hasRole("CUSTOMER")
 //                        .requestMatchers("/anonymous*")
 //                        .anonymous()
                                         .requestMatchers("/login/**","/register", "/home_customer*", "/static/**", "/film/**", "/customer/**")
                                         .permitAll()
-//                                        .requestMatchers("/css/cssAdmin/**")
-//                                        .permitAll()
-//                                        .requestMatchers("/css/cssCustomer/**")
-//                                        .permitAll()
-//                                        .requestMatchers("/image/**")
-//                                        .permitAll()
-//                                        .requestMatchers("/ImageAdmin/**")
-//                                        .permitAll()
                                         .anyRequest()
                                         .authenticated()
                 )
-                .formLogin(formLogin -> formLogin.loginPage("/login/**")
-                                .loginProcessingUrl("/perform_login")
-//                        .defaultSuccessUrl("/admin")
-                                .successHandler(authenticationSuccessHandler())
-//                        .failureUrl("/login?error=true")
-                                .failureHandler(authenticationFailureHandler())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login/customer") // Trang đăng nhập chung
+                        .loginProcessingUrl("/perform_login")
+                        .successHandler(authenticationSuccessHandler())
+                        .failureHandler(authenticationFailureHandler())
                 )
                 .logout(logout -> logout.logoutUrl("/perform_logout")
-                                .logoutSuccessUrl("/login/customer")
-                                .invalidateHttpSession(true)
                                 .deleteCookies("JSESSIONID")
-
-
 //                        .logoutSuccessHandler(logoutSuccessHandler())
                 )
+
 //                .rememberMe(me -> {}) //TODO search them tren mang
         ;
 

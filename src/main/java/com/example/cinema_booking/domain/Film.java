@@ -25,6 +25,7 @@ public class Film {
 
     private LocalDate dateStart;
     private LocalDate dateEnd;
+    private Long price;
 
 //    @DateTimeFormat(pattern ="yyyy-MM-dd")
 //    private  Date showtime;

@@ -328,42 +328,6 @@
         <img src="../../static/ImageAdmin/user-image-2.png" alt="admin-logo">
         <span class="header-text"> Admin</span>
       </div>
-      <!--        <thead>-->
-      <!--        <tr>-->
-      <!--&lt;!&ndash;          <th>ID</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>User Name</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>Email</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>Password</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>Edit</th>&ndash;&gt;-->
-      <!--          <th><img src="../static/ImageAdmin/user-image-2.png" alt=""> Delete</th>-->
-      <!--        </tr>-->
-      <!--        </thead>-->
-
-      <!--      <table>-->
-      <!--        <tbody>-->
-      <!--        <th:forEach items="${UserList}" var="user">-->
-      <!--          <tr>-->
-      <!--            <td>${user.id}</td>-->
-      <!--            <td>-->
-      <!--              <div class="order-owner">-->
-      <!--                <img src="../static/ImageAdmin/user-image-2.png"-->
-      <!--                     alt="user image"> <span>${user.username}</span>-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td>${user.email}</td>-->
-      <!--            <td><span class="order-status order-ready"> ${user.password}-->
-      <!--								</span></td>-->
-      <!--            <td>-->
-      <!--              <div class="payment-status payment-pending">-->
-      <!--                <div class="dot"></div>-->
-      <!--                <a href="#">Edit</a>-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td><a href="#">Delete</a></td>-->
-      <!--          </tr>-->
-      <!--        </th:forEach>-->
-      <!--        </tbody>-->
-      <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
           <span class="text1">Phim</span>
@@ -382,6 +346,7 @@
           <table>
             <tbody>
             <tr class="headline">
+              <td>Hình ảnh</td>
               <td>Tên phim</td>
               <td>Thể loại</td>
               <td>Thời lượng</td>
@@ -390,11 +355,12 @@
               <td>Giới thiệu</td>
               <td>Trailer</td>
               <td>Xếp hạng</td>
-              <td>Hình ảnh</td>
               <td>Trạng thái</td>
+              <td>Giá phim</td>
               <td></td>
             </tr>
             <tr class="film" th:each="film:${films}">
+              <td> <img class="img-film" th:src="@{'/images/' + ${film.imageFilm}}" alt="java"> </td>
               <td th:text="*{film.nameFilm}"></td>
               <td th:text="*{film.categoryEntity.nameCategory}"></td>
               <td th:text="*{film.time}"></td>
@@ -403,15 +369,13 @@
               <td th:text="*{film.introduce}"></td>
               <td th:text="*{film.trailer}"></td>
               <td th:text="*{film.rating}"></td>
-              <td th:text="*{film.imageFilm}"></td>
               <td th:text="*{film.status}"></td>
+              <td th:text="*{film.price}"></td>
               <td class="payment-status payment-pending">
                 <a class="edit" th:href="@{/admin/editFilm/{id}(id=${film.idFilm})}">Cập nhập</a>
                 <a class="delete" th:href="@{/admin/deleteFilm/{id}(id=${film.idFilm})}">Xóa</a>
               </td>
             </tr>
-
-
             </tbody>
           </table>
         </div>

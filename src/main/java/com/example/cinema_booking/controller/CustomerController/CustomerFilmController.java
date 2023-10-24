@@ -22,7 +22,6 @@ public class CustomerFilmController {
     @Autowired
     private FilmService filmService;
 
-
     @GetMapping()
     private String test(){
         return "customerHtml/homePage";

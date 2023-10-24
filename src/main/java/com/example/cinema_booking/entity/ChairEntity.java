@@ -1,6 +1,4 @@
     package com.example.cinema_booking.entity;
-
-
     import com.example.cinema_booking.domain.Chair;
     import jakarta.persistence.*;
     import lombok.Getter;

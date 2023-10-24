@@ -45,11 +45,14 @@ public class FilmServiceImpl implements FilmService {
             FilmEntity updatedFilm = existingFilm.get();
             updatedFilm.setNameFilm(film.getNameFilm());
             updatedFilm.setCategoryEntity(film.getCategoryEntity());
+            updatedFilm.setTime(film.getTime());
+            updatedFilm.setIntroduce(film.getIntroduce());
             updatedFilm.setImageFilm(film.getImageFilm());
 //            updatedFilm.setStatus(film.getStatus());
             updatedFilm.setTrailer(film.getTrailer());
             updatedFilm.setRating(film.getRating());
 //            updatedFilm.setShowtime(film.getShowtime());
+
             updatedFilm.setIntroduce(film.getIntroduce());
             updatedFilm.setTime(film.getTime());
             updatedFilm.setPrice(film.getPrice());

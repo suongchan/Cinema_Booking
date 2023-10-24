@@ -47,5 +47,4 @@ public class ShowtimeEntity {
 //    @JoinColumn(name = "idCinema")
 //    private CinemaRoomEntity cinemaRoom;
 
-
 }

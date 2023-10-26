@@ -4,6 +4,7 @@ import com.example.cinema_booking.domain.Category;
 import com.example.cinema_booking.domain.Cinema;
 import com.example.cinema_booking.entity.CategoryEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
+import com.example.cinema_booking.entity.NewsEntity;
 import com.example.cinema_booking.service.CategoryService;
 import com.example.cinema_booking.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,13 +76,21 @@ public class CinemaController {
     }
 
     @PostMapping("saveEditedCinema")
-    public String saveEditedCinema(@ModelAttribute("cinema") Cinema cinema, Model model) throws UserPrincipalNotFoundException {
+    public String saveEditedCinema(@ModelAttribute("cinema") Cinema cinema, @RequestParam("file") MultipartFile file, Model model) throws UserPrincipalNotFoundException {
         try {
-            // Gọi phương thức service để cập nhật thông tin khách hàng
-            cinemaService.updateCinema(cinema);
+            if (!file.isEmpty()) {
+                // Nếu người dùng đã tải lên tệp mới, thì cập nhật trường imageCinema
+                cinema.setImageCinema(file.getOriginalFilename());
+            } else {
+                // Nếu người dùng không tải lên tệp ới, giữ nguyên tệp hiện tại
+                CinemaEntity existingCinema = cinemaService.getCinemaById(cinema.getIdCinema());
+                if (existingCinema != null){
+                    cinema.setImageCinema(existingCinema.getImageCinema());
+                }
+            }
+                cinemaService.updateCinema(cinema);
             return "redirect:/admin/cinemaList";
         } catch (UserPrincipalNotFoundException e) {
-            // Xử lý khi không tìm thấy khách hàng
             model.addAttribute("messageError", "Không tìm thấy cinema.");
             return "adminHtml/editCinema";
         }

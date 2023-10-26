@@ -3,6 +3,7 @@ package com.example.cinema_booking.controller.AdminController;
 import com.example.cinema_booking.domain.Cinema;
 import com.example.cinema_booking.domain.Service;
 import com.example.cinema_booking.entity.CinemaEntity;
+import com.example.cinema_booking.entity.NewsEntity;
 import com.example.cinema_booking.entity.ServiceEntity;
 import com.example.cinema_booking.service.ServiceService;
 import jakarta.persistence.Entity;
@@ -75,17 +76,46 @@ public class ServiceController {
     }
 
     @PostMapping("saveEditedService")
-    public String saveEditedService(@ModelAttribute("service") ServiceEntity service, Model model) throws UserPrincipalNotFoundException {
+    public String saveEditedService(@ModelAttribute("service") ServiceEntity service, @RequestParam("file") MultipartFile file, Model model) throws UserPrincipalNotFoundException {
         try {
-            // Gọi phương thức service để cập nhật thông tin khách hàng
+            if (!file.isEmpty()){
+                //Nếu người đã tải lên tệp mới, thì cập nhật imageService
+                service.setImage(file.getOriginalFilename());
+            } else {
+                // Nếu không tải lên tệp mới, giữ nguyên tệp hiện tại
+                ServiceEntity existingService = serviceService.getServiceById(service.getIdService());
+                if (existingService != null){
+                    service.setImage(existingService.getImage());
+                }
+            }
             serviceService.updateService(service);
             return "redirect:/admin/serviceList";
         } catch (UserPrincipalNotFoundException e) {
-            // Xử lý khi không tìm thấy khách hàng
             model.addAttribute("messageError", "Không tìm thấy cinema.");
             return "adminHtml/editService";
         }
     }
+
+//    @PostMapping("saveEditedNews")
+//    public String saveEditedNews(@ModelAttribute("news") NewsEntity news, @RequestParam("file") MultipartFile file, Model model) throws UserPrincipalNotFoundException {
+//        try {
+//            if (!file.isEmpty()) {
+//                // Nếu người dùng đã tải lên tệp mới, thì cập nhật trường imageNew
+//                news.setImageNew(file.getOriginalFilename());
+//            } else {
+//                // Nếu không tải lên tệp mới, giữ nguyên tệp hiện tại
+//                NewsEntity existingNews = newsService.getNewsById(news.getIdNew());
+//                if (existingNews != null) {
+//                    news.setImageNew(existingNews.getImageNew());
+//                }
+//            }
+//            newsService.updateNews(news);
+//            return "redirect:/admin/newsList";
+//        } catch (UserPrincipalNotFoundException e) {
+//            model.addAttribute("messageError", "Không tìm thấy tin tức.");
+//            return "adminHtml/editNews";
+//        }
+//    }
 
     @GetMapping("/deleteService/{id}")
     public String deleteService(@PathVariable Long id) throws UserPrincipalNotFoundException {

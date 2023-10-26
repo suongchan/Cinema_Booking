@@ -73,15 +73,22 @@ public class NewsController {
     }
 
     @PostMapping("saveEditedNews")
-        public String saveEditedCinema(@ModelAttribute("news") NewsEntity news, @RequestParam("file") MultipartFile file,Model model) throws UserPrincipalNotFoundException {
+    public String saveEditedNews(@ModelAttribute("news") NewsEntity news, @RequestParam("file") MultipartFile file, Model model) throws UserPrincipalNotFoundException {
         try {
-            // Gọi phương thức service để cập nhật thông tin khách hàng
-            news.setImageNew(file.getOriginalFilename());
+            if (!file.isEmpty()) {
+                // Nếu người dùng đã tải lên tệp mới, thì cập nhật trường imageNew
+                news.setImageNew(file.getOriginalFilename());
+            } else {
+                // Nếu không tải lên tệp mới, giữ nguyên tệp hiện tại
+                NewsEntity existingNews = newsService.getNewsById(news.getIdNew());
+                if (existingNews != null) {
+                    news.setImageNew(existingNews.getImageNew());
+                }
+            }
             newsService.updateNews(news);
             return "redirect:/admin/newsList";
         } catch (UserPrincipalNotFoundException e) {
-            // Xử lý khi không tìm thấy khách hàng
-            model.addAttribute("messageError", "Không tìm thấy cinema.");
+            model.addAttribute("messageError", "Không tìm thấy tin tức.");
             return "adminHtml/editNews";
         }
     }

@@ -59,48 +59,6 @@
     <span class="permanent" >Báo cáo - Thống kê</span>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Báo cáo</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Thống kê</span> </a></li>
-
-
-    <!--    <li class="sidebar-submenu"><a href="#"-->
-    <!--                                   class="sidebar-menu-dropdown"> <i class='bx bx-user-circle'></i>-->
-    <!--      <span>account</span>-->
-    <!--      <div class="dropdown-icon"></div>-->
-    <!--    </a>-->
-    <!--      <ul class="sidebar-menu sidebar-menu-dropdown-content">-->
-    <!--        <li><a href="#"> edit profile </a></li>-->
-    <!--        <li><a href="#"> account settings </a></li>-->
-    <!--        <li><a href="#"> billing </a></li>-->
-    <!--      </ul></li>-->
-    <!--    <li class="sidebar-submenu"><a href="#" class="sidebar-menu-dropdown"> <i class='bx bx-category'></i> <span>project</span>-->
-    <!--      <div class="dropdown-icon"></div>-->
-    <!--    </a>-->
-    <!--      <ul class="sidebar-menu sidebar-menu-dropdown-content">-->
-    <!--        <li><a href="#"> list </a></li>-->
-    <!--        <li><a href="#"> add project </a></li>-->
-    <!--      </ul></li>-->
-    <!--    <li class="sidebar-submenu"><a th:href="${adminProduct}" class="sidebar-menu-dropdown"> <i class='bx bx-category'></i> <span>Product</span>-->
-    <!--      &lt;!&ndash; <div class="dropdown-icon"></div> &ndash;&gt;-->
-    <!--    </a>-->
-    <!--      <ul class="sidebar-menu sidebar-menu-dropdown-content">-->
-    <!--        <li><a href="#"> list product </a></li>-->
-    <!--        <li><a href="#"> add product </a></li>-->
-    <!--        <li><a href="#"> orders </a></li>-->
-    <!--      </ul></li>-->
-    <!--    <li><a href="#"> <i class='bx bx-mail-send'></i> <span>mail</span>-->
-    <!--    </a></li>-->
-    <!--    <li><a href="#"> <i class='bx bx-chat'></i> <span>chat</span>-->
-    <!--    </a></li>-->
-    <!--    <li><a href="#"> <i class='bx bx-calendar'></i> <span>calendar</span>-->
-    <!--    </a></li>-->
-    <!--    <li class="sidebar-submenu"><a href="#"-->
-    <!--                                   class="sidebar-menu-dropdown"> <i class='bx bx-cog'></i> <span>settings</span>-->
-    <!--      <div class="dropdown-icon"></div>-->
-    <!--    </a>-->
-    <!--      <ul class="sidebar-menu sidebar-menu-dropdown-content">-->
-    <!--        <li><a href="#" class="darkmode-toggle" id="darkmode-toggle">-->
-    <!--          darkmode <span class="darkmode-switch"></span>-->
-    <!--        </a></li>-->
-    <!--      </ul></li>-->
   </ul>
   <!-- END SIDEBAR MENU -->
 </div>
@@ -114,42 +72,6 @@
         <img src="../../static/ImageAdmin/user-image-2.png" alt="admin-logo">
         <span class="header-text"> Admin</span>
       </div>
-      <!--        <thead>-->
-      <!--        <tr>-->
-      <!--&lt;!&ndash;          <th>ID</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>User Name</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>Email</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>Password</th>&ndash;&gt;-->
-      <!--&lt;!&ndash;          <th>Edit</th>&ndash;&gt;-->
-      <!--          <th><img src="../static/ImageAdmin/user-image-2.png" alt=""> Delete</th>-->
-      <!--        </tr>-->
-      <!--        </thead>-->
-
-      <!--      <table>-->
-      <!--        <tbody>-->
-      <!--        <th:forEach items="${UserList}" var="user">-->
-      <!--          <tr>-->
-      <!--            <td>${user.id}</td>-->
-      <!--            <td>-->
-      <!--              <div class="order-owner">-->
-      <!--                <img src="../static/ImageAdmin/user-image-2.png"-->
-      <!--                     alt="user image"> <span>${user.username}</span>-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td>${user.email}</td>-->
-      <!--            <td><span class="order-status order-ready"> ${user.password}-->
-      <!--								</span></td>-->
-      <!--            <td>-->
-      <!--              <div class="payment-status payment-pending">-->
-      <!--                <div class="dot"></div>-->
-      <!--                <a href="#">Edit</a>-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td><a href="#">Delete</a></td>-->
-      <!--          </tr>-->
-      <!--        </th:forEach>-->
-      <!--        </tbody>-->
-      <!--      </table>-->
       <div class="admin-taikhoan">
         <div class="taikhoan-header">
           <span class="text1">Tin tức</span>
@@ -157,22 +79,15 @@
         </div>
         <div class="taikhoan-body">
 
-          <form class="form-containers"  th:action="@{/admin/saveEditedNews}" method="POST" th:object="${news}">
+          <form class="form-containers"  th:action="@{/admin/saveEditedNews}" method="POST" th:object="${news}" enctype="multipart/form-data">
             <input type="hidden" th:field="*{idNew}" />
 
-
-
-            <div class="form-row" >
+            <div class="form-row">
               <label for="input-file">Hình ảnh</label>
-              <input type="file" id="input-file" name="file"  required th:value="*{imageNew}">
+              <input type="file" id="input-file" name="file">
+              <p th:if="${news.imageNew}" th:text="${news.imageNew}"></p>
+              <input type="hidden" name="currentImage" th:field="*{imageNew}" th:if="${news.imageNew}">
             </div>
-
-<!--            <div class="form-row" >-->
-<!--              <label for="input-file">Hình ảnh</label>-->
-<!--              <td>-->
-<!--                <input id="input-file" type="file" name="file">-->
-<!--              </td>-->
-<!--            </div>-->
 
             <div class="form-row" >
               <label for="title">Tiêu đề</label>
@@ -188,7 +103,6 @@
               <label for="join_datepicker">Ngày tạo</label>
               <input type="date" class="date" placeholder="yyyy-MM-dd" id="join_datepicker" name="dateCreate" th:value="*{dateCreate}" >
             </div>
-
 
             <input type="submit" value="Lưu" class="submit">
 

@@ -51,19 +51,14 @@ public class FilmServiceImpl implements FilmService {
 //            updatedFilm.setStatus(film.getStatus());
             updatedFilm.setTrailer(film.getTrailer());
             updatedFilm.setRating(film.getRating());
-//            updatedFilm.setShowtime(film.getShowtime());
-
             updatedFilm.setIntroduce(film.getIntroduce());
             updatedFilm.setTime(film.getTime());
             updatedFilm.setPrice(film.getPrice());
 
             return filmRepository.save(updatedFilm);
         } else {
-
             return null;
         }
-
-
     }
 
     @Override
@@ -93,7 +88,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> getAllFilmSC(LocalDate now) {
-        return filmRepository.findAllByDateSC(now.plusDays(1), now.plusDays(20)).stream().map(FilmConverter::toModel).toList();
+        return filmRepository.findAllByDateSC(now.plusDays(1), now.plusDays(30)).stream().map(FilmConverter::toModel).toList();
     }
 
     @Override

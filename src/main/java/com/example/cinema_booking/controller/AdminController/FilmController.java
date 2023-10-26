@@ -78,9 +78,24 @@ public class FilmController {
     }
 
     @PostMapping("/editFilm")
-    public String editFilm(@ModelAttribute("films") FilmEntity film) throws UserPrincipalNotFoundException {
-        filmService.updateFilm(film);
-        return "redirect:/admin/filmList"; // Chuyển hướng sau khi chỉnh sửa phim
+    public String editFilm(@ModelAttribute("films") FilmEntity film, @RequestParam("file") MultipartFile file, Model model) throws UserPrincipalNotFoundException {
+        try {
+            if (!file.isEmpty()){
+                // Nếu người dùng đã tải lên tệp mới, thì cập nhật trường imageFilm
+                film.setImageFilm(file.getOriginalFilename());
+            } else {
+                // Nếu không tải lên tệp mới, giữ nguyên tệp hiện tại
+                FilmEntity existingFilm = filmService.getFilmById(film.getIdFilm());
+                if (existingFilm != null){
+                    film.setImageFilm(existingFilm.getImageFilm());
+                }
+            }
+            filmService.updateFilm(film);
+            return "redirect:/admin/filmList";
+        } catch (UserPrincipalNotFoundException e) {
+            model.addAttribute("messageError", "Không tìm thấy phim");
+            return "adminHtml/editFilm";
+        }
     }
 
     @GetMapping("/deleteFilm/{id}")

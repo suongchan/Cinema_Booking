@@ -389,15 +389,15 @@
               <td>Ngày tạo</td>
               <td></td>
             </tr>
-            <tr class="news" th:each="news:${news}">
-              <td th:text="${news.imageNew}"></td>
-              <td th:text="${news.titleNew}"></td>
-              <td th:text="${news.newDesc}"></td>
-              <td th:text="${news.dateCreate}"></td>
+            <tr class="news" th:each="newss:${news}">
+              <td> <img class="img-film" th:src="@{'/images/' + ${newss.imageNew}}" alt="java"> </td>
+              <td th:text="${newss.titleNew}"></td>
+              <td th:text="${newss.newDesc}"></td>
+              <td th:text="${newss.dateCreate}"></td>
 
               <td class="payment-status payment-pending">
-                <a class="edit" th:href="@{/admin/editNews/{id}(id=${news.idNew})}">Cập nhập</a>
-                <a class="delete" th:href="@{/admin/deleteNews/{id}(id=${news.idNew})}">Xóa</a>
+                <a class="edit" th:href="@{/admin/editNews/{id}(id=${newss.idNew})}">Cập nhập</a>
+                <a class="delete" th:href="@{/admin/deleteNews/{id}(id=${newss.idNew})}">Xóa</a>
               </td>
             </tr>
 

@@ -52,6 +52,11 @@
         </div>
     </header>
     <main>
+<!--        <div class="container_checkout">-->
+<!--            &lt;!&ndash; ... (các phần tử khác) ... &ndash;&gt;-->
+<!--            <p id="seatHoldingTime">hjg</p>-->
+<!--        </div>-->
+
         <div class="controller_main">
             <div class="controller_film">
                 <div class="film">
@@ -85,262 +90,142 @@
     <div class="container_chair">
         <h3>SCREEN</h3>
         <div class="chair">
-            <div th:each="chair : ${chairs}" class="row_chair">
+            <th:block th:each="seat : ${seatStatus}">
                 <div class="column_chair">
-                    <input type="button" class="chair_ticket" th:value="${chair.idChair}" th:id="${'chair-' + chair.idChair}">
+                    <input type="button" class="chair_ticket" th:value="${seat.chair.nameChair}" name="seat.chair.nameChair" th:attr="data-status=${seat.occupied}">
                 </div>
-                <!-- Các cột ghế khác nếu cần -->
-            </div>
+            </th:block>
         </div>
     </div>
 
 
-<!--            <div class="row_chair">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row_chair">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row_chair row_chair_special">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row_chair row_chair_special">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row_chair row_chair_special">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row_chair row_chair_special">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row_chair row_chair_vip">-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G1">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G2">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G3">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G4">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G5">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G6">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G7">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G8">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G9">-->
-<!--                </div>-->
-<!--                <div class="column_chair">-->
-<!--                    <input type="button" class="chair_ticket" Value="G10">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
         <div class="container_checkout">
         <form class="check_out">
             <span>
-                Bạn đã chọn chỗ ngồi
-                <p>D5,D6</p>
+                <p class="selectedChair" id="selectedChair"></p>
             </span>
+            <div class="film-info" th:attr="data-price=${showtime.filmEntity.price}">
             <span>
-                Tổng Tiền
-                <p>120 000</p>
+                <p class="price"></p>
             </span>
-            <input TYPE="button" class="submit" value="XÁC NHẬN">
+            </div>
+
+            <div id="showtimeId" th:data-id="${showtime.idShow}">
+            <input id="confirmButton"  TYPE="button" class="submit" value="XÁC NHẬN">
+            </div>
         </form>
     </div>
-    </div>
+
+
+    <script>
+        var selectedChairText = document.getElementById("selectedChair");
+        var chairs = document.querySelectorAll(".chair_ticket");
+        var filmInfoElement = document.querySelector(".film-info");
+        var giaPhim = parseInt(filmInfoElement.getAttribute("data-price"));
+        var priceElement = document.querySelector(".price");
+        var soGheDaChon = 0;
+        var tongTien = 0;
+        var selectedChairs = []; // Sử dụng một mảng để lưu trữ các ghế đã chọn
+
+        chairs.forEach(function(chair) {
+            if (chair.getAttribute("data-status") === "true") {
+                chair.classList.add("unavailable");
+            } else {
+                chair.addEventListener("click", function () {
+                    // Các hành động khi ghế được nhấp
+                    chair.addEventListener("click", function () {
+                        chair.classList.toggle("selected");
+                        var chairValue = chair.value;
+
+                        // Kiểm tra xem ghế đã được chọn hay không
+                        if (chair.classList.contains("selected")) {
+                            // Nếu ghế chưa có trong danh sách, thêm vào
+                            if (!selectedChairs.includes(chairValue)) {
+                                selectedChairs.push(chairValue);
+                            }
+                        } else {
+                            // Nếu ghế đã có trong danh sách, loại bỏ
+                            var index = selectedChairs.indexOf(chairValue);
+                            if (index !== -1) {
+                                selectedChairs.splice(index, 1);
+                            }
+                        }
+
+                        soGheDaChon = selectedChairs.length;
+
+                        if (soGheDaChon > 0) {
+                            var tongTien = giaPhim * soGheDaChon;
+                            priceElement.textContent = "Tổng Tiền: " + tongTien + " VNĐ";
+                            window.tongTien = tongTien;
+                        } else {
+                            priceElement.textContent = "Tổng Tiền: 0 VNĐ";
+                            window.tongTien = 0;
+                        }
+
+                        // Cập nhật nội dung của phần tử <p> có id "selectedChair"
+                        selectedChairText.textContent = "Bạn đã chọn chỗ ngồi: " + selectedChairs.join(",");
+
+                        var showtimeId = document.getElementById("showtimeId").getAttribute("data-id");
+                        console.log("showtimeId:", showtimeId); // Debugging statement
+
+                        // Check the values before constructing the redirect URL
+                        console.log("giaPhim:", giaPhim);
+                        console.log("soGheDaChon:", soGheDaChon);
+                        console.log("window.tongTien:", window.tongTien);
+                        console.log("selectedChairs:", selectedChairs.join(","));
+
+                        var redirectUrl = "/customer/buyPopCorn/" + showtimeId +
+                            "?soGheDaChon=" + soGheDaChon +
+                            "&selectedChairs=" + selectedChairs.join("_") +
+                            "&giaPhim=" + giaPhim +
+                            "&tongTien=" + window.tongTien;
+                        console.log("redirectUrl:", redirectUrl); // Debugging statement
+
+                        var confirmButton = document.getElementById("confirmButton");
+
+                        confirmButton.addEventListener("click", function () {
+                            sessionStorage.setItem("selectedChairs", JSON.stringify(selectedChairs));
+
+                            var data = {
+                                selectedChairs: selectedChairs,
+                                showtimeId: showtimeId
+                            };
+
+                            // Gửi dữ liệu lên máy chủ bằng Fetch API
+                            fetch("/customer/updateSeatStatus", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(data)
+                            })
+                                .then(function (response) {
+                                    if (response.ok) {
+                                        // Nếu gửi thành công, chuyển hướng người dùng đến trang khác hoặc thực hiện các thao tác khác
+                                        window.location.href = "/customer/confirmationPage";
+                                    } else {
+                                        // Xử lý lỗi nếu cần
+                                        console.error("Error:", response.statusText);
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.error("Error:", error);
+                                });
+                            // Set the tongTien value as a query parameter in the URL
+                            redirectUrl += "&tongTien=" + window.tongTien;
+                            console.log(redirectUrl)
+                            window.location.href = redirectUrl;
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+
+
+
+
 </nav>
 </body>
 </html>

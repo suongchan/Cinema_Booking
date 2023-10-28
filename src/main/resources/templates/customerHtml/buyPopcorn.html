@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Mua Đồ Uống</title>
   <link rel="stylesheet" href="../../static/css/cssCustomer/buyPopcorn.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -53,83 +54,202 @@
 </header>
 
 <main>
+  <div class="container_checkout">
+    <p id="seatHoldingTime">00:30</p>
+  </div>
   <div class="controller_main">
     <div class="main_left">
       <h3>CHÚNG TÔI CÓ ĐỒ ĂN</h3>
       <h5>Đặt trước đồ ăn của bạn và tiết kiệm hơn</h5>
       <div class="container_item">
       <span class="item">
-      <ul>
+      <ul class="service" th:each="service : ${services}">
         <li>
           <img src="../../static/image/corn.png">
         </li>
         <li>
-          <p>1 BẮP</p>
+          <p class="service_name" th:text="${service.nameService}"></p>
         </li>
         <li>
-         <p>
-           40 000
-         </p>
+         <p class="service_price" th:text="${service.price}"></p>
         </li>
-        <li>
+       <li>
           <span>
-             <input type="button" value="-">
-            <input type="button" value="1">
-             <input type="button" value="+">
+            <input class="numberService" type="number" value="1" min="1">
           </span>
           <span>
-            <input type="button" value="THÊM">
+            <input class="addService addServiceButton" type="button" value="THÊM">
           </span>
         </li>
       </ul>
         </span>
 
-      <span class="item">
-      <ul>
-        <li>
-          <img src="../../static/image/corn.png">
-        </li>
-        <li>
-          <p>1 BẮP</p>
-        </li>
-        <li>
-         <p>
-           40 000
-         </p>
-        </li>
-        <li>
-          <span>
-             <input type="button" value="-">
-            <input type="button" value="1">
-             <input type="button" value="+">
-          </span>
-          <span>
-            <input type="button" value="THÊM">
-          </span>
-        </li>
-      </ul>
-        </span>
       </div>
     </div>
 
     <div class="main_right">
       <h3>THANH TOÁN</h3>
-      <h3>ĐỊA ĐÀNG SỤP ĐỔ</h3>
-      <h4>2D</h4>
-      <span>RẠP: METIZ</span>
-      <span>02 VÉ</span>
-      <h4>31-08-2023, 08:00</h4>
-      <h3>TIỀN VÉ: 120 000</h3>
-      <span>DỊCH VỤ</span>
-      <span>90 000</span>
-      <h4>1X COMBO L1( 1 BẮP 2 NƯỚC)</h4>
-      <span>TỔNG TIỀN:</span>
-      <span>210 000</span>
-      <input type="button" value="XÁC NHẬN">
+      <h3 th:text="${showtime.filmEntity.nameFilm}"></h3>
+      <span th:text="${showtime.cinemaEntity.nameCinema}"></span>
+      <span th:text="${showtime.cinemaRoomEntity.nameCinemaRoom}"></span>
+      <span class="ticket" id="ticket">2 Vé</span>
+      <h4 class="nameChair" id="nameChair"></h4>
+      <h4 th:text="${showtime.dateShow} + ', '+ ${showtime.start}"></h4>
+      <h3 class="total" id="total"></h3>
+      <span class="checkout_numberService"></span>
+      <span class="checkout_nameService"></span>
+      <span class="priceService"></span>
+      <h4 class="total_price"></h4>
+      <div id="showtimeId" th:data-id="${showtime.idShow}">
+      <input id="confirmCheckout" class="confirm_checkout" type="button" value="XÁC NHẬN">
+      </div>
     </div>
   </div>
 
+  <script>
+    // Lấy giá trị từ query string
+    var urlParams = new URLSearchParams(window.location.search);
+    var tongTien = urlParams.get("tongTien");
+    var soGheDaChon = urlParams.get("soGheDaChon");
+    var selectedChairs = urlParams.get("selectedChairs"); // Add this line to get soGheDaChon
 
+    // Cập nhật nội dung của phần tử "total"
+    var totalElement = document.getElementById("total");
+    totalElement.textContent = "Tổng Tiền: " + tongTien + " VNĐ";
+    console.log(tongTien);
+
+    // Cập nhật nội dung của phần tử "ticket" with the value of soGheDaChon
+    var ticketElement = document.getElementById("ticket");
+    ticketElement.textContent = soGheDaChon + " Vé"; // Display soGheDaChon value
+
+    var nameChairElement = document.getElementById("nameChair");
+    nameChairElement.textContent = selectedChairs + " ";
+
+    var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
+    var countdownSeconds = parseInt(sessionStorage.getItem("countdownSeconds")) || 30;  // Mặc định là 180 giây nếu không tìm thấy
+
+    var countdownTimer = setInterval(function() {
+      var minutes = Math.floor(countdownSeconds / 60);
+      var seconds = countdownSeconds % 60;
+
+      minutes = String(minutes).padStart(2, '0');
+      seconds = String(seconds).padStart(2, '0');
+
+      seatHoldingTimeElement.textContent = minutes + ":" + seconds;
+
+      if (countdownSeconds > 0) {
+        countdownSeconds--;
+      } else {
+        clearInterval(countdownTimer);
+        console.log("Thời gian đã hết!");
+      }
+    }, 1000);
+
+    // Khai báo biến selectedServices và khởi tạo là một mảng rỗng
+    var selectedServices = [];
+
+    // Sử dụng một sự kiện click listener cho tất cả các nút "THÊM"
+    var addServiceButtons = document.querySelectorAll(".addServiceButton");
+
+    addServiceButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        // Lấy thông tin về dịch vụ tương ứng với nút đã nhấp
+        var container = button.closest(".service");
+        var serviceName = container.querySelector(".service_name").textContent;
+        var servicePrice = container.querySelector(".service_price").textContent;
+        var serviceQuantity = container.querySelector(".numberService").value;
+
+        // Tạo một đối tượng dịch vụ
+        var service = {
+          name: serviceName,
+          price: parseFloat(servicePrice),
+          quantity: parseInt(serviceQuantity)
+        };
+
+        // Lưu trữ thông tin dịch vụ trong mảng selectedServices
+        selectedServices.push(service);
+
+        // Cập nhật thông tin dịch vụ trong các phần tử HTML tương ứng
+        updateCheckoutInformation(selectedServices);
+      });
+    });
+
+    // ... (Phần code trước đó ở trên)
+
+    // Hàm để cập nhật thông tin dịch vụ trong các phần tử HTML
+    function updateCheckoutInformation(services) {
+      var checkoutNumberService = document.querySelector(".checkout_numberService");
+      var checkoutNameService = document.querySelector(".checkout_nameService");
+      var priceService = document.querySelector(".priceService");
+
+      // Xóa nội dung cũ trước khi cập nhật lại
+      checkoutNumberService.innerHTML = "";
+      checkoutNameService.innerHTML = "";
+      priceService.innerHTML = "";
+
+      // Tạo một đối tượng để lưu trữ thông tin dịch vụ và tổng giá của mỗi dịch vụ
+      var serviceSummary = {};
+
+      // Duyệt qua mảng selectedServices để tính tổng giá của từng loại dịch vụ
+      services.forEach(function(selectedService) {
+        var serviceName = selectedService.name;
+        var servicePrice = selectedService.price * selectedService.quantity;
+
+        if (!serviceSummary[serviceName]) {
+          serviceSummary[serviceName] = {
+            quantity: selectedService.quantity,
+            totalPrice: servicePrice
+          };
+        } else {
+          serviceSummary[serviceName].quantity += selectedService.quantity;
+          serviceSummary[serviceName].totalPrice += servicePrice;
+        }
+      });
+
+      // Duyệt qua các dịch vụ đã tính tổng giá và hiển thị thông tin
+      for (var serviceName in serviceSummary) {
+        var serviceInfo = serviceSummary[serviceName];
+
+        var infoLine = document.createElement("span");
+        infoLine.textContent = "Số lượng: " + serviceInfo.quantity + " Dịch vụ: " + serviceName + " Giá: " + serviceInfo.totalPrice + " VNĐ";
+
+        checkoutNumberService.appendChild(infoLine);
+
+        // Thêm một dòng trống sau mỗi dòng thông tin
+        checkoutNumberService.appendChild(document.createElement("br"));
+      }
+
+      // Tính tổng giá trị dịch vụ
+      var totalServicePrice = 0;
+      services.forEach(function(selectedService) {
+        totalServicePrice += selectedService.price * selectedService.quantity;
+      });
+
+      // Cộng tổng giá trị dịch vụ với tổng giá trị (total) và gán vào phần tử "total_price"
+      var totalElement = document.querySelector(".total");
+      var totalValue = parseInt(tongTien); // Tổng tiền từ query string
+      var totalPriceElement = document.querySelector(".total_price");
+      totalPriceElement.textContent = "THANH TOÁN: " + (totalValue + totalServicePrice) + " VNĐ";
+    }
+
+
+    var confirmCheckoutButton = document.getElementById("confirmCheckout");
+    var showtimeId = document.getElementById("showtimeId").getAttribute("data-id");
+    confirmCheckoutButton.addEventListener("click", function() {
+      // Lấy các giá trị từ các phần tử HTML và sessionStorage
+      sessionStorage.setItem("ticket", document.getElementById("ticket").textContent);
+      sessionStorage.setItem("nameChair", document.getElementById("nameChair").textContent);
+      sessionStorage.setItem("checkoutNumberService", document.querySelector(".checkout_numberService").textContent);
+      sessionStorage.setItem("checkoutNameService", document.querySelector(".checkout_nameService").textContent);
+      sessionStorage.setItem("priceService", document.querySelector(".priceService").textContent);
+      sessionStorage.setItem("totalPrice", document.querySelector(".total_price").textContent);
+
+      // Tạo URL trang checkout với các tham số
+      var checkoutURL = "/customer/checkout/" + showtimeId;
+      window.location.href = checkoutURL;
+    });
+
+  </script>
 </main>
 </body>
 </html>

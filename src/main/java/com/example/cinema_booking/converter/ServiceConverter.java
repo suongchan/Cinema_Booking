@@ -11,7 +11,7 @@ public class ServiceConverter {
         serviceEntity.setNameService(service.getNameService());
         serviceEntity.setImage(service.getImage());
         serviceEntity.setPrice(service.getPrice());
-        serviceEntity.setStatus(service.getStatus());
+
 
         return serviceEntity;
     }

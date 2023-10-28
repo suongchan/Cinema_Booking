@@ -17,6 +17,7 @@ public class Chair {
     private String nameChair;
 
 
+    private ShowtimeEntity showtime;
     private boolean isOccupied;
 
     private CinemaRoomEntity cinemaRoom;

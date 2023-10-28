@@ -1,6 +1,5 @@
 package com.example.cinema_booking.service.impl;
 
-import com.example.cinema_booking.entity.NewsEntity;
 import com.example.cinema_booking.entity.ServiceEntity;
 import com.example.cinema_booking.repository.ServiceRepository;
 import com.example.cinema_booking.service.ServiceService;
@@ -18,7 +17,7 @@ public class ServiceServiceImpl implements ServiceService {
     private ServiceRepository serviceRepository;
     @Override
     public List<ServiceEntity> getAllService() {
-        return serviceRepository.findAll() ;
+        return serviceRepository.findAll();
     }
 
     @Override
@@ -39,7 +38,6 @@ public class ServiceServiceImpl implements ServiceService {
             // Lấy khách hàng hiện có từ Optional
             ServiceEntity updatedService = existingService.get();
             updatedService.setNameService(service.getNameService());
-            updatedService.setStatus(service.getStatus());
             updatedService.setImage(service.getImage());
             updatedService.setPrice(service.getPrice());
 

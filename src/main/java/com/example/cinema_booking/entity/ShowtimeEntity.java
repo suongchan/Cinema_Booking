@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "shows")
@@ -22,6 +23,7 @@ public class ShowtimeEntity {
     private LocalTime start;
 //    @DateTimeFormat(pattern ="HH:mm")
     private LocalTime end;
+
 
     @ManyToOne
     @JoinColumn(name = "idFilm")
@@ -41,6 +43,8 @@ public class ShowtimeEntity {
     @OneToMany(mappedBy = "showtimeEntity", cascade = CascadeType.ALL)
     private List<OrderDetailTicketEntity> orderDetailTicketEntities;
 
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
+    private Set<SeatStatusEntity> seatStatuses;
 
 
 //    @ManyToOne

@@ -18,6 +18,7 @@ public class ServiceEntity {
     private String image;
     private String nameService;
     private Long price;
-    private String status;
+
+
 
 }

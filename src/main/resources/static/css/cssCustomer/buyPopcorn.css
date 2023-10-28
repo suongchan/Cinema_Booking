@@ -7,6 +7,10 @@ body {
     padding: 0;
 
 }
+.chair_ticket[data-status='true'] {
+    background-color: green;
+    color: white;
+}
 header {
     position: relative;
     display: flex;
@@ -88,13 +92,24 @@ main .main_left
 {
     padding-left: 30px;
     padding-top: 20px;
-    width: 70%;
+    width: 65%;
     height: 170px;
     background-color: #171E63;
     border: 1px solid #0D0942;
     border-radius: 8px;
     color: white;
     font-weight: bold;
+}
+.seatHoldingTime
+{
+    height: 25px;
+    color: white;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    background-color: #ea70d6;
 }
 .container_item
 {
@@ -104,7 +119,7 @@ main .main_left
 {
     display: flex;
     width: 40%;
-    background-color: #ea70d6;
+    background-color: #022D54;
 }
 .main_left .item img
 {
@@ -133,7 +148,8 @@ main .main_left
 }
 .main_right
 {
-    width: 30%;
+    background-color: #022D54;
+    width: 35%;
     margin-left: 50px;
 }
 .main_right h3

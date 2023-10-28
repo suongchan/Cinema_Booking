@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "OrderDetailTicket")
 @Getter
@@ -17,13 +19,10 @@ public class OrderDetailTicketEntity {
     @JoinColumn(name = "idOrder")
     private OrderEntity orderEntity;
 
+    @OneToMany(mappedBy = "orderDetailTicketEntity", cascade = CascadeType.ALL)
+    private List<SeatStatusEntity> seatStatusEntities;
+
     @ManyToOne
-    @JoinColumn(name= "idShowTime")
+    @JoinColumn(name = "idShowtime")
     private ShowtimeEntity showtimeEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "idChair")
-    private ChairEntity chairEntity;
-
-    private int quantity;
 }

@@ -19,4 +19,5 @@ public class OrderDetailServiceImpl implements OrderDetailServiceService {
     public List<OrderDetailServiceEntity> getAllByOrderId(OrderEntity orderEntity) {
         return orderDetailServiceRepository.findAllByOrderEntity(orderEntity);
     }
+
 }

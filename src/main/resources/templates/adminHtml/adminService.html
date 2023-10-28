@@ -180,7 +180,6 @@
               <td th:text="*{service.image}"></td>
               <td th:text="*{service.nameService}"></td>
               <td th:text="*{service.price}"></td>
-              <td th:text="*{service.status}"></td>
               <td class="payment-status payment-pending">
                 <a class="edit" th:href="@{/admin/editService/{id}(id=${service.idService})}">Cập nhập</a>
                 <a class="delete" th:href="@{/admin/deleteService/{id}(id=${service.idService})}">Xóa</a>

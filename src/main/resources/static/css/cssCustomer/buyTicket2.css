@@ -12,6 +12,12 @@ body {
     background-repeat: no-repeat;
     height: 450px;
 }
+/*.chair_ticket[data-status='true'] {*/
+/*    background-color: green;*/
+/*    color: white;*/
+/*}*/
+
+
 header {
     position: relative;
     display: flex;
@@ -162,55 +168,66 @@ nav
     text-align: center;
 }
 
-.container_chair
-{
-    width: 86%;
-    margin-left: 100px;
+.container_chair {
+    width: 76%;
+    margin: 0 auto;
     padding-top: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    /*text-align: center;*/
 }
-.container_chair h3
-{
+
+.container_chair h3 {
     width: 50%;
     color: white;
     text-align: center;
     border-top: 1px solid #171E63;
     border-bottom: 1px solid #171E63;
     padding: 10px;
-    margin-left: 250px;
+    margin: 0 auto;
 }
-.chair
-{
+
+.chair_ticket.selected {
+    background-color: orange; /* Đổi màu cho ghế đã chọn thành màu cam */
+}
+.chair_ticket[data-status="true"] {
+    background-color: green;
+    pointer-events: none;
+}
+
+
+.chair {
     padding-top: 30px;
-    padding-left: 200px;
-}
-.row_chair
-{
-    padding-top: 15px;
     display: flex;
+    flex-wrap: wrap;
 }
-.column_chair
-{
-    margin-left: 10px;
+
+.column_chair {
+    width: calc(10% - 10px); /* Trừ đi margin-left */
+    margin-left: 5px;
+    margin-top: 8px;
 }
-.row_chair_special .chair_ticket
-{
-background-color: #527EC1;
+
+.row_chair_special .chair_ticket {
+    background-color: #527EC1;
 }
-.row_chair_vip .chair_ticket
-{
+
+.row_chair_vip .chair_ticket {
     background-color: chocolate;
 }
-.chair_ticket
-{
+
+.chair_ticket {
     font-weight: 600;
     border: #0D0942;
     border-radius: 5px;
-    width: 50px;
+    width: 100%;
 }
-.chair_ticket:hover
-{
-    background: linear-gradient(to bottom, #ea70d6, transparent);
+
+.chair_ticket:hover {
+    background: #770464;
 }
+
 .container_checkout
 {
     display: flex;

@@ -3,7 +3,6 @@ package com.example.cinema_booking.service.impl;
 import com.example.cinema_booking.entity.ChairEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
-import com.example.cinema_booking.entity.ShowtimeEntity;
 import com.example.cinema_booking.repository.ChairRepository;
 import com.example.cinema_booking.service.ChairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +55,13 @@ public class ChairServiceImpl implements ChairService {
             }
         }
     }
+
+
+    @Override
+    public void saveAllChairs(List<ChairEntity> chairs) {
+        chairRepository.saveAll(chairs);
+    }
+
+
 
 }

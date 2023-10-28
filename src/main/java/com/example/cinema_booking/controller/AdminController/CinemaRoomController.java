@@ -49,14 +49,31 @@ public class CinemaRoomController {
         return "adminHtml/addRoom"; // Trả về trang thêm phim (addFilm.html)
     }
     @PostMapping("addRoom")
-    public String addFilm(@ModelAttribute("rooms") CinemaRoomEntity cinemaRoom) {
-
+    public String addRoom(@ModelAttribute("room") CinemaRoomEntity cinemaRoom) {
+        // Tạo phòng chiếu
         roomService.addRoom(cinemaRoom);
-
         chairService.createChair(cinemaRoom);
+
+        // Lấy danh sách ghế từ phòng chiếu vừa tạo
+        List<ChairEntity> chairs = cinemaRoom.getChairs();
+
+        if (chairs != null) {
+            // Duyệt qua danh sách ghế
+            for (ChairEntity chair : chairs) {
+                // Kiểm tra xem ghế đã tồn tại trong cơ sở dữ liệu chưa
+                if (chair.getIdChair() == null) {
+                    // Ghế chưa tồn tại, thì tạo mới và đặt trạng thái ghế là khả dụng
+                    chair.setOccupied(false);
+                    chairService.createChair(chair.getCinemaRoom());
+                } else {
+                    // Ghế đã tồn tại trong cơ sở dữ liệu, không cần thực hiện gì
+                }
+            }
+        }
 
         return "redirect:/admin/roomList";
     }
+
 
     @GetMapping("/editRoom/{id}")
     public String editFilmPage(@PathVariable Long id, Model model) {

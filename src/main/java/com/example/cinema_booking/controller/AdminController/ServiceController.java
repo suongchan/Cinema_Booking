@@ -22,7 +22,7 @@ public class ServiceController {
     private ServiceService serviceService;
     @GetMapping("serviceList")
     public String listService(Model model) {
-        List<ServiceEntity> service = serviceService.getAllService();
+       List<ServiceEntity> service = serviceService.getAllService();
         model.addAttribute("services", service);
         return "adminHtml/adminService";
     }

@@ -19,7 +19,6 @@
 
         private String nameChair;
 
-
         @ManyToOne
         @JoinColumn(name = "cinema_room_id")
         private CinemaRoomEntity cinemaRoom;

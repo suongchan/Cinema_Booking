@@ -1,7 +1,5 @@
 package com.example.cinema_booking.service;
 
-import com.example.cinema_booking.domain.Cinema;
-import com.example.cinema_booking.domain.Service;
 import com.example.cinema_booking.entity.ServiceEntity;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;

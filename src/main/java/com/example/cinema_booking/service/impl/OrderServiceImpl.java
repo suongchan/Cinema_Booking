@@ -3,16 +3,15 @@ package com.example.cinema_booking.service.impl;
 import com.example.cinema_booking.converter.SignatureGenerator;
 import com.example.cinema_booking.domain.Order;
 import com.example.cinema_booking.domain.OrderDetail;
-import com.example.cinema_booking.entity.OrderDetailServiceEntity;
-import com.example.cinema_booking.entity.OrderDetailTicketEntity;
-import com.example.cinema_booking.entity.OrderEntity;
-import com.example.cinema_booking.repository.OrderRepository;
+import com.example.cinema_booking.entity.*;
+import com.example.cinema_booking.repository.*;
 import com.example.cinema_booking.service.OrderDetailServiceService;
 import com.example.cinema_booking.service.OrderDetailTicketService;
 import com.example.cinema_booking.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +23,21 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private ShowtimeRepository showtimeRepository;
+
+
+    @Autowired
     private OrderDetailTicketService orderDetailTicketService;
 
     @Autowired
     private OrderDetailServiceService orderDetailServiceService;
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private OrderDetailTicketRepository orderDetailTicketRepository;
+
+    @Autowired
+    private OrderDetailServiceRepository orderDetailServiceRepository;
 
 
     @Override
@@ -52,15 +62,15 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDetailTicketEntity> orderDetailTicketEntities = orderDetailTicketService.getAllByOrderId(orderEntity);
         List<OrderDetailServiceEntity> orderDetailServiceEntities = orderDetailServiceService.getAllByOrderId(orderEntity);
 
-        for (OrderDetailTicketEntity orderDetailTicketEntity: orderDetailTicketEntities) {
+        for (OrderDetailTicketEntity orderDetailTicketEntity : orderDetailTicketEntities) {
             OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setName(orderDetailTicketEntity.getShowtimeEntity().getFilmEntity().getNameFilm());
-            orderDetail.setPrice(orderDetailTicketEntity.getShowtimeEntity().getFilmEntity().getPrice());
+            orderDetail.setName(orderDetailTicketEntity.getOrderEntity().getShowtimeEntity().getFilmEntity().getNameFilm());
+            orderDetail.setPrice(orderDetailTicketEntity.getOrderEntity().getShowtimeEntity().getFilmEntity().getPrice());
             orderDetail.setQuantity(1);
             orderDetails.add(orderDetail);
         }
 
-        for (OrderDetailServiceEntity orderDetailServiceEntity: orderDetailServiceEntities) {
+        for (OrderDetailServiceEntity orderDetailServiceEntity : orderDetailServiceEntities) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setName(orderDetailServiceEntity.getServiceEntity().getNameService());
             orderDetail.setPrice(orderDetailServiceEntity.getServiceEntity().getPrice());
@@ -85,4 +95,19 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

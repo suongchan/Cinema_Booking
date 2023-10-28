@@ -39,6 +39,8 @@ public class FilmEntity {
     private List<ShowtimeEntity> showsEntities;
     private Long price;
 
+
+
 //    @DateTimeFormat(pattern ="yyyy-MM-dd")
 //    private Date showtime;
 

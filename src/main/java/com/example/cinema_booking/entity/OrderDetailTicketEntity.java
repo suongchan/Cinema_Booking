@@ -17,13 +17,14 @@ public class OrderDetailTicketEntity {
     @JoinColumn(name = "idOrder")
     private OrderEntity orderEntity;
 
+    @OneToOne
+    @JoinColumn(name = "idSeat")
+    private SeatStatusEntity seatStatusEntity;
+
     @ManyToOne
-    @JoinColumn(name= "idShowTime")
+    @JoinColumn(name = "idShowtime")
     private ShowtimeEntity showtimeEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "idChair")
-    private ChairEntity chairEntity;
-
-    private int quantity;
+    public void setSeatStatusEntities(String selectedChairs) {
+    }
 }

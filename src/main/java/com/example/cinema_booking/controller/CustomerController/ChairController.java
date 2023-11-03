@@ -1,33 +1,26 @@
 package com.example.cinema_booking.controller.CustomerController;
 
 import com.example.cinema_booking.domain.Chair;
-import com.example.cinema_booking.domain.CinemaRoom;
-import com.example.cinema_booking.entity.ChairEntity;
-import com.example.cinema_booking.entity.CinemaEntity;
-import com.example.cinema_booking.entity.FilmEntity;
-import com.example.cinema_booking.entity.ShowtimeEntity;
-import com.example.cinema_booking.repository.ShowtimeRepository;
-import com.example.cinema_booking.service.ChairService;
-import com.example.cinema_booking.service.CinemaService;
-import com.example.cinema_booking.service.FilmService;
-import com.example.cinema_booking.service.ShowtimeService;
+import com.example.cinema_booking.domain.Cinema;
+import com.example.cinema_booking.entity.*;
+import com.example.cinema_booking.exception.CustomerNotFoundException;
+import com.example.cinema_booking.repository.SeatStatusRepository;
+import com.example.cinema_booking.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.security.Principal;
+import java.sql.SQLOutput;
 import java.util.*;
 
 @Controller
 @RequestMapping("customer")
 public class ChairController {
-    @Autowired
-    private FilmService filmService;
-
-    @Autowired
-    private CinemaService cinemaService;
 
     @Autowired
     private ShowtimeService showtimeService;
@@ -35,35 +28,57 @@ public class ChairController {
     @Autowired
     private ChairService chairService;
     @Autowired
-    private ShowtimeRepository showtimeRepository;
+    private SeatStatusService seatStatusService;
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    private ServiceService serviceService;
+
     @GetMapping("listChair/{id}")
-    public String listShowtime(@PathVariable Long id, Model model) {
+    public String listChair(@PathVariable Long id, Model model) {
         ShowtimeEntity showtime = showtimeService.getShowtimeById(id);
-        List<ChairEntity> chairs = chairService.getChairsByShowtime(showtime);
-        System.out.println(chairs);
-//        setChairName(chairs); // Thiết lập nameChair cho từng ghế
-
-
-        model.addAttribute("chairs", chairs);
+        List<SeatStatusEntity> seatStatus =  seatStatusService.getSeatStatusEntitiesByShowtime(id);
         model.addAttribute("showtime", showtime);
+        model.addAttribute("seatStatus", seatStatus);
+
         return "customerHtml/buyTicket2";
     }
-//        private void setChairName(List<ChairEntity> chairs) {
-//            char row = 'A'; // Bắt đầu từ hàng A
-//            int column = 1; // Bắt đầu từ cột 1
-//
-//            for (ChairEntity chair : chairs) {
-//                chair.setNameChair(row + Integer.toString(column));
-//                column++;
-//
-//                // Nếu đạt cột 10, di chuyển đến hàng tiếp theo và reset cột về 1
-//                if (column > 10) {
-//                    row++;
-//                    column = 1;
-//                }
-//                System.out.println(chair);
-//            }
-//
-//        }
+
+
+    @GetMapping("buyPopCorn/{id}")
+    public String listPopcorn(@PathVariable Long id, Model model,@RequestParam String selectedChairs) {
+        ShowtimeEntity showtime = showtimeService.getShowtimeById(id);
+        List<ServiceEntity> service = serviceService.getAllService();
+        model.addAttribute("showtime", showtime);
+        model.addAttribute("services", service);
+        System.out.println(selectedChairs);
+        return "customerHtml/buyPopcorn";
+    }
+
+    @PostMapping("/updateSeatStatus")
+    public ResponseEntity<String> updateSeatStatus(@RequestBody Map<String, Object> requestData) {
+        System.out.println("dhksjfhjsdg");
+        List<String> selectedChairs = (List<String>) requestData.get("selectedChairs");
+        Long showtimeId = Long.parseLong(requestData.get("showtimeId").toString());
+
+        try {
+            // Cập nhật trạng thái của ghế đã chọn
+            seatStatusService.updateSeatStatus(showtimeId, selectedChairs);
+            System.out.println(showtimeId);
+            System.out.println(selectedChairs);
+
+            // Trả về thông báo thành công
+            return ResponseEntity.ok("Seat status updated successfully");
+        } catch (Exception e) {
+            // Xử lý lỗi nếu cần
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating seat status");
+        }
+    }
+
+    @GetMapping("/confirmationPage")
+    public String confirmationPage(Model model) {
+      return "redirect:/customer/buyPopCorn/{id}";
+    }
+
 
 }

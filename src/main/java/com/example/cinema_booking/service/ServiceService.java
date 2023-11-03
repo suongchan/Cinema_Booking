@@ -18,4 +18,6 @@ public interface ServiceService {
     void updateService(ServiceEntity service) throws UserPrincipalNotFoundException;
 
     void deleteService(Long id) throws UserPrincipalNotFoundException;
+
+    ServiceEntity getServiceByName(String nameService);
 }

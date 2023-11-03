@@ -38,4 +38,5 @@ public class OrderEntity {
 
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
     private List<OrderDetailServiceEntity> orderDetailServiceEntities;
+
 }

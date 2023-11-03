@@ -7,4 +7,7 @@ public interface OrderService {
     OrderEntity getOrderById(Long idOrder);
 
     Order setOrder(OrderEntity orderEntity);
+
+    void createOrder(OrderEntity orderEntity);
+
 }

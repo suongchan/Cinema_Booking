@@ -113,7 +113,7 @@
               <td>
                 <span th:if="${T(java.time.LocalDate).now().isBefore(film.dateStart)}">Sắp chiếu</span>
                 <span th:if="${T(java.time.LocalDate).now().isAfter(film.dateEnd)}">Đã chiếu</span>
-                <span th:if="${T(java.time.LocalDate).now().isEqual(film.dateStart) or (T(java.time.LocalDate).now().isAfter(film.dateStart) and T(java.time.LocalDate).now().isBefore(film.dateEnd))}">Đang chiếu</span>
+                <span th:if="${T(java.time.LocalDate).now().isEqual(film.dateStart) or T(java.time.LocalDate).now().isAfter(film.dateStart) and T(java.time.LocalDate).now().isBefore(film.dateEnd) or T(java.time.LocalDate).now().isEqual(film.dateEnd)}">Đang chiếu</span>
 
               </td>
               <td th:text="*{film.price}"></td>

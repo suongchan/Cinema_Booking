@@ -21,4 +21,5 @@ public class OrderDetailServiceEntity {
     @JoinColumn(name= "idService")
     private ServiceEntity serviceEntity;
     private int quantity;
+
 }

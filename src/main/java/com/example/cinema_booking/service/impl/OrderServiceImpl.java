@@ -10,12 +10,14 @@ import com.example.cinema_booking.repository.OrderRepository;
 import com.example.cinema_booking.service.OrderDetailServiceService;
 import com.example.cinema_booking.service.OrderDetailTicketService;
 import com.example.cinema_booking.service.OrderService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -84,5 +86,12 @@ public class OrderServiceImpl implements OrderService {
         order.setSignature(signature);
         return order;
     }
+
+    @Override
+    public void createOrder(OrderEntity orderEntity) {
+        orderRepository.save(orderEntity);
+    }
+
+
 
 }

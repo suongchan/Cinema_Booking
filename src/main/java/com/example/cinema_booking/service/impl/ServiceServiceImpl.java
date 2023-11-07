@@ -63,4 +63,9 @@ public class ServiceServiceImpl implements ServiceService {
             throw new UserPrincipalNotFoundException("Không tìm thấy khách hàng với ID " + id);
         }
     }
+
+    @Override
+    public ServiceEntity getServiceByName(String nameService) {
+        return serviceRepository.getServiceEntitiesByNameService(nameService);
+    }
 }

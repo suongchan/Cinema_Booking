@@ -390,7 +390,7 @@
               <td></td>
             </tr>
             <tr class="cinema" th:each="cinema:${cinema}">
-              <td th:text="*{cinema.imageCinema}"></td>
+              <td> <img class="img-film" th:src="@{'/images/' + ${cinema.imageCinema}}" alt="java"> </td>
               <td th:text="*{cinema.nameCinema}"></td>
               <td th:text="*{cinema.addressCinema}"></td>
               <td th:text="*{cinema.city}"></td>

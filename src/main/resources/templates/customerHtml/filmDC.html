@@ -28,8 +28,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">PHIM <span class="arrow">▼</span></a>
                 <ul class="sub-menu">
-                  <li><a class="sub-menu-item" href="#">PHIM ĐANG CHIẾU</a></li>
-                  <li><a class="sub-menu-item" href="#">PHIM SẮP CHIẾU</a></li>
+                  <li><a class="sub-menu-item" th:href="@{/film/dang-chieu}">PHIM ĐANG CHIẾU</a></li>
+                  <li><a class="sub-menu-item" th:href="@{/film/sap-chieu}">PHIM SẮP CHIẾU</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -46,8 +46,8 @@
                   XIN CHÀO : SUONGCHAN <span class="arrow">▼</span>
                 </a>
                 <ul class="dropdown-menu">
-<!--                  <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>-->
-<!--                  <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>-->
+                  <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
+                  <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
 
                 </ul>
               </li>
@@ -60,37 +60,18 @@
 </header>
 
 <main>
+  <h4 class="filmDC">PHIM ĐANG CHIẾU</h4>
   <div class="controller_main">
     <div class="controller_film">
       <div class="film" th:each=" f : ${filmDC}">
-        <div class="column column_left">
-          <a th:href="@{'/film/detail/' + ${f.idFilm}}"><img src="../../static/image/film1.png"></a>
-        </div>
-        <div class="column column_right">
-          <a href="#"><h3 th:text="${f.nameFilm}"></h3></a>
-          <p class="timeFilm" th:text="'Thời lượng: '+${f.time}+' phút'"></p>
-          <p th:text="'Thể loại: '+${f.category.nameCategory}"> </p>
-          <div class="order">
-            <div id="videoContainer" class="videoContainer" style="display: none;" th:each=" f : ${filmDC}">
-              <iframe th:src="${f.trailer}"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowfullscreen></iframe>
-              <button id="closeVideo" class="closeVideo"><ion-icon name="exit-outline"></ion-icon></button>
-            </div>
-            <a th:href="@{/customer/listShowtime/{id}(id=${f.idFilm})}">
-              <span class="ticket">
-              <img src="../../static/image/ticket.png">
-              Đặt Vé
-            </span>
+            <a th:href="@{'/film/detail/' + ${f.idFilm}}">
+                <div class="image-container">
+                  <img th:src="@{'/images/' + ${f.imageFilm}}" alt="java">
+                  <div class="play-button">Xem chi tiết</div>
+                </div>
+                <h5 th:text="${f.nameFilm}"></h5>
             </a>
-            <a class="showTrailer">
-                <span id="showTrailer">
-                    <img src="../../static/image/trailer.png">
-                    Xem Trailer
-                </span>
-            </a>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>

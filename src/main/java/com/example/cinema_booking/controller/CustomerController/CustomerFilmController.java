@@ -3,7 +3,6 @@ package com.example.cinema_booking.controller.CustomerController;
 
 import com.example.cinema_booking.domain.Film;
 import com.example.cinema_booking.entity.FilmEntity;
-import com.example.cinema_booking.service.CategoryService;
 import com.example.cinema_booking.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

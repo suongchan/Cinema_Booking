@@ -27,10 +27,10 @@ public class PaymentController {
         Order order = orderService.setOrder(orderEntity);
 
         // call API thanh toan, mo 2 dong nay thi tat dong duoi
-//        String url = paymentAPI.getQrFromOtherClient(order);
-//        return "redirect:" + url;
+        String url = paymentAPI.getQrFromOtherClient(order);
+        return "redirect:" + url;
 
-        return "redirect:/payment/success";
+//        return "redirect:/payment/success";
     }
 
     @GetMapping("success")

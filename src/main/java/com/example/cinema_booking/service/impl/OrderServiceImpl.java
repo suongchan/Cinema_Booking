@@ -81,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
 //                  "orderCode", "99999999"
         );
 
-        String ChecksumKey = "22ee21ab306b80fac1782bb426e6140498bc4b5b9f483f30d4883f320731e29e";
+        String ChecksumKey = "55b9653213f256262c00ea11cd1c2e6e8de10eee36345f36209daff395f15060";
         String signature = SignatureGenerator.generateSignature(params, ChecksumKey);
         order.setSignature(signature);
         return order;

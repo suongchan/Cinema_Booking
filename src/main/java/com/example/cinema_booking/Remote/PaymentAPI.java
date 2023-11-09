@@ -29,9 +29,8 @@ public class PaymentAPI {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("x-client-id", "9f9afe18-099b-4cd0-81c1-fc229326dccf");
-        headers.set("x-api-key", "f13eb249-fa4d-4a01-95f6-3656f8d81406");
-
+        headers.set("x-client-id", "7e515daa-7e16-4bb2-ba5f-72919c2eb772");
+        headers.set("x-api-key", "fdc2e080-a604-4c9a-96e0-8656a14d07d9");
 
         HttpEntity<Order> requestEntity = new HttpEntity<>(requestBody, headers);
 

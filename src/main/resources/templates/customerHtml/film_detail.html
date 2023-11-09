@@ -93,7 +93,12 @@
 <!--      <span class="material-symbols-outlined">-->
 <!--              favoritefavoritefavoritefavoritefavorite-->
 <!--      </span>-->
-      <span class="order">Đặt Vé</span>
+        <a th:href="@{/customer/listShowtime/{id}(id=${film.idFilm})}">
+              <span class="ticket">
+              <img src="../../static/image/ticket.png">
+              Đặt Vé
+            </span>
+        </a>
     </div>
 
     <div class="controller_Intro">

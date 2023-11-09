@@ -1,6 +1,7 @@
 package com.example.cinema_booking.controller.AdminController;
 
 import com.example.cinema_booking.domain.CinemaRoom;
+import com.example.cinema_booking.entity.ChairEntity;
 import com.example.cinema_booking.entity.CinemaEntity;
 import com.example.cinema_booking.entity.CinemaRoomEntity;
 import com.example.cinema_booking.service.ChairService;
@@ -51,6 +52,20 @@ public class CinemaRoomController {
 
         CinemaRoomEntity cinemaRoomEntity = roomService.addRoom(cinemaRoom);
         chairService.createChair(cinemaRoomEntity);
+        List<ChairEntity> chairs = cinemaRoom.getChairs();
+        if (chairs != null) {
+            // Duyệt qua danh sách ghế
+            for (ChairEntity chair : chairs) {
+                // Kiểm tra xem ghế đã tồn tại trong cơ sở dữ liệu chưa
+                if (chair.getIdChair() == null) {
+                    // Ghế chưa tồn tại, thì tạo mới và đặt trạng thái ghế là khả dụng
+                    chair.setOccupied(false);
+                    chairService.createChair(chair.getCinemaRoom());
+                } else {
+                    // Ghế đã tồn tại trong cơ sở dữ liệu, không cần thực hiện gì
+                }
+            }
+        }
         return "redirect:/admin/roomList";
     }
 

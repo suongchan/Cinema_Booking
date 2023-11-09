@@ -21,17 +21,40 @@ public class ChairServiceImpl implements ChairService {
 
     @Override
     public void createChair(CinemaRoomEntity cinemaRoom) {
-        int numberChair = cinemaRoom.getNumberChair();
+        int numChairs = cinemaRoom.getNumberChair();
+
+        // Tính toán số hàng và cột
+        int maxChairsPerRow = 10;
+        int numRows = (int) Math.ceil((double) numChairs / maxChairsPerRow);
+        int numColumns = maxChairsPerRow;
+
         List<ChairEntity> chairEntities = new ArrayList<>();
 
-        Long idCinema= cinemaRoom.getCinemaEntity().getIdCinema();
-        for (int i = 1; i <= numberChair ; i++) {
-            ChairEntity chairEntity = new ChairEntity();
-            chairEntity.setCinemaRoom(cinemaRoom);
-            chairEntity.setOccupied(false);
-            chairEntity.setCinemaEntity(new CinemaEntity(idCinema));
-            chairRepository.save(chairEntity);
-            chairEntities.add(chairEntity);
+        Long idCinema = cinemaRoom.getCinemaEntity().getIdCinema();
+
+        int chairCount = 1;
+
+        for (int row = 1; row <= numRows; row++) {
+            for (int col = 1; col <= numColumns; col++) {
+                ChairEntity chairEntity = new ChairEntity();
+                chairEntity.setCinemaRoom(cinemaRoom);
+                chairEntity.setOccupied(false);
+                chairEntity.setCinemaEntity(new CinemaEntity(idCinema));
+
+                // Tạo nameChair dựa trên hàng và cột
+                String nameChair = String.format("%c%d", (char) ('A' + row - 1), col);
+                chairEntity.setNameChair(nameChair);
+
+                chairRepository.save(chairEntity);
+                chairEntities.add(chairEntity);
+
+                chairCount++;
+
+                // Kiểm tra nếu đã tạo đủ số ghế thì dừng
+                if (chairCount > numChairs) {
+                    break;
+                }
+            }
         }
     }
 

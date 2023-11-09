@@ -104,39 +104,39 @@
       </form>
     </div>
 
-      <script>
-        // Function to parse URL parameters
-        // Retrieve the data from sessionStorage
-        var ticket = sessionStorage.getItem("ticket");
-        var nameChair = sessionStorage.getItem("nameChair");
-        var checkoutNumberService = sessionStorage.getItem("checkoutNumberService");
-        var checkoutNameService = sessionStorage.getItem("checkoutNameService");
-        var priceService = sessionStorage.getItem("priceService");
-        var totalPrice = sessionStorage.getItem("totalPrice");
+    <script>
+      // Function to parse URL parameters
+      // Retrieve the data from sessionStorage
+      var ticket = sessionStorage.getItem("ticket");
+      var nameChair = sessionStorage.getItem("nameChair");
+      var checkoutNumberService = sessionStorage.getItem("checkoutNumberService");
+      var checkoutNameService = sessionStorage.getItem("checkoutNameService");
+      var priceService = sessionStorage.getItem("priceService");
+      var totalPrice = sessionStorage.getItem("totalPrice");
+      var selectedChairs = sessionStorage.getItem("selectedChairs");
+      console.log("name: "  + nameChair)
+      console.log(selectedChairs)
+
+      // Display the data on the checkout page as needed
+      document.getElementById("ticket").textContent = ticket;
+      document.getElementById("nameChair").textContent = nameChair;
+      document.querySelector(".checkout_numberService").textContent = checkoutNumberService;
+      document.querySelector(".checkout_nameService").textContent = checkoutNameService;
+      document.querySelector(".priceService").textContent = priceService;
+      document.querySelector(".total_price").textContent = totalPrice;
+
+      document.getElementById("confirmPayment").addEventListener("click", function() {
+        console.log("Button clicked");
         var selectedChairs = sessionStorage.getItem("selectedChairs");
-        console.log("name: "  + nameChair)
+        console.log("selectedChairs:")
         console.log(selectedChairs)
-
-        // Display the data on the checkout page as needed
-        document.getElementById("ticket").textContent = ticket;
-        document.getElementById("nameChair").textContent = nameChair;
-        document.querySelector(".checkout_numberService").textContent = checkoutNumberService;
-        document.querySelector(".checkout_nameService").textContent = checkoutNameService;
-        document.querySelector(".priceService").textContent = priceService;
-        document.querySelector(".total_price").textContent = totalPrice;
-
-        document.getElementById("confirmPayment").addEventListener("click", function() {
-          console.log("Button clicked");
-          var selectedChairs = sessionStorage.getItem("selectedChairs");
-          console.log("selectedChairs:")
-          console.log(selectedChairs)
-          const customerId = document.getElementById("customerInfo").getAttribute("data-customer-id");
-          const showtimeId = document.getElementById("showtimeInfo").getAttribute("data-showtime-id");
-          let totalPrice = document.querySelector(".total_price").textContent;
-          totalPrice = parseInt(totalPrice.replace(/[^0-9]/g, ''));
-          const nameChair = document.getElementById("nameChair").textContent;
-          const checkoutNameService = document.getElementById("checkoutNameService").textContent;
-          const checkoutNumberService = document.getElementById("checkoutNumberService").textContent;
+        const customerId = document.getElementById("customerInfo").getAttribute("data-customer-id");
+        const showtimeId = document.getElementById("showtimeInfo").getAttribute("data-showtime-id");
+        let totalPrice = document.querySelector(".total_price").textContent;
+        totalPrice = parseInt(totalPrice.replace(/[^0-9]/g, ''));
+        const nameChair = document.getElementById("nameChair").textContent;
+        const checkoutNameService = document.getElementById("checkoutNameService").textContent;
+        const checkoutNumberService = document.getElementById("checkoutNumberService").textContent;
 
 
 // Tìm tất cả các kết hợp của "Số lượng:" và "Dịch vụ:"
@@ -153,59 +153,59 @@
 //           }
 
 
-          console.log("Customer ID:", customerId);
-          console.log("Showtime ID:", showtimeId);
-          console.log("Total Price:", totalPrice);
-          console.log("Name Ticket:", nameChair);
-          // console.log("Name Service:", nameService);
-          // console.log("Number Service:", numberService);
-          const selectedChairsArray = selectedChairs.split('_');
-          const orderData = {
-            selectedChairs: selectedChairsArray,
-            totalPrice: totalPrice,
-            nameTicket: nameChair,
-            customerId: customerId,
-            showtimeId: showtimeId,
-            checkoutNumberService: checkoutNumberService
-          };
+        console.log("Customer ID:", customerId);
+        console.log("Showtime ID:", showtimeId);
+        console.log("Total Price:", totalPrice);
+        console.log("Name Ticket:", nameChair);
+        // console.log("Name Service:", nameService);
+        // console.log("Number Service:", numberService);
+        const selectedChairsArray = selectedChairs.split('_');
+        const orderData = {
+          selectedChairs: selectedChairsArray,
+          totalPrice: totalPrice,
+          nameTicket: nameChair,
+          customerId: customerId,
+          showtimeId: showtimeId,
+          checkoutNumberService: checkoutNumberService
+        };
 
-          console.log("Order Data:", orderData);
+        console.log("Order Data:", orderData);
 
-          fetch('/customer/createOrder', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(orderData),
-          })
-                  .then(response => {
-                    if (response.ok) {
-                      // Kiểm tra nếu phản hồi là JSON
-                      const contentType = response.headers.get('content-type');
-                      if (contentType && contentType.includes('application/json')) {
-                        return response.json();
-                      } else {
-                        // Phản hồi không phải là JSON, xử lý theo cách khác nếu cần
-                        // Ví dụ: Chuyển hướng đến trang thanh toán
-                        // window.location.href = "/customer/payment";
-                      }
+        fetch('/customer/createOrder', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData),
+        })
+                .then(response => {
+                  if (response.ok) {
+                    // Kiểm tra nếu phản hồi là JSON
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                      return response.json();
                     } else {
-                      throw new Error('Failed to create order');
+                      // Phản hồi không phải là JSON, xử lý theo cách khác nếu cần
+                      // Ví dụ: Chuyển hướng đến trang thanh toán
+                      window.location.href = "/payment/{idOder}";
                     }
-                  })
-                  .then(data => {
-                    console.log('Success:', data);
-                  })
-                  .catch((error) => {
-                    console.error('Error:', error);
-                    // Xử lý lỗi và hiển thị thông báo lỗi cho người dùng
-                  });
+                  } else {
+                    throw new Error('Failed to create order');
+                  }
+                })
+                .then(data => {
+                  console.log('Success:', data);
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                  // Xử lý lỗi và hiển thị thông báo lỗi cho người dùng
+                });
 
 
-        });
+      });
 
 
-      </script>
+    </script>
 
 
   </div>

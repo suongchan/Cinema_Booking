@@ -16,4 +16,6 @@ public interface SeatStatusService {
     SeatStatusEntity getSeats(Long showtimeId, String selectedChairs);
 
     SeatStatusEntity getSeatStatusById(Long seatId);
+
+    void setStatus(Long idOrder);
 }

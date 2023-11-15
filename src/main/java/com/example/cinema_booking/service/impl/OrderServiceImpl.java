@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         order.setBuyerName(orderEntity.getCustomerEntity().getName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
         order.setReturnUrl("http://localhost:8080/payment/success/" + order.getOrderCode());
-        order.setCancelUrl("Url huy thanh toan");
+        order.setCancelUrl("http://localhost:8080/payment/failed");
 
         List<OrderDetail> orderDetails = new ArrayList<>();
         List<OrderDetailTicketEntity> orderDetailTicketEntities = orderDetailTicketService.getAllByOrderId(orderEntity);

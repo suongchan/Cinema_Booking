@@ -54,7 +54,7 @@
 
 <main>
   <div class="container_checkout">
-    <p id="seatHoldingTime">00:30</p>
+    <p id="seatHoldingTime"></p>
   </div>
   <div class="controller_main">
     <div class="main_left">
@@ -203,6 +203,44 @@
 
 
       });
+
+      var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
+
+      // Lấy giá trị thời gian đếm ngược từ localStorage, mặc định là 30 giây nếu không tìm thấy
+      var countdownSeconds = parseInt(localStorage.getItem("countdownSeconds")) || 30;
+
+      // Cập nhật hiển thị ban đầu
+      updateCountdownDisplay();
+
+      // Bắt đầu đếm ngược
+      var countdownTimer = setInterval(function() {
+        if (countdownSeconds > 0) {
+          countdownSeconds--;
+          updateCountdownDisplay();
+        } else {
+          clearInterval(countdownTimer);
+          console.log("Thời gian đã hết!");
+        }
+      }, 1000);
+
+      // Hàm cập nhật hiển thị thời gian
+      function updateCountdownDisplay() {
+        var minutes = Math.floor(countdownSeconds / 60);
+        var seconds = countdownSeconds % 60;
+
+        minutes = String(minutes).padStart(2, '0');
+        seconds = String(seconds).padStart(2, '0');
+
+        seatHoldingTimeElement.textContent = minutes + ":" + seconds;
+
+        // Lưu thời gian đếm ngược vào localStorage
+        localStorage.setItem("countdownSeconds", countdownSeconds.toString());
+        if (countdownSeconds === 0) {
+          seatHoldingTimeElement.style.display = 'none';
+        }
+      }
+
+
 
 
     </script>

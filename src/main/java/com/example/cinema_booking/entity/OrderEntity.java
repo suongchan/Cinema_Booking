@@ -25,6 +25,7 @@ public class OrderEntity {
     private Long totalPrice;
 
     private Integer point;
+    private Boolean status;
     @ManyToOne
     @JoinColumn(name= "idShowTime")
     private ShowtimeEntity showtimeEntity;

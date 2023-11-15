@@ -135,7 +135,6 @@ public class OrderController {
             // Save the OrderEntity to the database
             orderService.createOrder(orderEntity);
 
-
             for (String seat : selectedChairs) {
                 System.out.println(seat + "/");
 

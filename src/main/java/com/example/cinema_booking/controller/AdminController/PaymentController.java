@@ -7,6 +7,7 @@ import com.example.cinema_booking.repository.OrderDetailServiceRepository;
 import com.example.cinema_booking.service.OrderDetailServiceService;
 import com.example.cinema_booking.service.OrderDetailTicketService;
 import com.example.cinema_booking.service.OrderService;
+import com.example.cinema_booking.service.SeatStatusService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class PaymentController {
 
     @Autowired
     private OrderDetailServiceService orderDetailServiceService;
+
+    @Autowired
+    private SeatStatusService seatStatusService;
 
 
     @GetMapping("{idOrder}")
@@ -63,5 +67,13 @@ public class PaymentController {
             return "error";
         }
     }
+
+    @GetMapping("failed/{idOrder}")
+    public String failed(@PathVariable String idOrder){
+        Long orderId = Long.parseLong(idOrder);
+        seatStatusService.setStatus(orderId);
+        return "failed";
+    }
+
 
 }

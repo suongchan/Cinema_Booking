@@ -6,5 +6,8 @@
 </head>
 <body>
 Đã thanh toán thành công
+<div class="film" th:each="o : ${orderHistory}">
+        <h5 th:text="${o.id}"></h5>
+</div>
 </body>
 </html>

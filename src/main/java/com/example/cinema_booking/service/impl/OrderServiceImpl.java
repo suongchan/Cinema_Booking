@@ -45,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         order.setOrderCode(orderEntity.getIdOrder());
 //        order.setOrderCode(99999999L);
+        System.out.println("tiền" + orderEntity.getAmount());
         order.setAmount(orderEntity.getAmount());
         order.setDescription(orderEntity.getCustomerEntity().getEmail());
         order.setCustomer_id(orderEntity.getCustomerEntity().getIdCustomer());

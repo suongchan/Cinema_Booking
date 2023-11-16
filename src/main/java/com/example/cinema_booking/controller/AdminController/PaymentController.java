@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -45,12 +46,13 @@ public class PaymentController {
 
 
     @GetMapping("{idOrder}")
-    public String payment(@PathVariable Long idOrder) {
+    public String payment(@PathVariable Long idOrder, RedirectAttributes redirectAttributes) {
         OrderEntity orderEntity = orderService.getOrderById(idOrder);
         Order order = orderService.setOrder(orderEntity);
 
         // call API thanh toan, mo 2 dong nay thi tat dong duoi
         String url = paymentAPI.getQrFromOtherClient(order);
+        redirectAttributes.addAttribute("idOrder", order.getOrderCode());
         return "redirect:" + url;
 
 //        return "redirect:/payment/success";

@@ -128,10 +128,47 @@
     var nameChairElement = document.getElementById("nameChair");
     nameChairElement.textContent = selectedChairs + " ";
 
-    var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
-    var countdownSeconds = parseInt(sessionStorage.getItem("countdownSeconds")) || 30;  // Mặc định là 180 giây nếu không tìm thấy
+    // var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
+    // var countdownSeconds = parseInt(sessionStorage.getItem("countdownSeconds")) || 30;  // Mặc định là 180 giây nếu không tìm thấy
+    //
+    // var countdownTimer = setInterval(function() {
+    //   var minutes = Math.floor(countdownSeconds / 60);
+    //   var seconds = countdownSeconds % 60;
+    //
+    //   minutes = String(minutes).padStart(2, '0');
+    //   seconds = String(seconds).padStart(2, '0');
+    //
+    //   seatHoldingTimeElement.textContent = minutes + ":" + seconds;
+    //
+    //   if (countdownSeconds > 0) {
+    //     countdownSeconds--;
+    //   } else {
+    //     clearInterval(countdownTimer);
+    //     console.log("Thời gian đã hết!");
+    //   }
+    // }, 1000);
 
+    var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
+
+    // Lấy giá trị thời gian đếm ngược từ sessionStorage, mặc định là 180 giây nếu không tìm thấy
+    var countdownSeconds = parseInt(localStorage.getItem("countdownSeconds")) || 30;
+
+    // Cập nhật hiển thị ban đầu
+    updateCountdownDisplay();
+
+    // Bắt đầu đếm ngược
     var countdownTimer = setInterval(function() {
+      if (countdownSeconds > 0) {
+        countdownSeconds--;
+        updateCountdownDisplay();
+      } else {
+        clearInterval(countdownTimer);
+        console.log("Thời gian đã hết!");
+      }
+    }, 1000);
+
+    // Hàm cập nhật hiển thị thời gian
+    function updateCountdownDisplay() {
       var minutes = Math.floor(countdownSeconds / 60);
       var seconds = countdownSeconds % 60;
 
@@ -140,13 +177,13 @@
 
       seatHoldingTimeElement.textContent = minutes + ":" + seconds;
 
-      if (countdownSeconds > 0) {
-        countdownSeconds--;
-      } else {
-        clearInterval(countdownTimer);
-        console.log("Thời gian đã hết!");
+      // Lưu thời gian đếm ngược vào sessionStorage
+      localStorage.setItem("countdownSeconds", countdownSeconds.toString());
+      if (countdownSeconds === 0) {
+        seatHoldingTimeElement.style.display = 'none';
       }
-    }, 1000);
+    }
+
 
     // Khai báo biến selectedServices và khởi tạo là một mảng rỗng
     var selectedServices = [];

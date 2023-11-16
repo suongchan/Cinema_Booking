@@ -24,7 +24,4 @@ public class OrderDetailTicketEntity {
     @ManyToOne
     @JoinColumn(name = "idShowtime")
     private ShowtimeEntity showtimeEntity;
-
-    public void setSeatStatusEntities(String selectedChairs) {
-    }
 }

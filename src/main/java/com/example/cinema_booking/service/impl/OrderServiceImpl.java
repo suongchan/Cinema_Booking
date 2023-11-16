@@ -6,18 +6,18 @@ import com.example.cinema_booking.domain.OrderDetail;
 import com.example.cinema_booking.entity.OrderDetailServiceEntity;
 import com.example.cinema_booking.entity.OrderDetailTicketEntity;
 import com.example.cinema_booking.entity.OrderEntity;
+import com.example.cinema_booking.entity.OrderHistoryEntity;
+import com.example.cinema_booking.repository.OrderHistoryRepository;
 import com.example.cinema_booking.repository.OrderRepository;
 import com.example.cinema_booking.service.OrderDetailServiceService;
 import com.example.cinema_booking.service.OrderDetailTicketService;
 import com.example.cinema_booking.service.OrderService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -30,6 +30,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDetailServiceService orderDetailServiceService;
+
+    @Autowired
+    private OrderHistoryRepository orderHistoryRepository;
 
 
     @Override
@@ -47,8 +50,8 @@ public class OrderServiceImpl implements OrderService {
         order.setCustomer_id(orderEntity.getCustomerEntity().getIdCustomer());
         order.setBuyerName(orderEntity.getCustomerEntity().getName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://localhost:8080/payment/success");
-        order.setCancelUrl("Url huy thanh toan");
+        order.setReturnUrl("http://localhost:8080/payment/success/" + order.getOrderCode());
+        order.setCancelUrl("http://localhost:8080/payment/failed");
 
         List<OrderDetail> orderDetails = new ArrayList<>();
         List<OrderDetailTicketEntity> orderDetailTicketEntities = orderDetailTicketService.getAllByOrderId(orderEntity);
@@ -88,8 +91,28 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderHistoryEntity saveOrderHistory(OrderEntity orderEntity){
+        OrderHistoryEntity orderHistoryEntity = new OrderHistoryEntity();
+        orderHistoryEntity.setId(orderEntity.getIdOrder());
+        orderHistoryEntity.setOrderDateTime(orderEntity.getOrderDateTime());
+        orderHistoryEntity.setPoint(orderEntity.getPoint());
+        orderHistoryEntity.setCustomerId(orderEntity.getCustomerEntity().getIdCustomer());
+        orderHistoryEntity.setTotalPrice(orderEntity.getTotalPrice());
+        orderHistoryEntity.setAmount(orderEntity.getAmount());
+        orderHistoryEntity.setIdShowtime(orderEntity.getShowtimeEntity().getIdShow());
+        return orderHistoryRepository.save(orderHistoryEntity);
+    }
+
+    @Override
     public void createOrder(OrderEntity orderEntity) {
+        orderEntity.setStatus(false);
         orderRepository.save(orderEntity);
+    }
+
+    @Override
+    public OrderEntity setStatus(OrderEntity orderEntity) {
+        orderEntity.setStatus(true);
+        return orderRepository.save(orderEntity);
     }
 
 

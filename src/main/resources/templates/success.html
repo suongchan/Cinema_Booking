@@ -1,10 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mua vé</title>
+    <title>Thông tin vé</title>
+    <link rel="stylesheet" href="../../static/css/cssCustomer/success.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-Đã thanh toán thành công
+<header>
+    <div class="logo">
+        <img src="../../static/image/logo.png">
+    </div>
+
+    <div class="toolbar">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">TRANG CHỦ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">PHIM</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">RẠP CHIẾU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">TIN TỨC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">LIÊN HỆ</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                XIN CHÀO : SUONGCHAN
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
+                                <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container_checkout">
+        <p id="seatHoldingTime"></p>
+    </div>
+    <div class="controller_main">
+        <div class="main_left">
+            <div class="container_item">
+                <form class="account" th:object="${customer}">
+                    <div id="customerInfo" th:data-customer-id="${customer.idCustomer}">
+                        <h3>Thông Tin khách hàng</h3>
+                        <!--          <input type="hidden" th:field="*{idCustomer}" />-->
+                        <div class="info">
+                            <div class="column">
+                                <span>Họ và Tên:</span>
+                                <p th:text="${customer.name}"></p>
+                                <span>Số Điện Thoại:</span>
+                                <p th:text="${customer.phone}"></p>
+                            </div>
+                            <div class="column">
+                                <span>Email:</span>
+                                <p th:text="${customer.email}"></p>
+                                <span>Địa chỉ:</span>
+                                <p th:text="${customer.address}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="main_right">
+            <form class="showtime" th:object="${showtime}">
+                <div id="showtimeInfo" th:data-showtime-id="${showtime.idShow}">
+                    <h3>THANH TOÁN</h3>
+                    <h3 th:text="${showtime.filmEntity.nameFilm}"></h3>
+                    <span th:text="${showtime.cinemaEntity.nameCinema}"></span>
+                    <span th:text="${showtime.cinemaRoomEntity.nameCinemaRoom}"></span>
+                    <span class="ticket" id="ticket">2 Vé</span>
+                    <h4 class="nameChair" id="nameChair"></h4>
+                    <h4 th:text="${showtime.dateShow} + ', '+ ${showtime.start}"></h4>
+                    <h3 class="total" id="total"></h3>
+                    <h4>DỊCH VỤ</h4>
+                    <span class="checkout_numberService" id="checkoutNumberService"></span>
+                    <span class="checkout_nameService" id="checkoutNameService"></span>
+                    <span class="priceService"></span>
+                    <h4 class="total_price" id="totalPrice"></h4>
+                    <input id="confirmPayment" class="confirm_payment" type="button" value="PAYMENT">
+                </div>
+            </form>
+        </div>
+
+        <script>
+            // Function to parse URL parameters
+            // Retrieve the data from sessionStorage
+            var ticket = sessionStorage.getItem("ticket");
+            var nameChair = sessionStorage.getItem("nameChair");
+            var checkoutNumberService = sessionStorage.getItem("checkoutNumberService");
+            var checkoutNameService = sessionStorage.getItem("checkoutNameService");
+            var priceService = sessionStorage.getItem("priceService");
+            var totalPrice = sessionStorage.getItem("totalPrice");
+            var selectedChairs = sessionStorage.getItem("selectedChairs");
+            console.log("name: "  + nameChair)
+            console.log(selectedChairs)
+
+            // Display the data on the checkout page as needed
+            document.getElementById("ticket").textContent = ticket;
+            document.getElementById("nameChair").textContent = nameChair;
+            document.querySelector(".checkout_numberService").textContent = checkoutNumberService;
+            document.querySelector(".checkout_nameService").textContent = checkoutNameService;
+            document.querySelector(".priceService").textContent = priceService;
+            document.querySelector(".total_price").textContent = totalPrice;
+
+            document.getElementById("confirmPayment").addEventListener("click", function() {
+                console.log("Button clicked");
+                var selectedChairs = sessionStorage.getItem("selectedChairs");
+                console.log("selectedChairs:")
+                console.log(selectedChairs)
+                const customerId = document.getElementById("customerInfo").getAttribute("data-customer-id");
+                const showtimeId = document.getElementById("showtimeInfo").getAttribute("data-showtime-id");
+                let totalPrice = document.querySelector(".total_price").textContent;
+                totalPrice = parseInt(totalPrice.replace(/[^0-9]/g, ''));
+                const nameChair = document.getElementById("nameChair").textContent;
+                const checkoutNameService = document.getElementById("checkoutNameService").textContent;
+                const checkoutNumberService = document.getElementById("checkoutNumberService").textContent;
+
+
+// Tìm tất cả các kết hợp của "Số lượng:" và "Dịch vụ:"
+//           var regex = /Số lượng: (\d+) Dịch vụ: ([^\d]+)(?= Giá:|$)/g;
+//           var matches = checkoutNumberService.matchAll(regex);
+//
+// // Duyệt qua tất cả các kết quả và lấy thông tin
+//           for (const match of matches) {
+//             var numberService = match[1];
+//             var nameService = match[2];
+//
+//             console.log("nameService:", nameService);
+//             console.log("numberService:", numberService);
+//           }
+
+                console.log("Customer ID:", customerId);
+                console.log("Showtime ID:", showtimeId);
+                console.log("Total Price:", totalPrice);
+                console.log("Name Ticket:", nameChair);
+                // console.log("Name Service:", nameService);
+                // console.log("Number Service:", numberService);
+                const selectedChairsArray = selectedChairs.split('_');
+                const orderData = {
+                    selectedChairs: selectedChairsArray,
+                    totalPrice: totalPrice,
+                    nameTicket: nameChair,
+                    customerId: customerId,
+                    showtimeId: showtimeId,
+                    checkoutNumberService: checkoutNumberService
+                };
+
+                console.log("Order Data:", orderData);
+
+                fetch('/customer/createOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData),
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Kiểm tra nếu phản hồi là JSON
+                            const contentType = response.headers.get('content-type');
+                            if (contentType && contentType.includes('application/json')) {
+                                return response.json();
+                            } else {
+                                // Phản hồi không phải là JSON, xử lý theo cách khác nếu cần
+                                // Ví dụ: Chuyển hướng đến trang thanh toán
+                                window.location.href = "/payment/{idOder}";
+                            }
+                        } else {
+                            throw new Error('Failed to create order');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // Xử lý lỗi và hiển thị thông báo lỗi cho người dùng
+                    });
+
+            });
+
+            var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
+
+            // Lấy giá trị thời gian đếm ngược từ localStorage, mặc định là 30 giây nếu không tìm thấy
+            var countdownSeconds = parseInt(localStorage.getItem("countdownSeconds")) || 30;
+
+            // Cập nhật hiển thị ban đầu
+            updateCountdownDisplay();
+
+            // Bắt đầu đếm ngược
+            var countdownTimer = setInterval(function() {
+                if (countdownSeconds > 0) {
+                    countdownSeconds--;
+                    updateCountdownDisplay();
+                } else {
+                    clearInterval(countdownTimer);
+                    console.log("Thời gian đã hết!");
+                }
+            }, 1000);
+
+            // Hàm cập nhật hiển thị thời gian
+            function updateCountdownDisplay() {
+                var minutes = Math.floor(countdownSeconds / 60);
+                var seconds = countdownSeconds % 60;
+
+                minutes = String(minutes).padStart(2, '0');
+                seconds = String(seconds).padStart(2, '0');
+
+                seatHoldingTimeElement.textContent = minutes + ":" + seconds;
+
+                // Lưu thời gian đếm ngược vào localStorage
+                localStorage.setItem("countdownSeconds", countdownSeconds.toString());
+                if (countdownSeconds === 0) {
+                    seatHoldingTimeElement.style.display = 'none';
+                }
+            }
+
+        </script>
+
+    </div>
+</main>
 </body>
 </html>

@@ -112,6 +112,8 @@ public class OrderController {
     public ResponseEntity<String> createOrder(@RequestBody Map<String, Object> orderData) {
         try {
             Long totalPrice = Long.parseLong(orderData.get("totalPrice").toString());
+            Long discount = Long.parseLong(orderData.get("discount").toString());
+            Long amount = Long.parseLong(orderData.get("amount").toString());
             Long customerId = Long.parseLong(orderData.get("customerId").toString());
             Long showtimeId = Long.parseLong(orderData.get("showtimeId").toString());
             List<String> selectedChairs = (List<String>) orderData.get("selectedChairs");
@@ -123,6 +125,10 @@ public class OrderController {
             OrderEntity orderEntity = new OrderEntity();
             orderEntity.setOrderDateTime(LocalDateTime.now());
             orderEntity.setTotalPrice(totalPrice);
+            orderEntity.setAmount(amount);
+            orderEntity.setPoint(Math.toIntExact(discount));
+            System.out.println(discount);
+            System.out.println(amount);
 
             // Retrieve and set the ShowtimeEntity
             ShowtimeEntity showtime = showtimeService.getShowtimeById(showtimeId);

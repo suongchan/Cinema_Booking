@@ -54,7 +54,7 @@
 
 <main>
   <div class="container_checkout">
-    <p id="seatHoldingTime">00:30</p>
+    <p id="seatHoldingTime"></p>
   </div>
   <div class="controller_main">
     <div class="main_left">
@@ -75,6 +75,8 @@
                 <p th:text="${customer.email}"></p>
                 <span>Địa chỉ:</span>
                 <p th:text="${customer.address}"></p>
+                <span>Start:</span>
+                <p id="customerStart" th:text="${customer.star}"></p>
               </div>
             </div>
           </div>
@@ -99,6 +101,13 @@
           <span class="checkout_nameService" id="checkoutNameService"></span>
           <span class="priceService"></span>
           <h4 class="total_price" id="totalPrice"></h4>
+          <h4>ƯU ĐÃI</h4>
+          <input type="text" class="point" value="0" onchange="applyDiscount()">
+          <p id="point">Bạn đã dùng: <span id="usedPoints">0</span> sao</p>
+          <div id="discount">Bạn được giảm: <span id="discountValue"></span></div>
+          <H3>TỔNG THANH TOÁN:</H3>
+          <div id="amount"> <span id="amountValue"></span></div>
+
           <input id="confirmPayment" class="confirm_payment" type="button" value="PAYMENT">
         </div>
       </form>
@@ -117,6 +126,11 @@
       console.log("name: "  + nameChair)
       console.log(selectedChairs)
 
+      var point = 0;
+      var discount = 0;
+      var amount = 0;
+
+
       // Display the data on the checkout page as needed
       document.getElementById("ticket").textContent = ticket;
       document.getElementById("nameChair").textContent = nameChair;
@@ -124,6 +138,44 @@
       document.querySelector(".checkout_nameService").textContent = checkoutNameService;
       document.querySelector(".priceService").textContent = priceService;
       document.querySelector(".total_price").textContent = totalPrice;
+
+      function applyDiscount() {
+        var pointInput = document.querySelector('.point');
+        point = parseInt(pointInput.value);
+
+        if (isNaN(point)) {
+          alert('Vui lòng nhập một số hợp lệ cho điểm.');
+          return;
+        }
+
+        var usedPointsSpan = document.getElementById('usedPoints');
+        usedPointsSpan.textContent = point; // Update displayed used points
+
+        if (point > customerStart) {
+          console.log("Không đủ điểm");
+          alert('Số điểm của bạn không đủ để được giảm giá.');
+        } else {
+          discount = point * 10;
+
+          // Extract numeric value from totalPrice
+          var totalPriceString = document.getElementById('totalPrice').textContent;
+          var totalPrice = parseFloat(totalPriceString.replace(/\D/g, '')); // Remove non-numeric characters
+
+          amount = totalPrice - discount;
+
+          // Check if amount is a valid number
+          if (isNaN(amount) || !isFinite(amount)) {
+            alert('Có lỗi xảy ra khi tính toán tổng thanh toán.');
+            return;
+          }
+
+          var discountElement = document.getElementById('discountValue');
+          discountElement.textContent = "Discount: " + discount;
+
+          var amountElement = document.getElementById('amountValue');
+          amountElement.textContent = "Amount: " + amount;
+        }
+      }
 
       document.getElementById("confirmPayment").addEventListener("click", function() {
         console.log("Button clicked");
@@ -139,20 +191,6 @@
         const checkoutNumberService = document.getElementById("checkoutNumberService").textContent;
 
 
-// Tìm tất cả các kết hợp của "Số lượng:" và "Dịch vụ:"
-//           var regex = /Số lượng: (\d+) Dịch vụ: ([^\d]+)(?= Giá:|$)/g;
-//           var matches = checkoutNumberService.matchAll(regex);
-//
-// // Duyệt qua tất cả các kết quả và lấy thông tin
-//           for (const match of matches) {
-//             var numberService = match[1];
-//             var nameService = match[2];
-//
-//             console.log("nameService:", nameService);
-//             console.log("numberService:", numberService);
-//           }
-
-
         console.log("Customer ID:", customerId);
         console.log("Showtime ID:", showtimeId);
         console.log("Total Price:", totalPrice);
@@ -166,7 +204,9 @@
           nameTicket: nameChair,
           customerId: customerId,
           showtimeId: showtimeId,
-          checkoutNumberService: checkoutNumberService
+          checkoutNumberService: checkoutNumberService,
+          discount: discount,
+          amount: amount
         };
 
         console.log("Order Data:", orderData);
@@ -204,7 +244,49 @@
 
       });
 
+      var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
 
+      // Lấy giá trị thời gian đếm ngược từ localStorage, mặc định là 30 giây nếu không tìm thấy
+      var countdownSeconds = parseInt(localStorage.getItem("countdownSeconds")) || 30;
+
+      // Cập nhật hiển thị ban đầu
+      updateCountdownDisplay();
+
+      // Bắt đầu đếm ngược
+      var countdownTimer = setInterval(function() {
+        if (countdownSeconds > 0) {
+          countdownSeconds--;
+          updateCountdownDisplay();
+        } else {
+          clearInterval(countdownTimer);
+          console.log("Thời gian đã hết!");
+        }
+      }, 1000);
+
+      // Hàm cập nhật hiển thị thời gian
+      function updateCountdownDisplay() {
+        var minutes = Math.floor(countdownSeconds / 60);
+        var seconds = countdownSeconds % 60;
+
+        minutes = String(minutes).padStart(2, '0');
+        seconds = String(seconds).padStart(2, '0');
+
+        seatHoldingTimeElement.textContent = minutes + ":" + seconds;
+
+        // Lưu thời gian đếm ngược vào localStorage
+        localStorage.setItem("countdownSeconds", countdownSeconds.toString());
+        if (countdownSeconds === 0) {
+          seatHoldingTimeElement.style.display = 'none';
+        }
+      }
+
+    </script>
+
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      var customerStart = /*[[${customer.star}]]*/ 0; // Default value if customer.star is null
+      console.log("star: " + customerStart);
+      /*]]>*/
     </script>
 
 

@@ -21,6 +21,7 @@ public class Customer {
     private String email;
     private String address;
     private String rePassword;
+    private Long star;
 
     public String getPassword() {
         return password;

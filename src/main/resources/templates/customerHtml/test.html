@@ -1,283 +1,254 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Mua Đồ Uống</title>
+    <link rel="stylesheet" href="../../static/css/cssCustomer/buyPopcorn.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-        <span>
-      <li class="nav-item dropdown">
-                <select id="cinema" name="cinema.idCinema" th:field="*{cinemas}">
-                <!-- Populate the options with cinema data -->
-                <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
-              </select>
-      </li>
-    </span>
+<header>
+    <div class="logo">
+        <img src="../../static/image/logo.png">
+    </div>
+
+    <div class="toolbar">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">TRANG CHỦ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">PHIM</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">RẠP CHIẾU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">TIN TỨC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">LIÊN HỆ</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                XIN CHÀO : SUONGCHAN
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
+                                <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container_checkout">
+        <p id="seatHoldingTime">00:30</p>
+    </div>
+    <div class="controller_main">
+        <div class="main_left">
+            <div class="container_item">
+                <form class="account" id="account" th:object="${customer}">
+                    <div id="customerInfo" th:data-customer-id="${customer.idCustomer}">
+                        <h3>Thông Tin khách hàng</h3>
+                        <div class="info">
+                            <div class="column">
+                                <span>Họ và Tên:</span>
+                                <p th:text="${customer.name}"></p>
+                                <span>Số Điện Thoại:</span>
+                                <p th:text="${customer.phone}"></p>
+                            </div>
+                            <div class="column">
+                                <span>Email:</span>
+                                <p th:text="${customer.email}"></p>
+                                <span>Địa chỉ:</span>
+                                <p th:text="${customer.address}"></p>
+                                <span>Start:</span>
+                                <p id="customerStart" th:text="${customer.star}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="main_right">
+            <form class="showtime" th:object="${showtime}">
+                <div id="showtimeInfo" th:data-showtime-id="${showtime.idShow}">
+                    <h3 th:text="${showtime.filmEntity.nameFilm}"></h3>
+                    <span th:text="${showtime.cinemaEntity.nameCinema}"></span>
+                    <span th:text="${showtime.cinemaRoomEntity.nameCinemaRoom}"></span>
+                    <span class="ticket" id="ticket">2 Vé</span>
+                    <h4 class="nameChair" id="nameChair"></h4>
+                    <h4 th:text="${showtime.dateShow} + ', '+ ${showtime.start}"></h4>
+                    <h3 class="total" id="total"></h3>
+                    <h4>DỊCH VỤ</h4>
+                    <span class="checkout_numberService" id="checkoutNumberService"></span>
+                    <span class="checkout_nameService" id="checkoutNameService"></span>
+                    <span class="priceService"></span>
+                    <h4 class="total_price" id="totalPrice"></h4>
+                    <h4>ƯU ĐÃI</h4>
+                    <input type="text" class="point" value="0" onchange="applyDiscount()">
+                    <p id="point">Bạn đã dùng: <span id="usedPoints">0</span> sao</p>
+                    <div id="discount">Bạn được giảm: <span id="discountValue"></span></div>
+                    <H3>TỔNG THANH TOÁN:</H3>
+                    <div id="amount"> <span id="amountValue"></span></div>
+                    <input id="confirmPayment" class="confirm_payment" type="button" value="PAYMENT">
+                </div>
+            </form>
+        </div>
+
+        <script>
+
+            // Function to parse URL parameters and retrieve data from sessionStorage
+            var ticket = sessionStorage.getItem("ticket");
+            var nameChair = sessionStorage.getItem("nameChair");
+            var checkoutNumberService = sessionStorage.getItem("checkoutNumberService");
+            var checkoutNameService = sessionStorage.getItem("checkoutNameService");
+            var priceService = sessionStorage.getItem("priceService");
+            var totalPrice = sessionStorage.getItem("totalPrice");
+            var selectedChairs = sessionStorage.getItem("selectedChairs");
+            var customer = document.getElementById("account").textContent;
+
+            // Declare global variables for discount and amount
+            var point = 0;
+            var discount = 0;
+            var amount = 0;
+
+            // Display the data on the checkout page as needed
+            document.getElementById("ticket").textContent = ticket;
+            document.getElementById("nameChair").textContent = nameChair;
+            document.getElementById("account").textContent = customer;
+            document.querySelector(".checkout_numberService").textContent = checkoutNumberService;
+            document.querySelector(".checkout_nameService").textContent = checkoutNameService;
+            document.querySelector(".priceService").textContent = priceService;
+            document.querySelector(".total_price").textContent = totalPrice;
+
+            const customerId = document.getElementById("customerInfo").getAttribute("data-customer-id");
+            const showtimeId = document.getElementById("showtimeInfo").getAttribute("data-showtime-id");
+            console.log(customerId)
+            console.log(showtimeId)
 
 
-      <div class="dateTime" th:each="showtime,iterStat : ${showtimeForFilm}" th:id="'showtimeList-' + ${showtime.cinemaEntity.idCinema}" th:attr="data-showtime-id=${showtime.idShow}">
-          <!-- Lọc lịch chiếu theo rạp và sắp xếp theo ngày -->
-          <ul class="date">
-              <li th:text="${showtime.dateShow}" class="dateShow"></li>
-          </ul>
-          <ul class="date">
-              <li class="start" th:text="${showtime.start}">
-                  <a href="#" class="showtime-link" th:text="${showtime.start}"></a>
-              </li>
-          </ul>
-      </div>
+            // Apply discount function
+            function applyDiscount() {
+                var pointInput = document.querySelector('.point');
+                point = parseInt(pointInput.value);
 
-      <script>
-          document.addEventListener('DOMContentLoaded', function () {
-              const selectCinema = document.getElementById('cinema');
-              const dateTimeDivs = document.querySelectorAll('.dateTime');
+                if (isNaN(point)) {
+                    alert('Vui lòng nhập một số hợp lệ cho điểm.');
+                    return;
+                }
 
-              const dateShowStartMap = {};
-              const dateShowStartIdMap = {}; // This map will store id_show values for each start time
+                var usedPointsSpan = document.getElementById('usedPoints');
+                usedPointsSpan.textContent = point; // Update displayed used points
 
-              dateTimeDivs.forEach(div => {
-                  const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
-                  const dateShow = div.querySelector('.dateShow').textContent;
-                  const start = div.querySelector('.start').textContent;
-                  const showtimeId = div.getAttribute('data-showtime-id');
+                if (point > customerStart) {
+                    console.log("Không đủ điểm");
+                    alert('Số điểm của bạn không đủ để được giảm giá.');
+                } else {
+                    discount = point * 10;
 
-                  if (!dateShowStartMap[cinemaId]) {
-                      dateShowStartMap[cinemaId] = {};
-                      dateShowStartIdMap[cinemaId] = {};
-                  }
+                    // Extract numeric value from totalPrice
+                    var totalPriceString = document.getElementById('totalPrice').textContent;
+                    var totalPrice = parseFloat(totalPriceString.replace(/\D/g, '')); // Remove non-numeric characters
 
-                  if (!dateShowStartMap[cinemaId][dateShow]) {
-                      dateShowStartMap[cinemaId][dateShow] = [];
-                      dateShowStartIdMap[cinemaId][dateShow] = {};
-                  }
+                    amount = totalPrice - discount;
 
-                  if (!dateShowStartMap[cinemaId][dateShow].includes(start)) {
-                      dateShowStartMap[cinemaId][dateShow].push(start);
-                      dateShowStartIdMap[cinemaId][dateShow][start] = showtimeId;
-                  }
-              });
+                    // Check if amount is a valid number
+                    if (isNaN(amount) || !isFinite(amount)) {
+                        alert('Có lỗi xảy ra khi tính toán tổng thanh toán.');
+                        return;
+                    }
 
-              let lastSelectedCinemaId;
+                    var discountElement = document.getElementById('discountValue');
+                    discountElement.textContent = "Discount: " + discount;
 
-              function convertTimeToComparableDate(timeString) {
-                  const [hours, minutes] = timeString.split(":");
-                  return new Date(1970, 0, 1, hours, minutes); // Using a fixed date and only varying the time for comparison
-              }
-              function displayTimesForCinema(cinemaId) {
-                  if (lastSelectedCinemaId === cinemaId) {
-                      return;
-                  }
-                  lastSelectedCinemaId = cinemaId;
+                    var amountElement = document.getElementById('amountValue');
+                    amountElement.textContent = "Amount: " + amount;
+                }
+            }
 
-                  dateTimeDivs.forEach(div => {
-                      div.style.display = 'none';
-                      const startUl = div.querySelector('.date .start');
-                      while (startUl.firstChild) {
-                          startUl.removeChild(startUl.firstChild);
-                      }
-                  });
+            document.getElementById("confirmPayment").addEventListener("click", function () {
+                console.log("Button clicked");
+                var selectedChairs = sessionStorage.getItem("selectedChairs");
+                console.log("selectedChairs:", selectedChairs);
 
-                  let displayedDates = {};
+                // const customerId = document.getElementById("customerInfo").getAttribute("data-customer-id");
+                // const showtimeId = document.getElementById("showtimeInfo").getAttribute("data-showtime-id");
 
-                  dateTimeDivs.forEach(div => {
-                      const divCinemaId = div.getAttribute('id').replace('showtimeList-', '');
-                      const dateShow = div.querySelector('.dateShow').textContent;
+                console.log("Total Price:", discount);
+                console.log("Name Ticket:", amount);
 
-                      if (Number(divCinemaId) === Number(cinemaId)) {
-                          if (!displayedDates[dateShow]) {
-                              div.style.display = 'block';
-                              const startUl = div.querySelector('.date .start');
-                              const commonHref = `/customer/listChair/`;
+                // Tạo đối tượng dữ liệu đơn hàng
+                const orderData = {
+                    selectedChairs: selectedChairs.split('_'),
+                    totalPrice: totalPrice,
+                    nameTicket: nameChair,
+                    customerId: customerId,
+                    showtimeId: showtimeId,
+                    checkoutNumberService: checkoutNumberService,
+                    discount: discount,
+                    amount: amount
+                };
 
-                              // Sắp xếp thời gian tăng dần trước khi hiển thị
-                              dateShowStartMap[cinemaId][dateShow].sort((a, b) => {
-                                  return convertTimeToComparableDate(a) - convertTimeToComparableDate(b);
-                              }).forEach(start => {
-                                  const startLi = document.createElement('a');
-                                  startLi.textContent = start;
-                                  startLi.href = commonHref + dateShowStartIdMap[cinemaId][dateShow][start];
-                                  startUl.appendChild(startLi);
-                              });
+                console.log("Order Data:", orderData);
 
-                              displayedDates[dateShow] = true;
-                          }
-                      }
-                  });
-              }
-              selectCinema.addEventListener('change', function () {
-                  const selectedCinemaId = this.value;
-                  displayTimesForCinema(selectedCinemaId);
-              });
-
-              displayTimesForCinema(selectCinema.options[selectCinema.selectedIndex].value);
-          });
-
-      </script>
+                // Thực hiện yêu cầu fetch để tạo đơn hàng
+                fetch('/customer/createOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData),
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Kiểm tra xem phản hồi có phải là JSON không
+                            const contentType = response.headers.get('content-type');
+                            if (contentType && contentType.includes('application/json')) {
+                                return response.json();
+                            } else {
+                                // Nếu phản hồi không phải là JSON, bạn có thể xử lý theo cách tương ứng
+                                window.location.href = "/payment/{idOder}";
+                            }
+                        } else {
+                            throw new Error('Failed to create order');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+                        // Tùy chọn, bạn có thể chuyển hướng đến trang thanh toán hoặc thực hiện các hành động khác
+                        window.location.href = "/payment/" + data.orderId; // Giả sử máy chủ trả về ID đơn hàng
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // Xử lý lỗi và hiển thị thông báo phù hợp cho người dùng
+                    });
+            });
 
 
+        </script>
 
-      <!--            <script>-->
-<!--          document.addEventListener('DOMContentLoaded', function () {-->
-<!--              const selectCinema = document.getElementById('cinema');-->
-<!--              const dateTimeDivs = document.querySelectorAll('.dateTime');-->
-
-<!--              const defaultCinemaId = selectCinema.options[0].value;-->
-<!--                  dateTimeDivs.forEach(div => {-->
-<!--                      const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
-<!--                      if (Number(cinemaId) === Number(defaultCinemaId)) {-->
-<!--                          div.style.display = 'block';-->
-<!--                      } else {-->
-<!--                          div.style.display = 'none';-->
-<!--                      }-->
-<!--                  });-->
-
-
-<!--              selectCinema.addEventListener('change', function () {-->
-<!--                  const selectedCinemaId = this.value;-->
-
-<!--                  // Xóa tất cả phần tử .dateTime-->
-<!--                  dateTimeDivs.forEach(div => {-->
-<!--                      div.style.display = 'none';-->
-<!--                  });-->
-
-<!--                  // Tạo một đối tượng để lưu trữ thông tin về dateShow và start-->
-<!--                  const dateShowStartMap = {};-->
-
-<!--                  // Thu thập thông tin và lưu trữ vào đối tượng-->
-<!--                  dateTimeDivs.forEach(div => {-->
-<!--                      const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
-<!--                      if (Number(cinemaId) === Number(selectedCinemaId)) {-->
-<!--                          const dateShow = div.querySelector('.dateShow').textContent;-->
-<!--                          const start = div.querySelector('.start').textContent;-->
-
-<!--                          if (!dateShowStartMap[dateShow]) {-->
-<!--                              dateShowStartMap[dateShow] = start;-->
-<!--                          } else {-->
-<!--                              dateShowStartMap[dateShow] += ', ' + start;-->
-<!--                          }-->
-<!--                      }-->
-<!--                  });-->
-
-
-<!--                  // Hiển thị thông tin đã thu thập-->
-<!--                  let displayedDates = {}; // To keep track of displayed dateShow values-->
-<!--                  Object.keys(dateShowStartMap).forEach(dateShow => {-->
-<!--                      const startTimes = dateShowStartMap[dateShow];-->
-<!--                      dateTimeDivs.forEach(div => {-->
-<!--                          const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
-<!--                          if (Number(cinemaId) === Number(selectedCinemaId) && div.querySelector('.dateShow').textContent === dateShow) {-->
-<!--                              if (!displayedDates[dateShow]) {-->
-<!--                                  div.style.display = 'block';-->
-<!--                                  displayedDates[dateShow] = true;-->
-<!--                              }-->
-<!--                              const startUl = div.querySelector('.date .start');-->
-<!--                              startUl.textContent = startTimes;-->
-<!--                          }-->
-<!--                      });-->
-<!--                  });-->
-
-
-<!--                  let defaultDates = {};-->
-<!--                  Object.keys(dateShowStartMap).forEach(dateShow => {-->
-<!--                      const startTimes = dateShowStartMap[dateShow].join(', ');-->
-<!--                      dateTimeDivs.forEach(div => {-->
-<!--                          const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
-<!--                          if (Number(cinemaId) === Number(defaultCinemaId) && div.querySelector('.dateShow').textContent === dateShow) {-->
-<!--                              console.log("dskjghks,ad")-->
-<!--                              if (!defaultDates[dateShow]) {-->
-<!--                                  div.style.display = 'block';-->
-<!--                                  defaultDates[dateShow] = true;-->
-<!--                              }-->
-<!--                              const startUl = div.querySelector('.date .start');-->
-<!--                              startUl.textContent = startTimes;-->
-<!--                          }-->
-<!--                      });-->
-
-<!--                  });-->
-<!--              });-->
-<!--              });-->
-<!--      </script>-->
-  </header>
+            <script th:inline="javascript">
+              /*<![CDATA[*/
+              var customerStart = /*[[${customer.star}]]*/ 0; // Default value if customer.star is null
+              console.log("star: " + customerStart);
+              /*]]>*/
+            </script>
+    </div>
+</main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-<!--      <script>-->
-
-<!--          document.addEventListener('DOMContentLoaded', function () {-->
-<!--              const selectCinema = document.getElementById('cinema');-->
-<!--              const dateTimeDivs = document.querySelectorAll('.dateTime');-->
-
-<!--              selectCinema.addEventListener('change', function () {-->
-<!--                  const selectedCinemaId = this.value;-->
-<!--                  const shownDateShows = {}; // Sử dụng đối tượng này để theo dõi giá trị dateShow đã được hiển thị-->
-
-<!--                  // Xóa tất cả phần tử .dateTime và .dateShow-->
-<!--                  dateTimeDivs.forEach(div => {-->
-<!--                      div.style.display = 'none';-->
-<!--                  });-->
-
-<!--                  // Thu thập thông tin và hiển thị dateShow và start-->
-<!--                  dateTimeDivs.forEach(div => {-->
-<!--                      const cinemaId = div.getAttribute('id').replace('showtimeList-', '');-->
-<!--                      if (Number(cinemaId) === Number(selectedCinemaId)) {-->
-<!--                          const dateShow = div.querySelector('.dateShow').textContent;-->
-<!--                          if (!shownDateShows[dateShow]) {-->
-<!--                              div.style.display = 'block';-->
-<!--                              shownDateShows[dateShow] = true;-->
-<!--                          }-->
-<!--                          const start = div.querySelector('.start').textContent;-->
-<!--                          div.querySelector('.dateShow').textContent += ' - ' + start;-->
-<!--                      }-->
-<!--                  });-->
-<!--              });-->
-<!--          });-->
-
-
-
-
-
-          // document.addEventListener('DOMContentLoaded', function() {
-          //     const selectCinema = document.getElementById('cinema');
-          //     const dateTimeDivs = document.querySelectorAll('.dateTime');
-          //
-          //     // Mặc định, chọn rạp phim đầu tiên
-          //     const selectedCinemaId = selectCinema.value;
-          //
-          //     // Hiển thị `dateShow` của rạp phim đầu tiên
-          //     dateTimeDivs.forEach(div => {
-          //         const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
-          //         if (Number(cinemaId) === Number(selectedCinemaId)) {
-          //             div.style.display = 'block';
-          //         } else {
-          //             div.style.display = 'none';
-          //         }
-          //     });
-          //
-          //     selectCinema.addEventListener('change', function () {
-          //         const selectedCinemaId = this.value;
-          //
-          //         // Ẩn tất cả các thẻ .dateTime
-          //         dateTimeDivs.forEach(div => {
-          //             const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
-          //             if (Number(cinemaId) === Number(selectedCinemaId)) {
-          //                 div.style.display = 'block';
-          //             } else {
-          //                 div.style.display = 'none';
-          //             }
-          //         });
-          //     });
-          // });
-<!--      </script>-->
-<!--  </header>-->
-<!--</body>-->
-<!--</html>-->

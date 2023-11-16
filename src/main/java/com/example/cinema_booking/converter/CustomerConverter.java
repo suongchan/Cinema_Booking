@@ -21,6 +21,7 @@ public class CustomerConverter {
         customerEntity.setEmail(customer.getEmail());
         customerEntity.setAddress(customer.getAddress());
         customerEntity.setRole("ROLE_CUSTOMER");
+        customerEntity.setStar(0L);
         return customerEntity;
     }
 }

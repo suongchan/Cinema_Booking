@@ -93,7 +93,7 @@ main .main_left
     padding-left: 30px;
     padding-top: 20px;
     width: 65%;
-    height: 170px;
+    height: auto;
     background-color: #171E63;
     border: 1px solid #0D0942;
     border-radius: 8px;

@@ -93,23 +93,12 @@ main .main_left
     padding-left: 30px;
     padding-top: 20px;
     width: 65%;
-    height: 170px;
+    height: auto;
     background-color: #171E63;
     border: 1px solid #0D0942;
     border-radius: 8px;
     color: white;
     font-weight: bold;
-}
-.seatHoldingTime
-{
-    height: 25px;
-    color: white;
-    font-weight: bolder;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    background-color: #ea70d6;
 }
 .container_item
 {
@@ -146,33 +135,33 @@ main .main_left
 .main_left_item.active {
     color: chocolate;
 }
-.main_right
-{
-    background-color: #022D54;
-    width: 35%;
-    margin-left: 50px;
-}
-.main_right h3
-{
-    border: 1px solid #045050;
-    border-radius: 3px;
-    padding:3px 30px;
-    color: white;
-}
-.main_right .info
-{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
-    padding: 20px 70px 20px 30px;
-    border: 1px solid #0D0942;
-    color: white;
-    background-color: #171E63;
-}
-.main_right .info .column
-{
-    width: 40%;
-}
+/*.main_right*/
+/*{*/
+/*    background-color: #022D54;*/
+/*    width: 35%;*/
+/*    margin-left: 50px;*/
+/*}*/
+/*.main_right h3*/
+/*{*/
+/*    border: 1px solid #045050;*/
+/*    border-radius: 3px;*/
+/*    padding:3px 30px;*/
+/*    color: white;*/
+/*}*/
+/*.main_right .info*/
+/*{*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-top: 40px;*/
+/*    padding: 20px 70px 20px 30px;*/
+/*    border: 1px solid #0D0942;*/
+/*    color: white;*/
+/*    background-color: #171E63;*/
+/*}*/
+/*.main_right .info .column*/
+/*{*/
+/*    width: 40%;*/
+/*}*/
 .column p {
     border-bottom: 1px solid #0D0942;
 }
@@ -192,6 +181,45 @@ main .main_left
 .ChangePass
 {
     text-decoration: none;
+}
+
+.main_right {
+    background-color: #022D54;
+    width: 35%;
+    margin-left: 50px;
+    display: block; /* Chuyển thành hiển thị một cột */
+}
+
+.ticket_info, .service_info {
+    width: 100%; /* Chiếm toàn bộ chiều rộng của main_right */
+    padding: 20px;
+    border: 1px solid #0D0942;
+    color: white;
+    background-color: #171E63;
+    border-radius: 8px;
+}
+
+.ticket_info h3,
+.service_info h4 {
+    border: 1px solid #045050;
+    border-radius: 3px;
+    padding: 3px 10px;
+    color: white;
+    margin-top: 20px; /* Di chuyển margin-top lên đây để áp dụng cho cả h3 và h4 */
+}
+
+.total_price,
+.confirm_payment {
+    margin-top: 20px;
+}
+
+/* Xóa phần margin-top cho h4 để tránh khoảng trắng không mong muốn */
+.service_info h4 {
+    margin-top: 0;
+}
+.nameChair {
+    display: inline;
+    white-space: nowrap;
 }
 
 

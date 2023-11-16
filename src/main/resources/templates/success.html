@@ -43,9 +43,7 @@
                                 <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
                             </ul>
                         </li>
-
                     </ul>
-
                 </div>
             </div>
         </nav>
@@ -53,9 +51,6 @@
 </header>
 
 <main>
-    <div class="container_checkout">
-        <p id="seatHoldingTime"></p>
-    </div>
     <div class="controller_main">
         <div class="main_left">
             <div class="container_item">
@@ -66,7 +61,7 @@
                         <div class="info">
                             <div class="column">
                                 <span>Họ và Tên:</span>
-                                <p th:text="${customer.name}"></p>
+                                <p th:text="${customer.username}"></p>
                                 <span>Số Điện Thoại:</span>
                                 <p th:text="${customer.phone}"></p>
                             </div>
@@ -79,29 +74,37 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
 
         <div class="main_right">
-            <form class="showtime" th:object="${showtime}">
-                <div id="showtimeInfo" th:data-showtime-id="${showtime.idShow}">
-                    <h3>THANH TOÁN</h3>
-                    <h3 th:text="${showtime.filmEntity.nameFilm}"></h3>
-                    <span th:text="${showtime.cinemaEntity.nameCinema}"></span>
-                    <span th:text="${showtime.cinemaRoomEntity.nameCinemaRoom}"></span>
-                    <span class="ticket" id="ticket">2 Vé</span>
-                    <h4 class="nameChair" id="nameChair"></h4>
-                    <h4 th:text="${showtime.dateShow} + ', '+ ${showtime.start}"></h4>
-                    <h3 class="total" id="total"></h3>
-                    <h4>DỊCH VỤ</h4>
-                    <span class="checkout_numberService" id="checkoutNumberService"></span>
-                    <span class="checkout_nameService" id="checkoutNameService"></span>
-                    <span class="priceService"></span>
-                    <h4 class="total_price" id="totalPrice"></h4>
-                    <input id="confirmPayment" class="confirm_payment" type="button" value="PAYMENT">
+            <div class="ticket_info">
+                <h3>VÉ XEM PHIM</h3>
+                <div id="showtimeInfo" th:data-showtime-id="${order.showtimeEntity.idShow}">
+                    <h4 th:text="${order.showtimeEntity.filmEntity.nameFilm}"></h4>
+                    <p th:text="'RẠP: '+${order.showtimeEntity.cinemaEntity.nameCinema}"></p>
+                    <p th:text="'PHÒNG: '+ ${order.showtimeEntity.cinemaRoomEntity.nameCinemaRoom}"></p>
+                    <h5 class="nameChair" th:each="chair, iterStat : ${order.orderDetailTicketEntities}">
+                        <span th:if="${iterStat.index == 0}">Ghế: </span>
+                        <span th:text="${chair.seatStatusEntity.chair.nameChair}"></span>
+                        <span th:if="${!iterStat.last}">, </span>
+                    </h5>
+                    <p th:text="'NGÀY CHIẾU: '+${order.showtimeEntity.dateShow} + ', SUẤT: '+ ${order.showtimeEntity.start}"></p>
+                    <th:block th:with="totalPrice=${order.showtimeEntity.filmEntity.price * order.orderDetailTicketEntities.size()}">
+                        <p class="total" id="total" th:text="'TỔNG GIÁ VÉ: ' + ${totalPrice} + 'đ'"></p>
+                    </th:block>
+
                 </div>
-            </form>
+            </div>
+            <div class="service_info">
+                <h4>Dịch vụ</h4>
+                <div th:each="ser : ${order.orderDetailServiceEntities}">
+                    <p class="checkout_numberService" id="checkoutNumberService" th:text="'SỐ LƯỢNG DỊCH VỤ: '+${ser.quantity}"></p>
+                    <p class="checkout_nameService" id="checkoutNameService" th:text="'TÊN DỊCH VỤ: ' +${ser.serviceEntity.nameService}"></p>
+                    <p class="priceService" th:text="'TỔNG GIÁ COMBO: '+${ser.serviceEntity.price}+'đ'"></p>
+                </div>
+                <h3 class="total_price" id="totalPrice" th:text="'TỔNG CỘNG: '+${order.amount} +'đ'"></h3>
+            </div>
         </div>
 
         <script>
@@ -137,20 +140,6 @@
                 const nameChair = document.getElementById("nameChair").textContent;
                 const checkoutNameService = document.getElementById("checkoutNameService").textContent;
                 const checkoutNumberService = document.getElementById("checkoutNumberService").textContent;
-
-
-// Tìm tất cả các kết hợp của "Số lượng:" và "Dịch vụ:"
-//           var regex = /Số lượng: (\d+) Dịch vụ: ([^\d]+)(?= Giá:|$)/g;
-//           var matches = checkoutNumberService.matchAll(regex);
-//
-// // Duyệt qua tất cả các kết quả và lấy thông tin
-//           for (const match of matches) {
-//             var numberService = match[1];
-//             var nameService = match[2];
-//
-//             console.log("nameService:", nameService);
-//             console.log("numberService:", numberService);
-//           }
 
                 console.log("Customer ID:", customerId);
                 console.log("Showtime ID:", showtimeId);

@@ -66,9 +66,6 @@ public class OrderController {
         model.addAttribute("showtime", showtime);
 //        model.addAttribute("showtime", showtime);
 
-        // Thêm các thông tin dịch vụ và thông tin khác nếu cần
-
-        // Trả về trang `checkout`
         return "customerHtml/checkout";
     }
 
@@ -109,7 +106,8 @@ public class OrderController {
 //    }
 
     @PostMapping("/createOrder")
-    public ResponseEntity<String> createOrder(@RequestBody Map<String, Object> orderData) {
+    public ResponseEntity<Long> createOrder(@RequestBody Map<String, Object> orderData, Model model) {
+        Long idOrder = 0L;
         try {
             Long totalPrice = Long.parseLong(orderData.get("totalPrice").toString());
             Long discount = Long.parseLong(orderData.get("discount").toString());
@@ -127,8 +125,10 @@ public class OrderController {
             orderEntity.setTotalPrice(totalPrice);
             orderEntity.setAmount(amount);
             orderEntity.setPoint(Math.toIntExact(discount));
-            System.out.println(discount);
-            System.out.println(amount);
+            System.out.println("giảm gia" + discount);
+            System.out.println(orderEntity.getPoint());
+            System.out.println(" tiền" + amount);
+            System.out.println(orderEntity.getAmount());
 
             // Retrieve and set the ShowtimeEntity
             ShowtimeEntity showtime = showtimeService.getShowtimeById(showtimeId);
@@ -140,6 +140,9 @@ public class OrderController {
 
             // Save the OrderEntity to the database
             orderService.createOrder(orderEntity);
+
+            idOrder = orderEntity.getIdOrder();
+            model.addAttribute("idOrder", idOrder);
 
             for (String seat : selectedChairs) {
                 System.out.println(seat + "/");
@@ -206,13 +209,12 @@ public class OrderController {
 
         } catch (Exception e) {
             // Xử lý lỗi nếu cần
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating seat status");
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating seat status");
+            throw new  RuntimeException(e);
         }
-
-
-
-//
-        return ResponseEntity.ok("Order created successfully");
+        System.out.println("được rồi ---------------------");
+        return ResponseEntity.ok(idOrder);
+//        return "redirect:/payment/{idOrder}";
 
     }
 

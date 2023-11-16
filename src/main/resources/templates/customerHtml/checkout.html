@@ -227,7 +227,13 @@
                     } else {
                       // Phản hồi không phải là JSON, xử lý theo cách khác nếu cần
                       // Ví dụ: Chuyển hướng đến trang thanh toán
-                      window.location.href = "/payment/{idOder}";
+                      // const id = response.body
+                      // console.log("ba la ba xam" + id)
+                      // // Chuỗi ban đầu
+                      // const originalString = "/payment/{idOrder}";
+                      // // Thay thế phần {idOrder} bằng giá trị của biến id
+                      // const modifiedString = originalString.replace("{idOrder}", id);
+                      // window.location.href = modifiedString;
                     }
                   } else {
                     throw new Error('Failed to create order');
@@ -235,6 +241,13 @@
                 })
                 .then(data => {
                   console.log('Success:', data);
+                  const id = data
+                  console.log("ba la ba xam" + id)
+                  // Chuỗi ban đầu
+                  const originalString = "/payment/{idOrder}";
+                  // Thay thế phần {idOrder} bằng giá trị của biến id
+                  const modifiedString = originalString.replace("{idOrder}", id);
+                  window.location.href = modifiedString;
                 })
                 .catch((error) => {
                   console.error('Error:', error);

@@ -36,16 +36,14 @@
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>quản trị</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> khách hàng </span> </a></li>
-    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>thể loại</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
     <span class="permanent">Danh mục</span>
     <li><a href="#"> <i class='bx bx-shopping-bag'></i> <span>Rạp chiếu</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Phòng chiếu</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>Ghế</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span> Phim </span> </a></li>
+    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>Phim</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> Dịch vụ </span> </a></li>
 
     <span class="permanent" >Nghiệp vụ</span>
@@ -78,7 +76,7 @@
           <div class="search">
             <form action="/admin/film-search" method="get">
               <input type="text" name="name_film" id="search" placeholder="Tìm kiếm...">
-              <button type="submit">Tìm Kiếm</button>
+              <button type="submit" class="searchStaff">Tìm Kiếm</button>
               <a th:href="@{/admin/addFilmPage}" class="addStaff">Thêm </a>
             </form>
           </div>
@@ -92,9 +90,6 @@
               <td>Thời lượng</td>
               <td>Ngày khởi chiếu</td>
               <td>Ngày kết thúc</td>
-              <td>Giới thiệu</td>
-              <td>Trailer</td>
-              <td>Xếp hạng</td>
               <td>Trạng thái</td>
               <td>Giá phim</td>
               <td></td>
@@ -103,13 +98,9 @@
               <td> <img class="img-film" th:src="@{'/images/' + ${film.imageFilm}}" alt="java"> </td>
               <td th:text="*{film.nameFilm}"></td>
               <td th:text="*{film.categoryEntity.nameCategory}"></td>
-              <td th:text="*{film.time}"></td>
+              <td th:text="*{film.time +' phút'} "></td>
               <td th:text="*{film.dateStart}"></td>
               <td th:text="*{film.dateEnd}"></td>
-              <td th:text="*{film.introduce}"></td>
-              <td th:text="*{film.trailer}"></td>
-              <td th:text="*{film.rating}"></td>
-<!--          <td th:text="*{film.status}"></td>-->
               <td>
                 <span th:if="${T(java.time.LocalDate).now().isBefore(film.dateStart)}">Sắp chiếu</span>
                 <span th:if="${T(java.time.LocalDate).now().isAfter(film.dateEnd)}">Đã chiếu</span>

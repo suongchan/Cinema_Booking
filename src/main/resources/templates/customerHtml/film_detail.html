@@ -87,16 +87,16 @@
 </div>
 <nav>
     <div class="rank">
-            <span >
-              <p th:text="'Đánh giá: ' +${film.rating} + ' /10'"> </p>
-            </span>
-<!--      <span class="material-symbols-outlined">-->
-<!--              favoritefavoritefavoritefavoritefavorite-->
-<!--      </span>-->
+
         <a th:href="@{/customer/listShowtime/{id}(id=${film.idFilm})}">
               <span class="ticket">
-              <img src="../../static/image/ticket.png">
               Đặt Vé
+            </span>
+        </a>
+
+        <a th:href="@{/${film.trailer}}">
+              <span class="ticket">
+              Trailer
             </span>
         </a>
     </div>

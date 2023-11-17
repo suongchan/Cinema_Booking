@@ -368,13 +368,26 @@ a {
 .search {
     padding-top: 20px;
 }
+.search .search-customer
+{
+    border: none;
+    background-color: #fabc28;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 12pt;
+    transition: background-color 0.3s;
+}
+
+.search .search-customer:hover {
+    background-color: #efcf83; /* ??i m?u n?n th?nh ?? khi hover */
+}
 
 .search input {
     width: 40%;
     height: 35px;
 }
-
-
 
 
 table {

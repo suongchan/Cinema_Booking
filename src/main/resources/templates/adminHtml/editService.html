@@ -41,7 +41,7 @@
     <span class="permanent">Quản trị</span>
     <li><a th:href="@{/admin}"> <i class='bx bx-home'></i> <span>quản trị</span> </a></li>
     <li><a th:href="@{/admin/staffList}" > <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
-    <li><a href="#" th:href="@{/admin/customerList}"  class="active"> <i class='bx bx-chart'></i> <span>khách hàng</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span> khách hàng </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
@@ -50,7 +50,7 @@
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Phòng chiếu</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Ghế</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> Phim </span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span> Dịch vụ </span> </a></li>
+    <li><a href="#"  class="active"> <i class='bx bx-chart'></i> <span>dịch vụ</span> </a></li>
 
     <span class="permanent" >Nghiệp vụ</span>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Đặt vé</span> </a></li>
@@ -99,10 +99,6 @@
               <input type="text" id="price" name="price"  required th:value="*{price}" >
             </div>
 
-            <div class="form-row" >
-              <label for="status">Trạng thái</label>
-              <input type="text" id="status" name="status"  required th:value="*{status}" >
-            </div>
 
             <input type="submit" value="Lưu" class="submit">
           </form>

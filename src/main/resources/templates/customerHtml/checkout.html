@@ -260,7 +260,7 @@
       var seatHoldingTimeElement = document.getElementById("seatHoldingTime");
 
       // Lấy giá trị thời gian đếm ngược từ localStorage, mặc định là 30 giây nếu không tìm thấy
-      var countdownSeconds = parseInt(localStorage.getItem("countdownSeconds")) || 30;
+      var countdownSeconds = parseInt(localStorage.getItem("countdownSeconds")) || 60;
 
       // Cập nhật hiển thị ban đầu
       updateCountdownDisplay();

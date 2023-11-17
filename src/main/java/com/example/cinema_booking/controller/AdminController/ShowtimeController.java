@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,7 +153,10 @@ public class ShowtimeController {
             seatStatus.setShowtime(showtime);
             seatStatus.setChair(chair);
             seatStatus.setOccupied(false);
+            seatStatus.setStatus(false);
+            seatStatus.setTime(LocalTime.MIN);
             seatStatusEntities.add(seatStatus);
+
         }
 
         // Lưu danh sách SeatStatusEntity vào cơ sở dữ liệu

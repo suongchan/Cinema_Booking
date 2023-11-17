@@ -30,6 +30,7 @@ public class CustomerFilmController {
     public String showFilmDC(Model model) {
         List<Film> films = filmService.getAllFilmDC(LocalDate.now());
         model.addAttribute("filmDC", films);
+        System.out.println(films);
         return "customerHtml/filmDC";
     }
 

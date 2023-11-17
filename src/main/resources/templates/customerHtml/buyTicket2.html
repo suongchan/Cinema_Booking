@@ -92,7 +92,28 @@
         <div class="chair">
             <th:block th:each="seat : ${seatStatus}">
                 <div class="column_chair">
-                    <input type="button" class="chair_ticket" th:id="${seat.chair.idChair}" th:value="${seat.chair.nameChair}" name="seat.chair.nameChair" th:attr="data-status=${seat.occupied}" data-chair-id="${seat.chair.idChair}" data-chair-name="${seat.chair.nameChair}">
+                    <input type="button"
+                           class="chair_ticket"
+                           th:id="${seat.chair.idChair}"
+                           th:value="${seat.chair.nameChair}"
+                           name="seat.chair.nameChair"
+                           th:attr="data-status=${seat.occupied}, data-occupied=${seat.occupied}, data-status=${seat.status}"
+                           data-chair-id="${seat.chair.idChair}"
+                           data-chair-name="${seat.chair.nameChair}"
+                           th:classappend="${seat.occupied} ? 'selected' : ''"
+                           th:style="${seat.status} ? 'background-color: red;' : (${seat.occupied} ? 'background-color: orange;' : '')"
+                           th:disabled="${seat.occupied} ? true : (${seat.status} ? true : false)" />
+
+                    <!--                    <input type="button" class="chair_ticket" th:id="${seat.chair.idChair}" th:value="${seat.chair.nameChair}" name="seat.chair.nameChair" th:attr="data-status=${seat.occupied}" data-chair-id="${seat.chair.idChair}" data-chair-name="${seat.chair.nameChair}">-->
+<!--                    <input type="button"-->
+<!--                           class="chair_ticket"-->
+<!--                           th:id="${seat.chair.idChair}"-->
+<!--                           th:value="${seat.chair.nameChair}"-->
+<!--                           name="seat.chair.nameChair"-->
+<!--                           th:attr="data-status=${seat.status}"-->
+<!--                           data-chair-id="${seat.chair.idChair}"-->
+<!--                           data-chair-name="${seat.chair.nameChair}"-->
+<!--                           th:style="${seat.occupied} ? 'background-color: green;' : (${seat.status} ? 'background-color: orange;' : '')">-->
                 </div>
             </th:block>
         </div>
@@ -107,7 +128,7 @@
                 </span>
             <div class="film-info" th:attr="data-price=${showtime.filmEntity.price}">
                 <span>
-                    <p class="price"></p>
+                    <p class="priceTicket"></p>
                 </span>
             </div>
 
@@ -123,7 +144,7 @@
             var chairs = document.querySelectorAll(".chair_ticket");
             var filmInfoElement = document.querySelector(".film-info");
             var giaPhim = parseInt(filmInfoElement.getAttribute("data-price"));
-            var priceElement = document.querySelector(".price");
+            var priceElement = document.querySelector(".priceTicket");
             var soGheDaChon = 0;
             var tongTien = 0;
             var selectedChairs = [];

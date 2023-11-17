@@ -48,21 +48,34 @@ public class FilmController {
     }
 
     @PostMapping("/addFilm")
-    public String addFilm(@ModelAttribute FilmEntity filmEntity, @RequestParam("file") MultipartFile file, Model model) throws IOException, URISyntaxException{
+    public String addFilm(@ModelAttribute FilmEntity filmEntity, @RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, Model model) throws IOException, URISyntaxException{
         String message = "";
         try {
-            File file1 = new File(imagePath + file.getOriginalFilename());
-            try (OutputStream os = new FileOutputStream(file1)) {
+            File fileImage = new File(imagePath + file.getOriginalFilename());
+            try (OutputStream os = new FileOutputStream(fileImage)) {
                 os.write(file.getBytes());
             }
-
             message = "Uploaded the file successfully: " +file.getOriginalFilename();
             model.addAttribute("message", message);
         } catch (Exception e){
             message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
             model.addAttribute("message", message);
         }
+
+        String message2 = "";
+        try {
+            File fileImage1 = new File(imagePath + file1.getOriginalFilename());
+            try (OutputStream os = new FileOutputStream(fileImage1)) {
+                os.write(file1.getBytes());
+            }
+            message2 = "Uploaded the file successfully: " +file1.getOriginalFilename();
+            model.addAttribute("message", message2);
+        } catch (Exception e){
+            message2 = "Could not upload the file: " + file1.getOriginalFilename() + ". Error: " + e.getMessage();
+            model.addAttribute("message", message2);
+        }
         filmEntity.setImageFilm(file.getOriginalFilename());
+        filmEntity.setImageFilm1(file1.getOriginalFilename());
         filmEntity.setStatus(true);
         filmService.addFilm(filmEntity);
         return "redirect:/admin/filmList";

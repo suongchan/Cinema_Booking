@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.security.Principal;
 import java.sql.SQLOutput;
+import java.time.LocalTime;
 import java.util.*;
 
 @Controller
@@ -38,6 +39,17 @@ public class ChairController {
     public String listChair(@PathVariable Long id, Model model) {
         ShowtimeEntity showtime = showtimeService.getShowtimeById(id);
         List<SeatStatusEntity> seatStatus =  seatStatusService.getSeatStatusEntitiesByShowtime(id);
+        LocalTime currentTime = LocalTime.now();
+
+        for (SeatStatusEntity seatStatusEntity : seatStatus) {
+            if (!seatStatusEntity.getStatus() && seatStatusEntity.getTime().isBefore(currentTime)) {
+                {
+                    seatStatusEntity.setOccupied(false);
+                }
+                // Nếu bạn muốn thêm logic xử lý cho trường hợp ngược lại, bạn có thể thêm ở đây
+            }
+        }
+
         model.addAttribute("showtime", showtime);
         model.addAttribute("seatStatus", seatStatus);
 

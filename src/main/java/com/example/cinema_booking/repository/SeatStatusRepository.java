@@ -11,4 +11,5 @@ public interface SeatStatusRepository extends JpaRepository<SeatStatusEntity, Lo
     List<SeatStatusEntity> findByShowtimeIdShow(Long id);
 
     SeatStatusEntity findByShowtimeIdShowAndChairNameChair(Long showtimeId, String chairName);
+    SeatStatusEntity findByOrderDetailTicketEntitiesSeatStatusEntityId(Long idSeat);
 }

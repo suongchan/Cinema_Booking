@@ -41,17 +41,15 @@
   <ul class="sidebar-menu">
     <span class="permanent">Quản trị</span>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>quản trị</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>tài khoản</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> khách hàng </span> </a></li>
-    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>thể loại</span> </a></li>
+    <li><a href="#"> <i class='bx bx-chart'></i> <span> thể loại </span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> tin tức </span> </a></li>
 
     <span class="permanent">Danh mục</span>
     <li><a href="#"> <i class='bx bx-shopping-bag'></i> <span>Rạp chiếu</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Phòng chiếu</span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span>Ghế</span> </a></li>
     <li><a href="#"> <i class='bx bx-chart'></i> <span> Phim </span> </a></li>
-    <li><a href="#"> <i class='bx bx-chart'></i> <span> Dịch vụ </span> </a></li>
+    <li><a href="#" class="active"> <i class='bx bx-home'></i> <span>Dịch vụ</span> </a></li>
 
     <span class="permanent" >Nghiệp vụ</span>
     <li><a href="#"> <i class='bx bx-chart'></i> <span>Đặt vé</span> </a></li>
@@ -94,14 +92,12 @@
               <td>Hình ảnh</td>
               <td>Tên dịch vụ</td>
               <td>Giá</td>
-              <td>Trạng thái</td>
               <td></td>
             </tr>
             <tr class="cinema" th:each="service:${services}">
               <td> <img class="img-film" th:src="@{'/images/' + ${service.image}}" alt="java"> </td>
               <td th:text="*{service.nameService}"></td>
               <td th:text="*{service.price}"></td>
-              <td th:text="*{service.status}"></td>
               <td class="payment-status payment-pending">
                 <a class="edit" th:href="@{/admin/editService/{id}(id=${service.idService})}">Cập nhập</a>
                 <a class="delete" th:href="@{/admin/deleteService/{id}(id=${service.idService})}">Xóa</a>

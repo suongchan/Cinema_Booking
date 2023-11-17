@@ -190,11 +190,13 @@ nav
 
 .chair_ticket.selected {
     background-color: orange; /* Đổi màu cho ghế đã chọn thành màu cam */
+
 }
 .chair_ticket[data-status="true"] {
     background-color: green;
     pointer-events: none;
 }
+
 
 
 .chair {
@@ -270,8 +272,3 @@ nav
 {
     background-color: #ea70d6;
 }
-
-
-
-
-

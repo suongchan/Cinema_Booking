@@ -32,7 +32,7 @@ public class SecurityConfig {
                                         .hasRole("CUSTOMER")
 //                        .requestMatchers("/anonymous*")
 //                        .anonymous()
-                                        .requestMatchers("/login/**","/register", "/home_customer*", "/image/**", "/images/**", "/static/**", "/film/**", "/customer/**")
+                                        .requestMatchers("/login/**","/**","/register", "/home_customer*", "/image/**", "/images/**", "/static/**", "/film/**", "/customer/**")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated()

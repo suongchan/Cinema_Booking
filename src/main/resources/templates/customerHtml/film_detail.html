@@ -9,58 +9,63 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="background">
-<header>
-  <div class="logo">
-    <img src="../../static/image/logo.png">
-  </div>
+<div class="background" th:style="'background-image: url(/images/' + ${film.imageFilm} + '); background-size: cover; background-repeat: no-repeat; height: 450px;'">
 
 
-    <div class="container_toolbar">
-  <div class="toolbar">
-    <nav class="navbar navbar-expand-lg ">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">TRANG CHỦ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">PHIM</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">RẠP CHIẾU</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">TIN TỨC</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">LIÊN HỆ</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                XIN CHÀO : SUONGCHAN
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/customer/info">TÀI KHOẢN</a></li>
-                <li><a class="dropdown-item" th:href="@{/perform_logout}">ĐĂNG XUẤT</a></li>
-              </ul>
-            </li>
-
-          </ul>
-
+    <header>
+        <div class="logo">
+            <img src="../../static/image/logo.png">
         </div>
-      </div>
-    </nav>
-  </div>
-    </div>
-</header>
+        <div class="toolbar">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="#">TRANG CHỦ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">PHIM</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">RẠP CHIẾU</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">TIN TỨC</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">LIÊN HỆ</a>
+                            </li>
+
+                            <!--                            <li><a class="login" th:href="@{/login/customer}">ĐĂNG NHẬP</a></li>-->
+                            <!--                            <li><a class="register" th:href="@{/register}">ĐĂNG KÝ</a></li>-->
+                            <!--                            <li class="nav-item">-->
+
+                            <!--                              <ul class="dropdown-menu">-->
+                            <!--                                  <li><a class="login" th:href="@{/login/customer}">ĐĂNG NHẬP</a></li>-->
+                            <!--                                  <li><a class="register" th:href="@{/register}">ĐĂNG KÝ</a></li>-->
+                            <!--                                </ul>-->
+                            <!--                            </li>-->
+
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="login_register">
+            <ul>
+                <li><a class="login" th:href="@{/login/customer}">ĐĂNG NHẬP</a></li>
+                <li><a class="register" th:href="@{/register}">ĐĂNG KÝ</a></li>
+            </ul>
+        </div>
+    </header>
 <main>
   <div class="controller_main">
     <div class="controller_film">
       <div class="film">
         <div class="column column_left">
-          <img src="../../static/image/film1.png">
+            <img th:src="@{'/images/' + ${film.imageFilm1}}" alt="java">
         </div>
         <div class="column column_right">
           <h3 th:text="${film.nameFilm}"></h3>
@@ -85,16 +90,18 @@
   </div>
 </main>
 </div>
-<nav>
+<section>
     <div class="rank">
 
         <a th:href="@{/customer/listShowtime/{id}(id=${film.idFilm})}">
               <span class="ticket">
+                   <img src="../../static/image/ticket.png">
               Đặt Vé
             </span>
         </a>
 
         <a th:href="@{/${film.trailer}}">
+            <img src="../../static/image/trailer.png">
               <span class="ticket">
               Trailer
             </span>
@@ -112,7 +119,50 @@
         </div>
       </div>
     </div>
-</nav>
+</section>
+
+<footer>
+    <div class="top">
+        <div class="column">
+            <h3>CHO BẠN NHỮNG TRẢI NGHIỆM TỐT NHẤT</h3>
+        </div>
+        <div class="column">
+            <ul>
+                <li>
+                    <h3>MAGIC CINEMA</h3>
+                </li>
+                <li>
+                    <h4>GIỚI THIỆU</h4>
+                    <h4>LIÊN HỆ</h4>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="column">
+            <ul>
+                <li>
+                    <h3>THÔNG TIN CHUNG</h3>
+                </li>
+                <li>
+                    <h4>ĐIỀU KHOẢN CHUNG</h4>
+                    <h4>CÂU HỎI THƯỜNG GẶP</h4>
+                    <h4>ĐIỀU KHOẢN GIAO DỊCH</h4>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="bottom">
+        <ul>
+            <li>CHÚC BẠN CÓ TRẢI NGHIỆM TỐT NHẤT</li>
+            <LI>  <img src="../../static/image/logo.png"></LI>
+            <LI>BẢN QUYỀN MAGIC CINEMA</LI>
+        </ul>
+
+    </div>
+</footer>
 
 
 </body>

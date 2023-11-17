@@ -29,6 +29,11 @@ public class FilmEntity {
     private String trailer;
     private Long rating;
     private String imageFilm;
+    private String imageFilm1;
+    private String imageFilm2;
+    private String imageFilm3;
+
+
     private boolean status;
 
     private LocalDate dateStart;

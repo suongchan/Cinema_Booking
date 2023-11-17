@@ -1,5 +1,6 @@
 package com.example.cinema_booking.service;
 
+import com.example.cinema_booking.entity.OrderEntity;
 import com.example.cinema_booking.entity.SeatStatusEntity;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface SeatStatusService {
     SeatStatusEntity getSeatStatusById(Long seatId);
 
     void setStatus(Long idOrder);
+
+    void updateSeat(OrderEntity orderEntity);
 }

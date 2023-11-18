@@ -38,7 +38,7 @@ public class SecurityConfig {
                                         .authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login/customer") // Trang đăng nhập chung
+                        .loginPage("/login/customer")
                         .loginProcessingUrl("/perform_login")
                         .successHandler(authenticationSuccessHandler())
                         .failureHandler(authenticationFailureHandler())

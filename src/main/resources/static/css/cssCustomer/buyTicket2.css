@@ -5,62 +5,55 @@ body {
     padding: 0;
     background-color: #0D0942;
 }
-.background
-{
+
+.background {
     background-image: url('/static/image/pg.png');
     background-size: cover;
     background-repeat: no-repeat;
     height: 450px;
 }
-/*.chair_ticket[data-status='true'] {*/
-/*    background-color: green;*/
-/*    color: white;*/
-/*}*/
-
 
 header {
     position: relative;
     display: flex;
-    /*background-color: #0D0942;*/
     width: 100%;
     height: 16%;
     border-bottom: 0.1px solid #045050;
 }
-header .logo
-{
+
+header .logo {
     position: absolute;
     width: 8%;
     display: flex;
     transform: translate(80%, 30%);
 }
-header .logo img
-{
+
+header .logo img {
     width: 100%;
 }
-header .toolbar
-{
+
+header .toolbar {
     width: 70%;
     display: flex;
     margin-left: 200px;
-    /*background-color: #0D0942;*/
 }
-header .toolbar .navbar  {
-    /*background-color: #0D0942;*/
+
+header .toolbar .navbar {
 }
-.toolbar
-{
+
+.toolbar {
     padding-left: 10px;
 }
-.toolbar ul li
-{
+
+.toolbar ul li {
     margin-left: 40px;
 }
-.toolbar  a
-{
+
+.toolbar a {
     color: white;
 }
-.toolbar  a:hover
-{
+
+.toolbar a:hover {
     color: aquamarine;
 }
 
@@ -73,61 +66,60 @@ header .toolbar .navbar  {
     text-align-all: center;
     background: linear-gradient(to bottom, #ea70d6, transparent);
 }
+
 .navbar-nav .dropdown-item {
     color: #0D0942;
     font-weight: bold;
 }
 
-/*phần main*/
-main
-{
+main {
     display: flex;
     width: 100%;
     height: 84%;
-    /*background-color: #0D0942;*/
 }
-.controller_main
-{
+
+.controller_main {
     display: flex;
     width: 86%;
     margin-left: 100px;
     padding-top: 50px;
-}.controller_film
- {
-     width: 100%;
+}
 
- }
-.film
-{
+.controller_film {
+    width: 100%;
+}
+
+.film {
     color: white;
     width: 100%;
     transform: translate(30%, 35%);
 }
-.film h3
-{
+
+.film h3 {
     font-size: 34pt;
 }
-.date_Time img
-{
+
+.date_Time img {
     width: 30px;
 }
-.date_Time
-{
+
+.date_Time {
     display: flex;
     color: white;
     padding-top: 10px;
 }
-.date
-{
+
+.show {
     padding-right: 150px;
 }
-.decsFilm
-{
+
+.decsFilm {
     padding-left: 20px;
     color: #e8d8d8;
     font-weight: 400;
 }
-nav
+
+section
 {
     background-color: #0D0942;
     padding-bottom: 80px;
@@ -230,45 +222,54 @@ nav
     background: #770464;
 }
 
-.container_checkout
-{
+.container_checkout {
     display: flex;
     width: 80%;
     margin-left: 80px;
     margin-top: 50px;
     background: linear-gradient(to bottom, #ea70d6, transparent);
     border-radius: 5px;
+    align-items: center;
+    justify-content: space-between; /* Chia cách tối đa giữa các phần tử */
+    padding: 20px; /* Thêm padding để tạo khoảng trắng xung quanh */
 }
-.check_out
-{
+
+.check_out {
     display: flex;
     color: white;
     font-weight: 600;
-    align-content: center;
-    padding-left: 150px;
+    align-items: center;
 }
-.check_out span
-{
-    margin-right: 100px;
-    padding-top: 30px;
+
+.check_out span {
+    margin-right: 20px;
 }
-.check_out span p
-{
+
+.check_out span p {
     color: #527EC1;
     font-size: 14pt;
     font-weight: 800;
 }
-.check_out input
+.priceTicket
 {
+    padding-top: 18px;
+}
+
+.buttonSubmit {
+    margin-left: auto; /* Đẩy phần tử về bên phải */
+}
+
+.check_out input {
+    float: right;
     width: 150px;
     height: 50px;
-    margin-top: 30px;
     color: white;
     border: 1px solid #560648;
     background: linear-gradient(to bottom, #ea70d6, transparent);
     border-radius: 40%;
+    cursor: pointer;
 }
-.check_out input:hover
-{
+
+.check_out input:hover {
     background-color: #ea70d6;
 }

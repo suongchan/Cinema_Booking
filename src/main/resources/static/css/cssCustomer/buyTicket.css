@@ -120,8 +120,17 @@ main {
     font-weight: 400;
 }
 
-nav {
+section {
+    padding-bottom: 20px;
     background-color: #0D0942;
+}
+
+section .selectedCinema
+{
+    background-color: #171E63 ;
+    color: white;
+    font-weight: bolder;
+    border: 1px solid #171E63;
 }
 
 /* Cinema Section */
@@ -148,19 +157,18 @@ nav {
 }
 
 /* Showtime Section */
-.showtime .column_left .dateTime img {
-    width: 50px;
-}
+/*.showtime .column_left .dateTime img {*/
+/*    width: 50px;*/
+/*}*/
 
-.showtime .column_right img {
-    width: 350px;
-    height: 450px;
-}
+/*.showtime .column_right img {*/
+/*    width: 350px;*/
+/*    height: 450px;*/
+/*}*/
 
 .container_showtime {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     width: 86%;
     margin-left: 60px;
     padding-top: 50px;
@@ -178,42 +186,130 @@ nav {
     width: 65%;
 }
 
-.container_dateTime {
+.column_right {
     display: flex;
-    flex-direction: row;
+    width: 35%;
+}
+
+.column_right img {
     width: 100%;
-    margin-bottom: 0;
-    padding: 10px;
-    margin-top: 20px;
+    height: auto;
+}
+
+.container_dateTime {
+    width: 100%;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: space-between;
 }
 
 .dateTime {
+    width: 95%;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #171ea1;
-    margin-bottom: 20px;
-    height: auto;
-    justify-content: center;
+    align-items: center;
+    background-color: #022D54;
+    margin-bottom: 10px;
 }
 
-.date {
+.date-time-container {
     display: flex;
-    list-style: none;
+    align-items: center;
 }
 
-.date img {
-    width: 20px;
+.date-time-container img {
+    margin-right: 5px;
 }
 
-.dateShow {
-    width: 40%; /* Adjust the width as needed */
-    background-color: white;
-}
-
-.start {
-    width: 60%; /* Adjust the width as needed */
+.dateShow, .start {
     color: white;
 }
 
-/* Add more styles as needed */
+.dateShow
+{
+    padding-right: 20px;
+    border-right: 1px solid #0D0942;
+}
+.dateShow img
+{
+    width: 30px;
+}
+.start{
+    padding-left: 10px;
+}
+.start a
+{
+    text-decoration: none;
+    color: white;
+    padding-right: 5px;
+}
+footer {
+    display: flex;
+    flex-direction: column; /* Chuyển sang sắp xếp theo chiều dọc */
+    background-color: #252222;
+    width: 100%;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.top {
+    float: left;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #0D0942 ;
+}
+
+.top .column {
+    float: left;
+    display: flex;
+    width: 25%;
+    margin-bottom: 30px;
+    margin-left: 55px;
+
+}
+.top .column li
+{
+    list-style: none;
+}
+.top .column h3
+{
+    font-size: 14pt;
+    color: white;
+    font-weight: bold;
+}
+.top .column h4
+{
+    font-size: 14pt;
+    color: grey;
+
+}
+.top .column img
+{
+    width: 80%;
+    height: 40pt;
+}
+.bottom {
+    padding-top: 20px;
+    float: left;
+    width: 100%;
+    align-items: center;
+}
+.bottom ul
+{
+
+    display: flex;
+}
+.bottom ul li
+{
+    color: gray;
+    width: 33.33%;
+    list-style: none;
+}
+.bottom ul li img
+{
+    width: 50%;
+
+}
+
+
+
+

@@ -73,7 +73,7 @@
         </div>
     </main>
 </div>
-<nav>
+<section>
     <div class="controller_ciname">
         <div class="cinema">
     <span>
@@ -82,7 +82,7 @@
     </span>
             <span>
       <li class="nav-item dropdown">
-                <select id="cinema" name="cinema.idCinema" th:field="*{cinemas}">
+                <select class="selectedCinema" id="cinema" name="cinema.idCinema" th:field="*{cinemas}">
                 <!-- Populate the options with cinema data -->
                 <option th:each="cinema : ${cinemas}" th:value="${cinema.idCinema}" th:text="${cinema.nameCinema}"></option>
               </select>
@@ -92,27 +92,24 @@
 
         <div class="container_showtime">
             <div class="showtime">
-                <div class="column column_left" >
+                <div class="column column_left">
                     <div class="container_dateTime">
-                        <div class="dateTime" th:each="showtime,iterStat : ${showtimeForFilm}" th:id="'showtimeList-' + ${showtime.cinemaEntity.idCinema}"  th:attr="data-showtime-id=${showtime.idShow}">
-                            <ul class="date">
-                                <li><img src="../../static/image/date.png"></li>
-                                <li id="dateShow" th:text="${showtime.dateShow}" class="dateShow"></li>
-                            </ul>
-
-                            <ul class="date">
-                                <li class="start" th:text="${showtime.start}"></li>
-                            </ul>
+                        <div class="dateTime" th:each="showtime,iterStat : ${showtimeForFilm}" th:id="'showtimeList-' + ${showtime.cinemaEntity.idCinema}" th:attr="data-showtime-id=${showtime.idShow}">
+                            <div class="date">
+                                <img src="../../static/image/date.png" alt="date">
+                                <span id="dateShow" th:text="${showtime.dateShow}" class="dateShow"></span>
+                                <span class="start" th:text="${showtime.start}"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="column column_right">
-                <img src="../../static/image/bgDetailFilm.png">
+                <div class="column column_right">
+                    <img th:src="@{'/images/' + ${films.imageFilm1}}" alt="java">
+                </div>
             </div>
         </div>
+
+
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -125,7 +122,7 @@
                 dateTimeDivs.forEach(div => {
                     const cinemaId = div.getAttribute('id').replace('showtimeList-', '');
                     const dateShow = div.querySelector('.dateShow').textContent;
-                    const start = div.querySelector('.start').textContent;
+                    const start = div.querySelector('.date .start').textContent;
                     const showtimeId = div.getAttribute('data-showtime-id');
 
                     if (!dateShowStartMap[cinemaId]) {
@@ -206,7 +203,50 @@
 
 
     </div>
-</nav>
+</section>
+
+<footer>
+    <div class="top">
+        <div class="column">
+            <h3>CHO BẠN NHỮNG TRẢI NGHIỆM TỐT NHẤT</h3>
+        </div>
+        <div class="column">
+            <ul>
+                <li>
+                    <h3>MAGIC CINEMA</h3>
+                </li>
+                <li>
+                    <h4>GIỚI THIỆU</h4>
+                    <h4>LIÊN HỆ</h4>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="column">
+            <ul>
+                <li>
+                    <h3>THÔNG TIN CHUNG</h3>
+                </li>
+                <li>
+                    <h4>ĐIỀU KHOẢN CHUNG</h4>
+                    <h4>CÂU HỎI THƯỜNG GẶP</h4>
+                    <h4>ĐIỀU KHOẢN GIAO DỊCH</h4>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="bottom">
+        <ul>
+            <li>CHÚC BẠN CÓ TRẢI NGHIỆM TỐT NHẤT</li>
+            <LI>  <img src="../../static/image/logo.png"></LI>
+            <LI>BẢN QUYỀN MAGIC CINEMA</LI>
+        </ul>
+
+    </div>
+</footer>
 
 </body>
 </html>
